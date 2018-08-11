@@ -15,6 +15,7 @@ public class LightMerchant extends Ship{
 	@Override
 	public void draw(float delta){
 		hvlDrawQuadc(x, y, 30f, 30f, Color.blue);
+		super.draw(delta);
 	}
 
 }

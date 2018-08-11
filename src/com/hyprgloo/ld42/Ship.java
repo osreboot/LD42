@@ -1,10 +1,15 @@
 package com.hyprgloo.ld42;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
+
 import java.util.ArrayList;
+
+import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.HvlMath;
 
-public abstract class Ship {
+public class Ship {
 
 	public static ArrayList<Ship> ships = new ArrayList<>();
 
@@ -37,7 +42,9 @@ public abstract class Ship {
 		y += ys * delta;
 	}
 	
-	public abstract void draw(float delta);
+	public void draw(float delta) {;
+		hvlDrawQuadc(xGoal, yGoal, 10, 10, Color.white);
+	}
 	
 	public void setGoal(float xArg, float yArg){
 		xGoal = xArg;

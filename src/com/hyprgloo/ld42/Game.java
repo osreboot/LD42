@@ -22,7 +22,7 @@ public class Game {
 	
 	public static void update(float delta){
 		Ship.updateShips(delta);
-		
+		ShipSelector.update(delta);
 		FancyOverlay.drawGameLevels(delta);
 	}
 	

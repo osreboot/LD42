@@ -1,6 +1,9 @@
 package com.hyprgloo.ld42;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
+
 import org.lwjgl.input.Mouse;
+import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.action.HvlAction1;
@@ -26,6 +29,7 @@ public class ShipSelector {
 				}
 			}
 		}
+
 		return closestShip;
 	}
 	
@@ -66,6 +70,8 @@ public class ShipSelector {
 		});
 	}
 	public static void update(float delta) {
-		
+		if(getClosestShip() != null) {
+			hvlDrawLine(getClosestShip().x, getClosestShip().y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), Color.white);
+		}
 	}
 }
