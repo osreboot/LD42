@@ -18,11 +18,7 @@ public class SpaceStationPart {
 		textureIndex = textureIndexArg;
 	}
 	
-	public void draw(float delta) {
-		for(SpaceStationPart part : SpaceStation.stationParts) {
-		hvlDrawQuadc(part.x, part.y, GRID_SIZE, GRID_SIZE, Main.getTexture(part.textureIndex));
-		}
-	}
+	
 	
 	public void setTextureIndex(int indexArg) {
 		textureIndex = indexArg;
