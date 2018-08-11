@@ -7,11 +7,14 @@ import java.util.HashMap;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
+import com.osreboot.ridhvl.action.HvlAction1;
 import com.osreboot.ridhvl.action.HvlAction2;
+import com.osreboot.ridhvl.menu.HvlButtonMenuLink;
 import com.osreboot.ridhvl.menu.HvlComponent;
 import com.osreboot.ridhvl.menu.HvlComponentDefault;
 import com.osreboot.ridhvl.menu.HvlMenu;
 import com.osreboot.ridhvl.menu.component.HvlArrangerBox;
+import com.osreboot.ridhvl.menu.component.HvlButton;
 import com.osreboot.ridhvl.menu.component.HvlArrangerBox.ArrangementStyle;
 import com.osreboot.ridhvl.menu.component.HvlComponentDrawable;
 import com.osreboot.ridhvl.menu.component.HvlSpacer;
@@ -27,7 +30,10 @@ public class MenuManager {
 	
 	public static void initialize(){
 		
-		HvlComponentDefault.setDefault(new HvlArrangerBox(Display.getWidth(), Display.getHeight(), ArrangementStyle.VERTICAL));
+		HvlArrangerBox defaultArrangerBox = new HvlArrangerBox(Display.getWidth(), Display.getHeight(), ArrangementStyle.VERTICAL);
+		defaultArrangerBox.setxAlign(0.15f);
+		defaultArrangerBox.setyAlign(0.85f);
+		HvlComponentDefault.setDefault(defaultArrangerBox);
 		
 		HvlLabeledButton defaultLabeledButton = new HvlLabeledButton(256, 64, new HvlComponentDrawable(){
 			@Override
@@ -48,6 +54,7 @@ public class MenuManager {
 				buttonWrappers.get(b).update(delta);
 				
 				if(b.isHovering()) FancyOverlay.drawMainButton(delta, b);
+				b.update(delta);
 			}
 		});
 		defaultLabeledButton.setTextScale(0.25f);
@@ -58,20 +65,31 @@ public class MenuManager {
 		game = new HvlMenu();
 		
 		main.add(new HvlArrangerBox.Builder().build());
-		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").build());
+		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				HvlMenu.setCurrent(game);
+				Game.restart();
+			}
+		}).build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("credits").build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("options").build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
-		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").build());
+		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				System.exit(0);
+			}
+		}).build());
 		
 		HvlMenu.setCurrent(main);
 	}
 	
 	public static void update(float delta){
 		if(HvlMenu.getCurrent() == main){
-			
+			FancyOverlay.updateMain(delta);
 		}else if(HvlMenu.getCurrent() == game){
 			Game.update(delta);
 		}

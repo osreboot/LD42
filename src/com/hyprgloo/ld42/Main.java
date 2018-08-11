@@ -1,5 +1,7 @@
 package com.hyprgloo.ld42;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
+
 import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.display.collection.HvlDisplayModeDefault;
@@ -40,7 +42,6 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void update(float delta){
-		FancyOverlay.update(delta);
 		MenuManager.update(delta);
 	}
 
