@@ -1,21 +1,24 @@
 package com.hyprgloo.ld42.ships;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
-
-import org.newdawn.slick.Color;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotation;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
 
 import com.hyprgloo.ld42.Cargo;
+import com.hyprgloo.ld42.Main;
 import com.hyprgloo.ld42.Ship;
 
 public class LightMerchant extends Ship{
 
 	public LightMerchant(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 20f, cargoArg);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 50f, cargoArg);
 	}
 
 	@Override
 	public void draw(float delta){
-		hvlDrawQuadc(x, y, 30f, 30f, Color.blue);
+		hvlRotate(x, y, rotation);
+		hvlDrawQuadc(x, y, 32f, 32f, Main.getTexture(Main.INDEX_CARGO_SHIP_SMALL));
+		hvlResetRotation();
 		super.draw(delta);
 	}
 

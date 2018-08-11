@@ -10,7 +10,7 @@ import com.hyprgloo.ld42.Ship;
 public class HeavyMerchant extends Ship{
 
 	public HeavyMerchant(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 50f, cargoArg);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 80f, cargoArg);
 	}
 
 	@Override
