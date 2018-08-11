@@ -34,11 +34,10 @@ public class Game {
 
 		energyPulseTimer = ENERGY_PULSE_DELAY;
 
-		new ShipMerchantMedium(-128, 256, 64, 192, 0, Cargo.FUEL);
-
-		new ShipMerchantLight(-128, 256, 64, 256 + 32, 0, Cargo.FUEL);
-		new ShipMerchantLight(-128, 256, 64, 256 + 64, 0, Cargo.ENERGY);
-		new ShipMerchantLight(-128, 256, 64, 256 + 96, 0, Cargo.AMMO);
+//		new ShipMerchantMedium(-128, 256, 64, 192, 0, Cargo.FUEL);
+//
+//
+//		new ShipMerchantLight(-128, 256, 64, 256 + 96, 0, Cargo.AMMO);
 
 		SpaceStation.restart();
 		//		if(Game.selected_level == 1) {
@@ -54,6 +53,7 @@ public class Game {
 			level_energy -= ENERGY_PULSE_AMOUNT;
 			energyPulseTimer = ENERGY_PULSE_DELAY;
 		}
+		LevelShipSequencer.updateLevels(delta);
 
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);

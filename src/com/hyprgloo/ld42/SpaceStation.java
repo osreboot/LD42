@@ -20,6 +20,20 @@ public class SpaceStation {
 		//0,0 is the center of the screen
 		//stationParts.add(new SpaceStationPart(xGridArg, yGridArg, rotationArg, textureIndexArg));
 		stationParts.clear();
+		if(Game.selected_level == 0) {
+			stationParts.add(new SpaceStationPart(0f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(1f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(-1f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(-2f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(-3f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_MED));
+			stationParts.add(new SpaceStationPart(2f, 1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
+			stationParts.add(new SpaceStationPart(2f, 2f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
+			stationParts.add(new SpaceStationPart(2f, -1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
+			stationParts.add(new SpaceStationPart(2f, -2f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
+			stationParts.add(new SpaceStationPart(2f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(3f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+
+		}
 		if(Game.selected_level == 1) {
 			//			stationParts.add(new SpaceStationPart(0f, 0f, 0f, Main.INDEX_STATION_TRUSS));
 			//			stationParts.add(new SpaceStationPart(0f, 2f, 0f, -1));

@@ -82,6 +82,15 @@ public class MenuManager {
 		levels.add(new HvlArrangerBox.Builder().setStyle(ArrangementStyle.HORIZONTAL).build());
 		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
 		levels.getFirstArrangerBox().add(new HvlSpacer(BUTTON_SPACING, 0));
+		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("T").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				Game.selected_level = 0;
+				HvlMenu.setCurrent(game);
+				Game.restart();
+			}
+		}).build());
+		levels.getFirstArrangerBox().add(new HvlSpacer(BUTTON_SPACING, 0));
 		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("1").setClickedCommand(new HvlAction1<HvlButton>(){
 			@Override
 			public void run(HvlButton aArg){
