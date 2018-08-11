@@ -15,8 +15,8 @@ public class Game {
 		level_energy = 1f;
 		level_ammo = 1f;
 		
-		new LightMerchant(0, 0, 0, 0, 0, 0, 0);
-		new HeavyMerchant(0, 0, 0, 0, 0, 0, 0);
+		new LightMerchant(0, 0, 0, 0, 0, 0, 0, Cargo.FUEL);
+		new HeavyMerchant(0, 0, 0, 0, 0, 0, 0, Cargo.FUEL);
 	}
 	
 	

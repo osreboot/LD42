@@ -19,8 +19,9 @@ public class Ship {
 	}
 	
 	public float x, y, xs, ys, xGoal, yGoal, rotation, maxSpeed;
+	public Cargo cargo;
 	
-	public Ship(float xArg, float yArg, float xsArg, float ysArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg){
+	public Ship(float xArg, float yArg, float xsArg, float ysArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg, Cargo cargoArg){
 		x = xArg;
 		y = yArg;
 		xs = xsArg;
@@ -29,6 +30,7 @@ public class Ship {
 		yGoal = yGoalArg;
 		rotation = rotationArg;
 		maxSpeed = maxSpeedArg;
+		cargo = cargoArg;
 		ships.add(this);
 	}
 	
