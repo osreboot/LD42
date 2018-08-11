@@ -28,10 +28,16 @@ public class Game {
 		new ShipMerchantLight(-128, 256, 64, 256 + 96, 0, Cargo.AMMO);
 		
 		SpaceStation.restart();
+		if(Game.selected_level == 1) {
+			new Raider(200, 800, SpaceStation.stationParts.get(5).x, SpaceStation.stationParts.get(5).y, 0, Raider.MAX_SPEED);
+			new Raider(400, 800, SpaceStation.stationParts.get(7).x, SpaceStation.stationParts.get(7).y, 0, Raider.MAX_SPEED);
+			new Raider(600, 800, SpaceStation.stationParts.get(9).x, SpaceStation.stationParts.get(9).y, 0, Raider.MAX_SPEED);
+		}
 	}
 	
 	public static void update(float delta){
 		Ship.updateShips(delta);
+		Raider.updateRaiders(delta);
 		ShipSelector.update(delta);
 		FancyOverlay.drawGameLevels(delta);
 		SpaceStation.update(delta);

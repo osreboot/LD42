@@ -18,9 +18,9 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 	}
 
 	public void updateTurretRotation(float delta){
-		Ship target = null;
-		for(Ship s : Ship.ships){
-			if(s instanceof ShipMerchantMedium) 
+		Raider target = null;
+		for(Raider s : Raider.raiders){
+			if(s instanceof Raider) 
 				target = s;
 		}
 
