@@ -6,22 +6,18 @@ public class SpaceStation {
 
 	public static final float GRID_SIZE = 24f;
 	
-	public static ArrayList<SpaceStation> stationGrid = new ArrayList<>();
-	
-	public float x, y, rotation;
-	public int textureIndex;
-	
-	public SpaceStation(float xArg, float yArg, float rotationArg, int textureIndexArg){
-		x = xArg;
-		y = yArg;
-		rotation = rotationArg;
-		textureIndex = textureIndexArg;
-		stationGrid.add(this);
-	}
+	public static ArrayList<SpaceStationPart> stationParts = new ArrayList<>();
 	
 	public static void restart(){
-		
-	}
+		//if(level == 1) {
+		//stationParts.add(new SpaceStationPart(xArg, yArg, rotationArg, textureIndexArg));
+		//}else if(level == 2) {
+		//stationParts.add(new SpaceStationPart(xArg, yArg, rotationArg, textureIndexArg));
+	//	}else if(level == 3) {
+	//	stationParts.add(new SpaceStationPart(xArg, yArg, rotationArg, textureIndexArg));
+
+		}
+	//}
 	
 	public static void update(float delta){
 		
