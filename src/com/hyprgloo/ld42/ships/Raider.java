@@ -10,7 +10,7 @@ import com.osreboot.ridhvl.HvlMath;
 
 public class Raider extends Ship{
 		
-	public float tradeTime, dockRotationOffset;
+	public float tradeTime, dockRotationOffset, idleTime;
 	public Cargo cargo;
 	public boolean docking = false, docked = false;
 	SpaceStationPart goalPart;
@@ -22,13 +22,15 @@ public class Raider extends Ship{
 		tradeTime = tradeTimeArg;
 		dockRotationOffset = dockRotationOffsetArg;
 		goalPart = goalPartArg;
+		idleTime = 8f;
 	}
 	
 	@Override
 	public void update(float delta){
 		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
 		float newRotation = 0f;
-		if(!docking && cargo == Cargo.EMPTY){
+		idleTime = HvlMath.stepTowards(idleTime, delta, 0f);
+		if(idleTime == 0 && !docking && cargo == Cargo.EMPTY){
 			if(!shipInProximity(goalPart.x, goalPart.y, SpaceStation.GRID_SIZE)){
 				docking = true;
 				xGoal = goalPart.x;

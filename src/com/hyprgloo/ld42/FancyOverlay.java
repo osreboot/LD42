@@ -4,6 +4,8 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
+import java.util.ArrayList;
+
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
@@ -31,7 +33,7 @@ public class FancyOverlay {
 		mainCrossHairGoal.x = b.getX();
 		mainCrossHairGoal.y = b.getY() + (b.getHeight()/2);
 	}
-
+	
 	public static final float 
 	GAME_LEVEL_FUEL_X = 16f,
 	GAME_LEVEL_ENERGY_X = GAME_LEVEL_FUEL_X + 128f + 48f,
@@ -46,9 +48,18 @@ public class FancyOverlay {
 		level_fuel_track = 0f;
 		level_energy_track = 1f;
 		level_ammo_track = 1f;
+		TextParticle.particles.clear();
 	}
 
 	public static void drawGameLevels(float delta){
+		for(TextParticle p : TextParticle.particles){
+			p.update(delta);
+			if(p.life == 0) TextParticle.particleTrash.add(p);
+		}
+		for(TextParticle p : TextParticle.particleTrash){
+			TextParticle.particles.remove(p);
+		}
+		
 		level_fuel_track = HvlMath.stepTowards(level_fuel_track, delta, Game.level_fuel);
 		level_energy_track = HvlMath.stepTowards(level_energy_track, delta, Game.level_energy);
 		level_ammo_track = HvlMath.stepTowards(level_ammo_track, delta, Game.level_ammo);
@@ -70,4 +81,41 @@ public class FancyOverlay {
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, level_ammo_track * 128f, 8f, Color.green);
 	}
 
+	public static void spawnFuelTextExplosion(boolean plus){
+		for(float f = 0; f < 10; f++){
+			new TextParticle(plus ? "+" : "-", plus ? Color.green : Color.red, 
+					HvlMath.randomFloatBetween(GAME_LEVEL_FUEL_X + 12, GAME_LEVEL_FUEL_X + 12 + 128), 16, 
+					HvlMath.randomFloatBetween(-100f, 100f), HvlMath.randomFloatBetween(-100f, 100f));
+		}
+	}
+	
+	public static class TextParticle{
+		
+		public static ArrayList<TextParticle> particles = new ArrayList<>();
+		public static ArrayList<TextParticle> particleTrash = new ArrayList<>();
+		
+		public String text;
+		public Color color;
+		public float x, y, xs, ys, life;
+		
+		public TextParticle(String textArg, Color colorArg, float xArg, float yArg, float xsArg, float ysArg){
+			text = textArg;
+			color = colorArg;
+			x = xArg;
+			y = yArg;
+			xs = xsArg;
+			ys = ysArg;
+			life = 1f;
+			particles.add(this);
+		}
+		
+		public void update(float delta){
+			life = HvlMath.stepTowards(life, delta, 0f);
+			x += xs * delta;
+			y += ys * delta;
+			Main.font.drawWordc(text, x, y, new Color(color.r, color.g, color.b, life));
+		}
+		
+	}
+	
 }

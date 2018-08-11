@@ -1,6 +1,7 @@
 package com.hyprgloo.ld42.ships;
 
 import com.hyprgloo.ld42.Cargo;
+import com.hyprgloo.ld42.FancyOverlay;
 import com.hyprgloo.ld42.Game;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
@@ -57,6 +58,7 @@ public class ShipMerchant extends Ship{
 				docked = false;
 				if(cargo == Cargo.FUEL){
 					Game.level_fuel += Game.RESUPPLY_FUEL_AMOUNT * cargoMultiplier;
+					FancyOverlay.spawnFuelTextExplosion(true);
 				}else if(cargo == Cargo.ENERGY){
 					Game.level_energy += Game.RESUPPLY_ENERGY_AMOUNT * cargoMultiplier;
 				}
