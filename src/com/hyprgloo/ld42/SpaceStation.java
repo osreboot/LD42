@@ -19,6 +19,7 @@ public class SpaceStation {
 	public static void restart(){
 		//0,0 is the center of the screen
 		//stationParts.add(new SpaceStationPart(xGridArg, yGridArg, rotationArg, textureIndexArg));
+		stationParts.clear();
 		if(Game.selected_level == 1) {
 			//			stationParts.add(new SpaceStationPart(0f, 0f, 0f, Main.INDEX_STATION_TRUSS));
 			//			stationParts.add(new SpaceStationPart(0f, 2f, 0f, -1));

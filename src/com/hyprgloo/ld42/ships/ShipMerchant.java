@@ -1,6 +1,7 @@
 package com.hyprgloo.ld42.ships;
 
 import com.hyprgloo.ld42.Cargo;
+import com.hyprgloo.ld42.Game;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
 import com.hyprgloo.ld42.SpaceStationPart;
@@ -9,18 +10,19 @@ import com.osreboot.ridhvl.HvlMath;
 
 public class ShipMerchant extends Ship{
 
-	public float tradeTime, dockRotationOffset;
+	public float tradeTime, dockRotationOffset, cargoMultiplier;
 	public Cargo cargo;
 	public boolean docking = false, docked = false;
 	public int dockingReq;
 	
 	public ShipMerchant(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg,
-			Cargo cargoArg, float tradeTimeArg, float dockRotationOffsetArg, int dockingReqArg){
+			Cargo cargoArg, float tradeTimeArg, float dockRotationOffsetArg, int dockingReqArg, float cargoMultiplierArg){
 		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, maxSpeedArg);
 		cargo = cargoArg;
 		tradeTime = tradeTimeArg;
 		dockRotationOffset = dockRotationOffsetArg;
 		dockingReq = dockingReqArg;
+		cargoMultiplier = cargoMultiplierArg;
 	}
 
 	@Override
@@ -51,9 +53,13 @@ public class ShipMerchant extends Ship{
 			}
 			tradeTime = HvlMath.stepTowards(tradeTime, delta, 0);
 			if(tradeTime == 0){
-				docked = false;
 				
-				//TODO add items from transaction here, successful transaction
+				docked = false;
+				if(cargo == Cargo.FUEL){
+					Game.level_fuel += Game.RESUPPLY_FUEL_AMOUNT * cargoMultiplier;
+				}else if(cargo == Cargo.ENERGY){
+					Game.level_energy += Game.RESUPPLY_ENERGY_AMOUNT * cargoMultiplier;
+				}
 				cargo = Cargo.EMPTY;
 			}
 		}

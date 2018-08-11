@@ -37,21 +37,37 @@ public class FancyOverlay {
 	GAME_LEVEL_ENERGY_X = GAME_LEVEL_FUEL_X + 128f + 48f,
 	GAME_LEVEL_AMMO_X = GAME_LEVEL_ENERGY_X + 128f + 48f;
 
+	private static float 
+	level_fuel_track = 0f,
+	level_energy_track = 1f,
+	level_ammo_track = 1f;
+
+	public static void gameRestart(){
+		level_fuel_track = 0f;
+		level_energy_track = 1f;
+		level_ammo_track = 1f;
+	}
+
 	public static void drawGameLevels(float delta){
+		level_fuel_track = HvlMath.stepTowards(level_fuel_track, delta, Game.level_fuel);
+		level_energy_track = HvlMath.stepTowards(level_energy_track, delta, Game.level_energy);
+		level_ammo_track = HvlMath.stepTowards(level_ammo_track, delta, Game.level_ammo);
+		
 		hvlDrawQuadc(GAME_LEVEL_FUEL_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_FUEL));
 		hvlDrawQuad(GAME_LEVEL_FUEL_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_FUEL_X + 12, 8, 128f, 8f, Color.black);
-		hvlDrawQuad(GAME_LEVEL_FUEL_X + 12, 8, Game.level_fuel * 128f, 8f, Color.magenta);
-		
-		hvlDrawQuadc(GAME_LEVEL_ENERGY_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_ENERGY));
+		hvlDrawQuad(GAME_LEVEL_FUEL_X + 12, 8, level_fuel_track * 128f, 8f, Color.magenta);
+
+		float energySize = HvlMath.map(HvlMath.limit(Game.energyPulseTimer, 0f, 3f), 0f, 3f, 24f, 16f);
+		hvlDrawQuadc(GAME_LEVEL_ENERGY_X, 12, energySize, energySize, Main.getTexture(Main.INDEX_CANISTER_ENERGY));
 		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12, 8, 128f, 8f, Color.black);
-		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12, 8, Game.level_energy * 128f, 8f, Main.COLOR_BLUE0);
-		
+		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12, 8, level_energy_track * 128f, 8f, Main.COLOR_BLUE0);
+
 		hvlDrawQuadc(GAME_LEVEL_AMMO_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_AMMO));
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, 128f, 8f, Color.black);
-		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, Game.level_ammo * 128f, 8f, Color.green);
+		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, level_ammo_track * 128f, 8f, Color.green);
 	}
 
 }

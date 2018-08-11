@@ -4,7 +4,7 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotation;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
 
-import com.hyprgloo.ld42.ships.ShipMerchantMedium;
+import com.hyprgloo.ld42.ships.Raider;
 import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
 
@@ -19,9 +19,9 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 
 	public void updateTurretRotation(float delta){
 		Raider target = null;
-		for(Raider s : Raider.raiders){
+		for(Ship s : Ship.ships){
 			if(s instanceof Raider) 
-				target = s;
+				target = (Raider)s;
 		}
 
 		if(target != null){
