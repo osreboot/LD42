@@ -15,7 +15,10 @@ public class Main extends HvlTemplateInteg2D{
 	}
 
 	public static final int 
-	INDEX_FONT = 0;
+	INDEX_FONT = 0,
+	INDEX_CANISTER_FUEL = 1,
+	INDEX_CANISTER_ENERGY = 2,
+	INDEX_CANISTER_AMMO = 3;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -25,7 +28,7 @@ public class Main extends HvlTemplateInteg2D{
 	COLOR_BLUE4 = new Color(0f, 0f, 0.4f);
 
 	public static HvlFontPainter2D font;
-	
+
 	public static HvlInput inputPause;
 
 	public Main(){
@@ -35,6 +38,9 @@ public class Main extends HvlTemplateInteg2D{
 	@Override
 	public void initialize(){
 		getTextureLoader().loadResource("Font");
+		getTextureLoader().loadResource("CanisterFuel");
+		getTextureLoader().loadResource("CanisterEnergy");
+		getTextureLoader().loadResource("CanisterAmmo");
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
@@ -45,7 +51,7 @@ public class Main extends HvlTemplateInteg2D{
 				return Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) || Keyboard.isKeyDown(Keyboard.KEY_P) ? 1 : 0;
 			}
 		});
-		
+
 		ShipSelector.initialize();
 		MenuManager.initialize();
 	}

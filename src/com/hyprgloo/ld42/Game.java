@@ -11,14 +11,13 @@ public class Game {
 	
 	public static void restart(){
 		Ship.ships.clear();
-		level_fuel = 0f;
+		level_fuel = 1f;
 		level_energy = 1f;
 		level_ammo = 1f;
 		
 		new LightMerchant(0, 0, 0, 0, 0, 0, 0, Cargo.FUEL);
 		new HeavyMerchant(0, 0, 0, 0, 0, 0, 0, Cargo.FUEL);
 	}
-	
 	
 	public static void update(float delta){
 		Ship.updateShips(delta);

@@ -2,6 +2,7 @@ package com.hyprgloo.ld42;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
@@ -30,11 +31,19 @@ public class FancyOverlay {
 		mainCrossHairGoal.x = b.getX();
 		mainCrossHairGoal.y = b.getY() + (b.getHeight()/2);
 	}
-	
+
+	public static final float 
+	GAME_LEVEL_FUEL_X = 16f,
+	GAME_LEVEL_ENERGY_X = GAME_LEVEL_FUEL_X + 128f + 64f,
+	GAME_LEVEL_AMMO_X = GAME_LEVEL_ENERGY_X + 128f + 64f;
+
 	public static void drawGameLevels(float delta){
-		hvlDrawQuad(16f, 8f, Game.level_fuel * 128f, 8f, Color.green);
-		hvlDrawQuad(128f + 32f, 8f, Game.level_energy * 128f, 8f, Color.blue);
-		hvlDrawQuad(256f + 48f, 8f, Game.level_fuel * 128f, 8f, Color.gray);
+		hvlDrawQuadc(GAME_LEVEL_FUEL_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_FUEL));
+		hvlDrawQuad(GAME_LEVEL_FUEL_X + 12, 8, Game.level_fuel * 128f, 8f, Color.magenta);
+		hvlDrawQuadc(GAME_LEVEL_ENERGY_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_ENERGY));
+		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12, 8, Game.level_energy * 128f, 8f, Main.COLOR_BLUE0);
+		hvlDrawQuadc(GAME_LEVEL_AMMO_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_AMMO));
+		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, Game.level_ammo * 128f, 8f, Color.green);
 	}
 
 }
