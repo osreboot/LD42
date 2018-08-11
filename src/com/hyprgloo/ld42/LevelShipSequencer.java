@@ -9,10 +9,17 @@ import com.hyprgloo.ld42.ships.ShipRaiderLight;
 import com.osreboot.ridhvl.HvlMath;
 
 public class LevelShipSequencer {
-	static float smallShipTimer = 10;
-	static float medShipTimer = 10;
-	static float largeShipTimer = 10;
-	static float raiderShipTimer = 12;
+	
+	public static final float SMALL_TIME = 10;
+	public static final float MED_TIME = 10;
+	public static final float LAR_TIME = 10;
+	public static final float RAID_TIME = 15;
+
+	
+	static float smallShipTimer = 0;
+	static float medShipTimer = 0;
+	static float largeShipTimer = 0;
+	static float raiderShipTimer = 5;
 	
 	public static boolean spawnedTutorial = false;
 	
@@ -32,7 +39,7 @@ public class LevelShipSequencer {
 			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, Display.getHeight() + 128, raiderCompParts.get(targetIndex).x, Display.getHeight() - 128, 0, raiderCompParts.get(targetIndex));
 		}
 	}
-	
+
 	public static void updateLevels(float delta) {
 		smallShipTimer -= delta;
 		medShipTimer -= delta;
@@ -54,7 +61,7 @@ public class LevelShipSequencer {
 			}
 			if(raiderShipTimer <= 0) {
 				spawnRaider();
-				raiderShipTimer = 12;
+				raiderShipTimer = 15;
 			}
 			
 		} else if(Game.selected_level == 2) {
