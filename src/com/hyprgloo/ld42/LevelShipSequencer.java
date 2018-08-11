@@ -57,11 +57,11 @@ public class LevelShipSequencer {
 			if(smallShipTimer <= 0) {
 				float startY = HvlMath.randomFloatBetween(100,600);
 				new ShipMerchantLight(-128, startY , 250, startY, 0, Cargo.FUEL);
-				smallShipTimer = 10;
+				smallShipTimer = SMALL_TIME;
 			}
 			if(raiderShipTimer <= 0) {
 				spawnRaider();
-				raiderShipTimer = 15;
+				raiderShipTimer = RAID_TIME;
 			}
 			
 		} else if(Game.selected_level == 2) {
