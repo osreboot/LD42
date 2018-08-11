@@ -37,10 +37,14 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void initialize(){
-		getTextureLoader().loadResource("Font");
-		getTextureLoader().loadResource("CanisterFuel");
-		getTextureLoader().loadResource("CanisterEnergy");
-		getTextureLoader().loadResource("CanisterAmmo");
+
+		getTextureLoader().loadResource("Font");//0
+		getTextureLoader().loadResource("CanisterFuel");//1
+		getTextureLoader().loadResource("CanisterEnergy");//2
+		getTextureLoader().loadResource("CanisterAmmo");//3
+		
+		getTextureLoader().loadResource("solarPanel");//4
+
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
