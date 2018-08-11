@@ -16,6 +16,8 @@ public class Game {
 		level_ammo = 1f;
 		
 		new LightMerchant(0, 0, 0, 0, 0, Cargo.FUEL);
+		new LightMerchant(0, 0, 0, 0, 0, Cargo.ENERGY);
+		new LightMerchant(0, 0, 0, 0, 0, Cargo.AMMO);
 		new HeavyMerchant(0, 0, 0, 0, 0, Cargo.FUEL);
 		SpaceStation.restart();
 	}
