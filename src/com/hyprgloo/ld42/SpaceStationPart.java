@@ -2,7 +2,7 @@ package com.hyprgloo.ld42;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
-import java.util.ArrayList;
+import org.lwjgl.opengl.Display;
 
 public class SpaceStationPart {
 	public static final float GRID_SIZE = 24f;
@@ -11,8 +11,9 @@ public class SpaceStationPart {
 	public int textureIndex;
 	
 	public SpaceStationPart(float xArg, float yArg, float rotationArg, int textureIndexArg){
-		x = xArg;
-		y = yArg;
+		x = Display.getWidth() + (GRID_SIZE/2 * xArg);
+		x = Display.getHeight() + (GRID_SIZE/2 * yArg);
+		
 		rotation = rotationArg;
 		textureIndex = textureIndexArg;
 	}
