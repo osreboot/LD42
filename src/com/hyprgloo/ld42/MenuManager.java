@@ -85,7 +85,7 @@ public class MenuManager {
 		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("1").setClickedCommand(new HvlAction1<HvlButton>(){
 			@Override
 			public void run(HvlButton aArg){
-				//TODO set level 1
+				Game.selected_level = 1;
 				HvlMenu.setCurrent(game);
 				Game.restart();
 			}
@@ -94,7 +94,7 @@ public class MenuManager {
 		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("2").setClickedCommand(new HvlAction1<HvlButton>(){
 			@Override
 			public void run(HvlButton aArg){
-				//TODO set level 2
+				Game.selected_level = 2;
 				HvlMenu.setCurrent(game);
 				Game.restart();
 			}
@@ -103,7 +103,7 @@ public class MenuManager {
 		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("3").setClickedCommand(new HvlAction1<HvlButton>(){
 			@Override
 			public void run(HvlButton aArg){
-				//TODO set level 3
+				Game.selected_level = 3;
 				HvlMenu.setCurrent(game);
 				Game.restart();
 			}

@@ -1,5 +1,8 @@
 package com.hyprgloo.ld42;
 
+import com.hyprgloo.ld42.ships.HeavyMerchant;
+import com.hyprgloo.ld42.ships.LightMerchant;
+
 public class Game {
 
 	public static int selected_level = -1;
@@ -11,6 +14,9 @@ public class Game {
 		level_fuel = 0f;
 		level_energy = 1f;
 		level_ammo = 1f;
+		
+		new LightMerchant(0, 0, 0, 0, 0, 0, 0);
+		new HeavyMerchant(0, 0, 0, 0, 0, 0, 0);
 	}
 	
 	

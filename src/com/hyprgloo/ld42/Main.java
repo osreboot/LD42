@@ -1,8 +1,10 @@
 package com.hyprgloo.ld42;
 
+import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.display.collection.HvlDisplayModeDefault;
+import com.osreboot.ridhvl.input.HvlInput;
 import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 import com.osreboot.ridhvl.template.HvlTemplateInteg2D;
 
@@ -23,6 +25,8 @@ public class Main extends HvlTemplateInteg2D{
 	COLOR_BLUE4 = new Color(0f, 0f, 0.4f);
 
 	public static HvlFontPainter2D font;
+	
+	public static HvlInput inputPause;
 
 	public Main(){
 		super(144, 1280, 720, "Airlock Gridlock by HYPRGLOO", new HvlDisplayModeDefault());
@@ -35,6 +39,13 @@ public class Main extends HvlTemplateInteg2D{
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
 
+		inputPause = new HvlInput(new HvlInput.InputFilter(){
+			@Override
+			public float getCurrentOutput(){
+				return Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) || Keyboard.isKeyDown(Keyboard.KEY_P) ? 1 : 0;
+			}
+		});
+		
 		MenuManager.initialize();
 	}
 
