@@ -10,7 +10,7 @@ import com.hyprgloo.ld42.Main;
 public class ShipMerchantMedium extends ShipMerchant{
 
 	public ShipMerchantMedium(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 30f, cargoArg, 15f, 180f);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 30f, cargoArg, 15f, 180f, -2);
 	}
 
 	@Override

@@ -24,7 +24,11 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_CANISTER_EMPTY = 6,
 	INDEX_CARGO_SHIP_MEDIUM = 7,
 	INDEX_STATION_DOCKING_PORT = 8,
-	INDEX_STATION_TRUSS = 9;
+	INDEX_STATION_TRUSS = 9,
+	INDEX_STATION_TURRET_MOUNT = 10,
+	INDEX_STATION_DOCKING_PORT_MED = 11,
+	INDEX_STATION_DOCKING_PORT_LRG = 12,
+	INDEX_STATION_TURRET = 13;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -48,12 +52,16 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("CanisterEnergy");//2
 		getTextureLoader().loadResource("CanisterAmmo");//3
 
-		getTextureLoader().loadResource("solarPanel");//4
+		getTextureLoader().loadResource("StationSolarPanel");//4
 		getTextureLoader().loadResource("CargoShipSmall");//5
 		getTextureLoader().loadResource("CanisterEmpty");//6
 		getTextureLoader().loadResource("CargoShipMedium");//7
 		getTextureLoader().loadResource("StationDockingPort");//8
 		getTextureLoader().loadResource("StationTruss");//9
+		getTextureLoader().loadResource("StationTurretMount");//10
+		getTextureLoader().loadResource("StationDockingPortMed");//11
+		getTextureLoader().loadResource("StationDockingPortLrg");//12
+		getTextureLoader().loadResource("StationTurret");//13
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
@@ -67,7 +75,6 @@ public class Main extends HvlTemplateInteg2D{
 
 		ShipSelector.initialize();
 		MenuManager.initialize();
-
 	}
 
 	@Override

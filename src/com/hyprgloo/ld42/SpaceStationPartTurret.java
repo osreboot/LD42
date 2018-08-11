@@ -1,0 +1,42 @@
+package com.hyprgloo.ld42;
+
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotation;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
+
+import com.hyprgloo.ld42.ships.ShipMerchantMedium;
+import com.osreboot.ridhvl.HvlCoord2D;
+import com.osreboot.ridhvl.HvlMath;
+
+public class SpaceStationPartTurret extends SpaceStationPart{
+
+	public float turretRotation;
+
+	public SpaceStationPartTurret(float xGridArg, float yGridArg, float rotationArg){
+		super(xGridArg, yGridArg, rotationArg, Main.INDEX_STATION_TURRET_MOUNT);
+		turretRotation = 0;
+	}
+
+	public void updateTurretRotation(float delta){
+		Ship target = null;
+		for(Ship s : Ship.ships){
+			if(s instanceof ShipMerchantMedium) 
+				target = s;
+		}
+
+		if(target != null){
+			float newRotation = (float)Math.toDegrees(HvlMath.fullRadians(new HvlCoord2D(x, y), new HvlCoord2D(target.x, target.y)));
+			while(Math.abs(newRotation - turretRotation) > 180f){
+				if(Math.abs(newRotation - 360f - turretRotation) < Math.abs(newRotation + 360f - turretRotation))
+					newRotation -= 360f;
+				else newRotation += 360f;
+			}
+			turretRotation = HvlMath.stepTowards(turretRotation, delta * 100f, newRotation);
+		}
+
+		hvlRotate(x, y, turretRotation - 90);
+		hvlDrawQuadc(x, y, GRID_SIZE, GRID_SIZE, Main.getTexture(Main.INDEX_STATION_TURRET));
+		hvlResetRotation();
+	}
+
+}

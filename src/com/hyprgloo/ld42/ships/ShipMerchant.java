@@ -12,13 +12,15 @@ public class ShipMerchant extends Ship{
 	public float tradeTime, dockRotationOffset;
 	public Cargo cargo;
 	public boolean docking = false, docked = false;
+	public int dockingReq;
 	
 	public ShipMerchant(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg,
-			Cargo cargoArg, float tradeTimeArg, float dockRotationOffsetArg){
+			Cargo cargoArg, float tradeTimeArg, float dockRotationOffsetArg, int dockingReqArg){
 		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, maxSpeedArg);
 		cargo = cargoArg;
 		tradeTime = tradeTimeArg;
 		dockRotationOffset = dockRotationOffsetArg;
+		dockingReq = dockingReqArg;
 	}
 
 	@Override
@@ -45,7 +47,7 @@ public class ShipMerchant extends Ship{
 			newRotation = (float)Math.toDegrees(HvlMath.fullRadians(new HvlCoord2D(x, y), new HvlCoord2D(xGoal, yGoal)));
 		}else{
 			for(SpaceStationPart p : SpaceStation.stationParts){
-				if(p.x == x && p.y == y && p.textureIndex == -1) newRotation = p.rotation + dockRotationOffset;
+				if(p.x == x && p.y == y && p.textureIndex <= dockingReq) newRotation = p.rotation + dockRotationOffset;
 			}
 			tradeTime = HvlMath.stepTowards(tradeTime, delta, 0);
 			if(tradeTime == 0){
@@ -63,8 +65,8 @@ public class ShipMerchant extends Ship{
 		if(goalDistance > 64f || docking || docked) rotation = HvlMath.stepTowards(rotation, delta * maxSpeed * 2f, newRotation);
 	}
 	
-	public boolean canDock(){
-		return !docked && cargo != Cargo.EMPTY;
+	public boolean canDock(int dockingReqArg){
+		return !docked && cargo != Cargo.EMPTY && dockingReq >= dockingReqArg;
 	}
 	
 }

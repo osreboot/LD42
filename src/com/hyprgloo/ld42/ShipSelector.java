@@ -80,7 +80,7 @@ public class ShipSelector {
 				if(selectedShip != null) {
 					SpaceStationPart dockingPart = null;
 					for(SpaceStationPart p : SpaceStation.stationParts){
-						if(p.textureIndex == -1){
+						if(p.textureIndex <= selectedShip.dockingReq){
 							if(HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), p.x, p.y) < MAX_DOCK_DISTANCE && (dockingPart == null ||
 									HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), p.x, p.y) < HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), dockingPart.x, dockingPart.y))){
 								dockingPart = p;
@@ -88,7 +88,7 @@ public class ShipSelector {
 						}
 					}
 					if(dockingPart != null){
-						if(!Ship.shipInProximity(dockingPart.x, dockingPart.y, SpaceStation.GRID_SIZE, selectedShip) && selectedShip.canDock()){
+						if(!Ship.shipInProximity(dockingPart.x, dockingPart.y, SpaceStation.GRID_SIZE, selectedShip) && selectedShip.canDock(dockingPart.textureIndex)){
 							selectedShip.setGoal(dockingPart.x, dockingPart.y);
 							selectedShip.docking = true;
 							selectedShip = null;

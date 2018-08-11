@@ -11,7 +11,7 @@ public class Game {
 	
 	public static void restart(){
 		Ship.ships.clear();
-		level_fuel = 1f;
+		level_fuel = 0f;
 		level_energy = 1f;
 		level_ammo = 1f;
 		
