@@ -1,7 +1,7 @@
 package com.hyprgloo.ld42;
 
-import com.hyprgloo.ld42.ships.HeavyMerchant;
-import com.hyprgloo.ld42.ships.LightMerchant;
+import com.hyprgloo.ld42.ships.ShipMerchantMedium;
+import com.hyprgloo.ld42.ships.ShipMerchantLight;
 
 public class Game {
 
@@ -15,10 +15,12 @@ public class Game {
 		level_energy = 1f;
 		level_ammo = 1f;
 		
-		new LightMerchant(0, 0, 0, 0, 0, Cargo.FUEL);
-		new LightMerchant(0, 0, 0, 0, 0, Cargo.ENERGY);
-		new LightMerchant(0, 0, 0, 0, 0, Cargo.AMMO);
-		new HeavyMerchant(0, 0, 0, 0, 0, Cargo.FUEL);
+		new ShipMerchantMedium(0, 0, 0, 0, 0, Cargo.FUEL);
+		
+		new ShipMerchantLight(0, 0, 0, 0, 0, Cargo.FUEL);
+		new ShipMerchantLight(0, 0, 0, 0, 0, Cargo.ENERGY);
+		new ShipMerchantLight(0, 0, 0, 0, 0, Cargo.AMMO);
+		
 		SpaceStation.restart();
 	}
 	

@@ -11,6 +11,8 @@ import com.osreboot.ridhvl.HvlMath;
 
 public class Ship {
 
+	public static final float AUTO_DOCK_DISTANCE = 5f;
+
 	public static ArrayList<Ship> ships = new ArrayList<>();
 
 	public static void updateShips(float delta){
@@ -18,11 +20,23 @@ public class Ship {
 		for(Ship s : ships) s.draw(delta);
 	}
 
-	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, maxSpeed;
-	public Cargo cargo;
-	public boolean docking = false;
+	public static boolean shipInProximity(float xArg, float yArg, float distance){
+		for(Ship s : ships){
+			if(HvlMath.distance(s.x, s.y, xArg, yArg) < distance) return true;
+		}
+		return false;
+	}
 
-	public Ship(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg, Cargo cargoArg){
+	public static boolean shipInProximity(float xArg, float yArg, float distance, Ship exception){
+		for(Ship s : ships){
+			if(HvlMath.distance(s.x, s.y, xArg, yArg) < distance && s != exception) return true;
+		}
+		return false;
+	}
+
+	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, maxSpeed;
+
+	public Ship(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg){
 		x = xArg;
 		y = yArg;
 		xs = 0;
@@ -32,36 +46,29 @@ public class Ship {
 		yGoal = yGoalArg;
 		rotation = rotationArg;
 		maxSpeed = maxSpeedArg;
-		cargo = cargoArg;
 		ships.add(this);
 	}
 
 	public void update(float delta){
-		if(docking){
-//			if(x < xGoal) xs = HvlMath.stepTowards(xs, delta * maxSpeed, Math.min(maxSpeed, Math.abs(x - xGoal)));
-//			if(x > xGoal) xs = HvlMath.stepTowards(xs, delta * maxSpeed, -Math.min(maxSpeed, Math.abs(x - xGoal)));
-//			if(y < yGoal) ys = HvlMath.stepTowards(ys, delta * maxSpeed, Math.min(maxSpeed, Math.abs(y - yGoal)));
-//			if(y > yGoal) ys = HvlMath.stepTowards(ys, delta * maxSpeed, -Math.min(maxSpeed, Math.abs(y - yGoal)));
-		}else{
-			float distance = HvlMath.distance(x, y, xGoal, yGoal);
-			speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, distance));
-			HvlCoord2D speedCoord = new HvlCoord2D(xGoal - x, yGoal - y);
-			speedCoord.normalize();
-			if(Float.isNaN(speedCoord.x)) speedCoord.x = 0;
-			if(Float.isNaN(speedCoord.y)) speedCoord.y = 0;
-			speedCoord.mult(speed);
-			xs = HvlMath.stepTowards(xs, delta * maxSpeed, speedCoord.x);
-			ys = HvlMath.stepTowards(ys, delta * maxSpeed, speedCoord.y);
-			x += xs * delta;
-			y += ys * delta;
-			float newRotation = (float)Math.toDegrees(HvlMath.fullRadians(new HvlCoord2D(x, y), new HvlCoord2D(xGoal, yGoal)));
-			while(Math.abs(newRotation - rotation) > 180f){
-				if(Math.abs(newRotation - 360f - rotation) < Math.abs(newRotation + 360f - rotation))
-					newRotation -= 360f;
-				else newRotation += 360f;
-			}
-			if(distance > 64f) rotation = HvlMath.stepTowards(rotation, delta * maxSpeed * 2f, newRotation);
+		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
+		float newRotation = 0f;
+		speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, goalDistance));
+		HvlCoord2D speedCoord = new HvlCoord2D(xGoal - x, yGoal - y);
+		speedCoord.normalize();
+		if(Float.isNaN(speedCoord.x)) speedCoord.x = 0;
+		if(Float.isNaN(speedCoord.y)) speedCoord.y = 0;
+		speedCoord.mult(speed);
+		xs = HvlMath.stepTowards(xs, delta * maxSpeed, speedCoord.x);
+		ys = HvlMath.stepTowards(ys, delta * maxSpeed, speedCoord.y);
+		x += xs * delta;
+		y += ys * delta;
+		newRotation = (float)Math.toDegrees(HvlMath.fullRadians(new HvlCoord2D(x, y), new HvlCoord2D(xGoal, yGoal)));
+		while(Math.abs(newRotation - rotation) > 180f){
+			if(Math.abs(newRotation - 360f - rotation) < Math.abs(newRotation + 360f - rotation))
+				newRotation -= 360f;
+			else newRotation += 360f;
 		}
+		if(goalDistance > 64f) rotation = HvlMath.stepTowards(rotation, delta * maxSpeed * 2f, newRotation);
 	}
 
 	public void draw(float delta){

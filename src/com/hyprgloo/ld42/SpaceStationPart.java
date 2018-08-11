@@ -1,7 +1,5 @@
 package com.hyprgloo.ld42;
 
-import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
-
 import org.lwjgl.opengl.Display;
 
 public class SpaceStationPart {
@@ -18,13 +16,11 @@ public class SpaceStationPart {
 		textureIndex = textureIndexArg;
 	}
 	
-	
-	
-	public void setTextureIndex(int indexArg) {
+	public void setTextureIndex(int indexArg){
 		textureIndex = indexArg;
 	}
 
-	public int getTextureIndex() {
+	public int getTextureIndex(){
 		return textureIndex;
 	}
 	

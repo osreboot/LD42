@@ -39,10 +39,15 @@ public class FancyOverlay {
 
 	public static void drawGameLevels(float delta){
 		hvlDrawQuadc(GAME_LEVEL_FUEL_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_FUEL));
+		hvlDrawQuad(GAME_LEVEL_FUEL_X + 12 - 1, 8 - 1, Game.level_fuel * 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_FUEL_X + 12, 8, Game.level_fuel * 128f, 8f, Color.magenta);
+		
 		hvlDrawQuadc(GAME_LEVEL_ENERGY_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_ENERGY));
+		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12 - 1, 8 - 1, Game.level_energy * 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12, 8, Game.level_energy * 128f, 8f, Main.COLOR_BLUE0);
+		
 		hvlDrawQuadc(GAME_LEVEL_AMMO_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_AMMO));
+		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12 - 1, 8 - 1, Game.level_ammo * 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, Game.level_ammo * 128f, 8f, Color.green);
 	}
 

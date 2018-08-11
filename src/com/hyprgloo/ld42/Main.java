@@ -19,8 +19,12 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_CANISTER_FUEL = 1,
 	INDEX_CANISTER_ENERGY = 2,
 	INDEX_CANISTER_AMMO = 3,
-	INDEX_SOLAR_PANEL = 4,
-	INDEX_CARGO_SHIP_SMALL = 5;
+	INDEX_STATION_SOLAR_PANEL = 4,
+	INDEX_CARGO_SHIP_SMALL = 5,
+	INDEX_CANISTER_EMPTY = 6,
+	INDEX_CARGO_SHIP_MEDIUM = 7,
+	INDEX_STATION_DOCKING_PORT = 8,
+	INDEX_STATION_TRUSS = 9;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -39,15 +43,17 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void initialize(){
-
 		getTextureLoader().loadResource("Font");//0
 		getTextureLoader().loadResource("CanisterFuel");//1
 		getTextureLoader().loadResource("CanisterEnergy");//2
 		getTextureLoader().loadResource("CanisterAmmo");//3
-		
+
 		getTextureLoader().loadResource("solarPanel");//4
 		getTextureLoader().loadResource("CargoShipSmall");//5
-
+		getTextureLoader().loadResource("CanisterEmpty");//6
+		getTextureLoader().loadResource("CargoShipMedium");//7
+		getTextureLoader().loadResource("StationDockingPort");//8
+		getTextureLoader().loadResource("StationTruss");//9
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
@@ -61,7 +67,7 @@ public class Main extends HvlTemplateInteg2D{
 
 		ShipSelector.initialize();
 		MenuManager.initialize();
-		
+
 	}
 
 	@Override
