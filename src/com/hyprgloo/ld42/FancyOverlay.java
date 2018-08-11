@@ -33,7 +33,7 @@ public class FancyOverlay {
 	}
 
 	public static final float 
-	GAME_LEVEL_FUEL_X = 32f,
+	GAME_LEVEL_FUEL_X = 16f,
 	GAME_LEVEL_ENERGY_X = GAME_LEVEL_FUEL_X + 128f + 48f,
 	GAME_LEVEL_AMMO_X = GAME_LEVEL_ENERGY_X + 128f + 48f;
 
