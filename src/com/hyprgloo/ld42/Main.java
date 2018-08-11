@@ -46,6 +46,7 @@ public class Main extends HvlTemplateInteg2D{
 			}
 		});
 		
+		ShipSelector.initialize();
 		MenuManager.initialize();
 	}
 
