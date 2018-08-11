@@ -36,7 +36,7 @@ public class Main extends HvlTemplateInteg2D{
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
-
+		ShipSelector.initialize();
 		MenuManager.initialize();
 	}
 
