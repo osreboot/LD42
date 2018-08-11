@@ -17,12 +17,14 @@ public class Game {
 		
 		new LightMerchant(0, 0, 0, 0, 0, Cargo.FUEL);
 		new HeavyMerchant(0, 0, 0, 0, 0, Cargo.FUEL);
+		SpaceStation.restart();
 	}
 	
 	public static void update(float delta){
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);
 		FancyOverlay.drawGameLevels(delta);
+		SpaceStation.update(delta);
 	}
 	
 }
