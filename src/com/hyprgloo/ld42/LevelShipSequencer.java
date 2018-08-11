@@ -10,6 +10,8 @@ import com.osreboot.ridhvl.HvlMath;
 
 public class LevelShipSequencer {
 	
+	public static final float SHIP_SPAWN_EDGE_SPACING = 64f;
+	
 	public static final float SMALL_TIME = 10;
 	public static final float MED_TIME = 10;
 	public static final float LAR_TIME = 10;
@@ -34,9 +36,9 @@ public class LevelShipSequencer {
 		int targetIndex = HvlMath.randomInt(raiderCompParts.size());
 		
 		if(raiderCompParts.get(targetIndex).y <= 360) {
-			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, -128, raiderCompParts.get(targetIndex).x, 128, 0, raiderCompParts.get(targetIndex));
+			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, -128, raiderCompParts.get(targetIndex).x, SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
 		} else if (raiderCompParts.get(targetIndex).y > 360) {
-			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, Display.getHeight() + 128, raiderCompParts.get(targetIndex).x, Display.getHeight() - 128, 0, raiderCompParts.get(targetIndex));
+			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, Display.getHeight() + 128, raiderCompParts.get(targetIndex).x, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
 		}
 	}
 
@@ -56,7 +58,7 @@ public class LevelShipSequencer {
 		} else if(Game.selected_level == 1){
 			if(smallShipTimer <= 0) {
 				float startY = HvlMath.randomFloatBetween(100,600);
-				new ShipMerchantLight(-128, startY , 250, startY, 0, Cargo.FUEL);
+				new ShipMerchantLight(-128, startY , SHIP_SPAWN_EDGE_SPACING, startY, 0, Cargo.FUEL);
 				smallShipTimer = SMALL_TIME;
 			}
 			if(raiderShipTimer <= 0) {

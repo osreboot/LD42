@@ -94,9 +94,17 @@ public class ShipSelector {
 							selectedShip = null;
 						}
 					}else{
-						selectedShip.setGoal(HvlCursor.getCursorX(), HvlCursor.getCursorY());
-						selectedShip.docking = false;
-						selectedShip = null;
+						FlightPath path = null;
+						for(FlightPath p : FlightPath.paths) if(p.isMouseHovering()) path = p;
+						if(path != null){
+							selectedShip.setFlightPath(path);
+							selectedShip.docking = false;
+							selectedShip = null;
+						}else{
+							selectedShip.setGoal(HvlCursor.getCursorX(), HvlCursor.getCursorY());
+							selectedShip.docking = false;
+							selectedShip = null;
+						}
 					}
 				}
 			}

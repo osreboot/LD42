@@ -2,6 +2,7 @@ package com.hyprgloo.ld42.ships;
 
 import com.hyprgloo.ld42.Cargo;
 import com.hyprgloo.ld42.FancyOverlay;
+import com.hyprgloo.ld42.FlightPath;
 import com.hyprgloo.ld42.Game;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
@@ -15,7 +16,10 @@ public class ShipMerchant extends Ship{
 	public Cargo cargo;
 	public boolean docking = false, docked = false;
 	public int dockingReq;
-	
+
+	public FlightPath flightPath;
+	public int flightPathIndex;
+
 	public ShipMerchant(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg,
 			Cargo cargoArg, float tradeTimeArg, float dockRotationOffsetArg, int dockingReqArg, float cargoMultiplierArg){
 		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, maxSpeedArg);
@@ -24,12 +28,24 @@ public class ShipMerchant extends Ship{
 		dockRotationOffset = dockRotationOffsetArg;
 		dockingReq = dockingReqArg;
 		cargoMultiplier = cargoMultiplierArg;
+		flightPathIndex = 0;
 	}
 
 	@Override
 	public void update(float delta){
 		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
 		float newRotation = 0f;
+		if(flightPath != null){
+			xGoal = flightPath.path.get(flightPathIndex).c.x;
+			yGoal = flightPath.path.get(flightPathIndex).c.y;
+			goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
+			if(goalDistance < AUTO_DOCK_DISTANCE){
+				do{
+					if(flightPathIndex < flightPath.path.size() - 1 && !isShipAheadInFlightPath(1)) 
+						flightPathIndex++; else break;
+				}while(flightPath.path.get(flightPathIndex).buffer == true);
+			}
+		}else flightPathIndex = 0;
 		if(docking && goalDistance < AUTO_DOCK_DISTANCE){
 			x = xGoal;
 			y = yGoal;
@@ -54,7 +70,7 @@ public class ShipMerchant extends Ship{
 			}
 			tradeTime = HvlMath.stepTowards(tradeTime, delta, 0);
 			if(tradeTime == 0){
-				
+
 				docked = false;
 				if(cargo == Cargo.FUEL){
 					Game.level_fuel += Game.RESUPPLY_FUEL_AMOUNT * cargoMultiplier;
@@ -73,9 +89,31 @@ public class ShipMerchant extends Ship{
 		}
 		if(goalDistance > 64f || docking || docked) rotation = HvlMath.stepTowards(rotation, delta * maxSpeed * 2f, newRotation);
 	}
-	
+
+	@Override
+	public void setGoal(float xArg, float yArg){
+		super.setGoal(xArg, yArg);
+		flightPath = null;
+		flightPathIndex = 0;
+	}
+
 	public boolean canDock(int dockingReqArg){
 		return !docked && cargo != Cargo.EMPTY && dockingReq >= dockingReqArg;
 	}
-	
+
+	public void setFlightPath(FlightPath flightPathArg){
+		flightPath = flightPathArg;
+		flightPathIndex = 0;
+	}
+
+	public boolean isShipAheadInFlightPath(int steps){
+		for(Ship s : ships){
+			if(s instanceof ShipMerchant && s != this){
+				ShipMerchant ship = (ShipMerchant)s;
+				if(ship.flightPath == this.flightPath && ship.flightPathIndex == this.flightPathIndex + steps) return true;
+			}
+		}
+		return false;
+	}
+
 }

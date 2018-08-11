@@ -25,10 +25,11 @@ public class Game {
 	public static void restart(){
 		Ship.ships.clear();
 		FancyOverlay.gameRestart();
+		FlightPath.restart();
 
 		level_fuel = 0f;
 		level_energy = 1f;
-		level_ammo = 1f;
+		level_ammo = 0f;
 
 		collisions = 1;
 
@@ -46,6 +47,8 @@ public class Game {
 		}
 		LevelShipSequencer.updateLevels(delta);
 
+		FlightPath.update(delta);
+		
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);
 		SpaceStation.update(delta);
