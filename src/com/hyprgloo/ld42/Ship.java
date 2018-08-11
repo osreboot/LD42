@@ -43,7 +43,8 @@ public class Ship {
 //			if(y < yGoal) ys = HvlMath.stepTowards(ys, delta * maxSpeed, Math.min(maxSpeed, Math.abs(y - yGoal)));
 //			if(y > yGoal) ys = HvlMath.stepTowards(ys, delta * maxSpeed, -Math.min(maxSpeed, Math.abs(y - yGoal)));
 		}else{
-			speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, HvlMath.distance(x, y, xGoal, yGoal)));
+			float distance = HvlMath.distance(x, y, xGoal, yGoal);
+			speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, distance));
 			HvlCoord2D speedCoord = new HvlCoord2D(xGoal - x, yGoal - y);
 			speedCoord.normalize();
 			if(Float.isNaN(speedCoord.x)) speedCoord.x = 0;
@@ -53,6 +54,13 @@ public class Ship {
 			ys = HvlMath.stepTowards(ys, delta * maxSpeed, speedCoord.y);
 			x += xs * delta;
 			y += ys * delta;
+			float newRotation = (float)Math.toDegrees(HvlMath.fullRadians(new HvlCoord2D(x, y), new HvlCoord2D(xGoal, yGoal)));
+			while(Math.abs(newRotation - rotation) > 180f){
+				if(Math.abs(newRotation - 360f - rotation) < Math.abs(newRotation + 360f - rotation))
+					newRotation -= 360f;
+				else newRotation += 360f;
+			}
+			if(distance > 64f) rotation = HvlMath.stepTowards(rotation, delta * maxSpeed * 2f, newRotation);
 		}
 	}
 
