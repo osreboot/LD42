@@ -26,7 +26,7 @@ public class MenuManager {
 	
 	private static HashMap<HvlLabeledButton, ButtonWrapper> buttonWrappers = new HashMap<>();
 
-	public static HvlMenu main, game;
+	public static HvlMenu main, levels, game;
 	
 	public static void initialize(){
 		
@@ -62,16 +62,11 @@ public class MenuManager {
 		HvlComponentDefault.setDefault(defaultLabeledButton);
 		
 		main = new HvlMenu();
+		levels = new HvlMenu();
 		game = new HvlMenu();
 		
 		main.add(new HvlArrangerBox.Builder().build());
-		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").setClickedCommand(new HvlAction1<HvlButton>(){
-			@Override
-			public void run(HvlButton aArg){
-				HvlMenu.setCurrent(game);
-				Game.restart();
-			}
-		}).build());
+		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").setClickedCommand(new HvlButtonMenuLink(levels)).build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("credits").build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
@@ -84,11 +79,41 @@ public class MenuManager {
 			}
 		}).build());
 		
+		levels.add(new HvlArrangerBox.Builder().setStyle(ArrangementStyle.HORIZONTAL).build());
+		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		levels.getFirstArrangerBox().add(new HvlSpacer(BUTTON_SPACING, 0));
+		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("1").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				//TODO set level 1
+				HvlMenu.setCurrent(game);
+				Game.restart();
+			}
+		}).build());
+		levels.getFirstArrangerBox().add(new HvlSpacer(BUTTON_SPACING, 0));
+		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("2").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				//TODO set level 2
+				HvlMenu.setCurrent(game);
+				Game.restart();
+			}
+		}).build());
+		levels.getFirstArrangerBox().add(new HvlSpacer(BUTTON_SPACING, 0));
+		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setWidth(64f).setText("3").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				//TODO set level 3
+				HvlMenu.setCurrent(game);
+				Game.restart();
+			}
+		}).build());
+		
 		HvlMenu.setCurrent(main);
 	}
 	
 	public static void update(float delta){
-		if(HvlMenu.getCurrent() == main){
+		if(HvlMenu.getCurrent() == main || HvlMenu.getCurrent() == levels){
 			FancyOverlay.updateMain(delta);
 		}else if(HvlMenu.getCurrent() == game){
 			Game.update(delta);
@@ -98,8 +123,6 @@ public class MenuManager {
 	}
 	
 	private static class ButtonWrapper{
-		
-		private float fade = 0f;
 		
 		private ButtonWrapper(){
 			
