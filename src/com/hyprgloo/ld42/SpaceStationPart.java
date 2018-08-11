@@ -11,8 +11,8 @@ public class SpaceStationPart {
 	public int textureIndex;
 	
 	public SpaceStationPart(float xArg, float yArg, float rotationArg, int textureIndexArg){
-		x = Display.getWidth()/2; //+ (GRID_SIZE/2 * xArg);
-		y = Display.getHeight()/2; //+ (GRID_SIZE/2 * yArg);
+		x = Display.getWidth()/2 + (GRID_SIZE * xArg);
+		y = Display.getHeight()/2 + (GRID_SIZE * yArg);
 		
 		rotation = rotationArg;
 		textureIndex = textureIndexArg;
