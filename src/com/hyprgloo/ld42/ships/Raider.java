@@ -1,6 +1,7 @@
 package com.hyprgloo.ld42.ships;
 
 import com.hyprgloo.ld42.Cargo;
+import com.hyprgloo.ld42.FancyOverlay;
 import com.hyprgloo.ld42.Game;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
@@ -28,8 +29,9 @@ public class Raider extends Ship{
 	@Override
 	public void update(float delta){
 		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
-		float newRotation = 0f;
-		idleTime = HvlMath.stepTowards(idleTime, delta, 0f);
+		if(!docking && goalDistance < AUTO_DOCK_DISTANCE){
+			idleTime = HvlMath.stepTowards(idleTime, delta, 0f);
+		}
 		if(idleTime == 0 && !docking && cargo == Cargo.EMPTY){
 			if(!shipInProximity(goalPart.x, goalPart.y, SpaceStation.GRID_SIZE)){
 				docking = true;
@@ -37,6 +39,8 @@ public class Raider extends Ship{
 				yGoal = goalPart.y;
 			}
 		}
+		goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
+		float newRotation = 0f;
 		if(docking && goalDistance < AUTO_DOCK_DISTANCE){
 			x = xGoal;
 			y = yGoal;
@@ -67,8 +71,10 @@ public class Raider extends Ship{
 				docked = false;
 				if(cargo == Cargo.FUEL){
 					Game.level_fuel -= Game.RESUPPLY_FUEL_AMOUNT;
+					FancyOverlay.spawnFuelTextExplosion(false);
 				}else if(cargo == Cargo.ENERGY){
 					Game.level_energy -= Game.RESUPPLY_ENERGY_AMOUNT;
+					FancyOverlay.spawnEnergyTextExplosion(false);
 				}
 			}
 		}

@@ -80,12 +80,24 @@ public class FancyOverlay {
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, 128f, 8f, Color.black);
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, level_ammo_track * 128f, 8f, Color.green);
 	}
+	
+	public static final float 
+	PARTICLE_EXPLOSION_SPEED = 20f,
+	PARTICLE_EXPLOSION_COUNT = 8f;
 
 	public static void spawnFuelTextExplosion(boolean plus){
-		for(float f = 0; f < 10; f++){
+		for(float f = 0; f < PARTICLE_EXPLOSION_COUNT; f++){
 			new TextParticle(plus ? "+" : "-", plus ? Color.green : Color.red, 
 					HvlMath.randomFloatBetween(GAME_LEVEL_FUEL_X + 12, GAME_LEVEL_FUEL_X + 12 + 128), 16, 
-					HvlMath.randomFloatBetween(-100f, 100f), HvlMath.randomFloatBetween(-100f, 100f));
+					HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED), HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED));
+		}
+	}
+	
+	public static void spawnEnergyTextExplosion(boolean plus){
+		for(float f = 0; f < PARTICLE_EXPLOSION_COUNT; f++){
+			new TextParticle(plus ? "+" : "-", plus ? Color.green : Color.red, 
+					HvlMath.randomFloatBetween(GAME_LEVEL_ENERGY_X + 12, GAME_LEVEL_ENERGY_X + 12 + 128), 16, 
+					HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED), HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED));
 		}
 	}
 	
@@ -105,7 +117,7 @@ public class FancyOverlay {
 			y = yArg;
 			xs = xsArg;
 			ys = ysArg;
-			life = 1f;
+			life = 1.5f;
 			particles.add(this);
 		}
 		
@@ -113,7 +125,7 @@ public class FancyOverlay {
 			life = HvlMath.stepTowards(life, delta, 0f);
 			x += xs * delta;
 			y += ys * delta;
-			Main.font.drawWordc(text, x, y, new Color(color.r, color.g, color.b, life));
+			Main.font.drawWordc(text, x, y, new Color(color.r, color.g, color.b, life), 0.125f);
 		}
 		
 	}

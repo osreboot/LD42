@@ -61,6 +61,7 @@ public class ShipMerchant extends Ship{
 					FancyOverlay.spawnFuelTextExplosion(true);
 				}else if(cargo == Cargo.ENERGY){
 					Game.level_energy += Game.RESUPPLY_ENERGY_AMOUNT * cargoMultiplier;
+					FancyOverlay.spawnEnergyTextExplosion(true);
 				}
 				cargo = Cargo.EMPTY;
 			}

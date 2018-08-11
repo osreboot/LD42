@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.newdawn.slick.Color;
 
+import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
 
@@ -20,6 +21,12 @@ public class Ship {
 		for(Ship s : ships) s.draw(delta);
 	}
 
+	public static int getMerchantCount(){
+		int count = 0;
+		for(Ship s : ships) if(s instanceof ShipMerchant) count++;
+		return count;
+	}
+	
 	public static boolean shipInProximity(float xArg, float yArg, float distance){
 		for(Ship s : ships){
 			if(HvlMath.distance(s.x, s.y, xArg, yArg) < distance) return true;
