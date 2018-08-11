@@ -33,9 +33,9 @@ public class FancyOverlay {
 	}
 
 	public static final float 
-	GAME_LEVEL_FUEL_X = 16f,
-	GAME_LEVEL_ENERGY_X = GAME_LEVEL_FUEL_X + 128f + 64f,
-	GAME_LEVEL_AMMO_X = GAME_LEVEL_ENERGY_X + 128f + 64f;
+	GAME_LEVEL_FUEL_X = 32f,
+	GAME_LEVEL_ENERGY_X = GAME_LEVEL_FUEL_X + 128f + 48f,
+	GAME_LEVEL_AMMO_X = GAME_LEVEL_ENERGY_X + 128f + 48f;
 
 	public static void drawGameLevels(float delta){
 		hvlDrawQuadc(GAME_LEVEL_FUEL_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_FUEL));
