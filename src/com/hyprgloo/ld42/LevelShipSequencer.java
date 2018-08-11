@@ -2,12 +2,18 @@ package com.hyprgloo.ld42;
 
 import java.util.ArrayList;
 
+import org.lwjgl.opengl.Display;
+
 import com.hyprgloo.ld42.ships.ShipMerchantLight;
+import com.hyprgloo.ld42.ships.ShipRaiderLight;
+import com.osreboot.ridhvl.HvlMath;
 
 public class LevelShipSequencer {
-	public static final int smallShipTimer = 10;
-	public static final int mediumShipTimer = 10;
-	public static final int largeShipTimer = 10;
+	static float smallShipTimer = 10;
+	static float medShipTimer = 10;
+	static float largeShipTimer = 10;
+	static float raiderShipTimer = 12;
+	
 	public static boolean spawnedTutorial = false;
 	
 	public static ArrayList<SpaceStationPart> raiderCompParts = new ArrayList<>();
@@ -18,11 +24,20 @@ public class LevelShipSequencer {
 				raiderCompParts.add(allParts);
 			}
 		}
+		int targetIndex = HvlMath.randomInt(raiderCompParts.size());
 		
+		if(raiderCompParts.get(targetIndex).y <= 360) {
+			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, -128, raiderCompParts.get(targetIndex).x, 128, 0, raiderCompParts.get(targetIndex));
+		} else if (raiderCompParts.get(targetIndex).y > 360) {
+			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, Display.getHeight() + 128, raiderCompParts.get(targetIndex).x, Display.getHeight() - 128, 0, raiderCompParts.get(targetIndex));
+		}
 	}
 	
 	public static void updateLevels(float delta) {
-		
+		smallShipTimer -= delta;
+		medShipTimer -= delta;
+		largeShipTimer -= delta;
+		raiderShipTimer -= delta;
 		if(Game.selected_level == 0) {
 			//TODO tutorial????
 			if(!spawnedTutorial) {
@@ -32,6 +47,15 @@ public class LevelShipSequencer {
 			}
 
 		} else if(Game.selected_level == 1){
+			if(smallShipTimer <= 0) {
+				float startY = HvlMath.randomFloatBetween(100,600);
+				new ShipMerchantLight(-128, startY , 250, startY, 0, Cargo.FUEL);
+				smallShipTimer = 10;
+			}
+			if(raiderShipTimer <= 0) {
+				spawnRaider();
+				raiderShipTimer = 12;
+			}
 			
 		} else if(Game.selected_level == 2) {
 			
