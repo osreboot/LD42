@@ -42,6 +42,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("CanisterFuel");//1
 		getTextureLoader().loadResource("CanisterEnergy");//2
 		getTextureLoader().loadResource("CanisterAmmo");//3
+		
 		getTextureLoader().loadResource("solarPanel");//4
 
 
