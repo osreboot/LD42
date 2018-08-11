@@ -16,6 +16,7 @@ public class HeavyMerchant extends Ship{
 	@Override
 	public void draw(float delta){
 		hvlDrawQuadc(x, y, 10f, 10f, Color.blue);
+		super.draw(delta);
 	}
 
 }
