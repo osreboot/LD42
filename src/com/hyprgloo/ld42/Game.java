@@ -4,15 +4,16 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.HvlMath;
+import com.osreboot.ridhvl.menu.HvlMenu;
 
 public class Game {
-	
+
 	public static enum EndState{
-		WIN, LOSS_ENERGY
+		IN_PROGRESS, WIN, LOSS_ENERGY, LOSS_COLLISIONS
 	}
 
 	public static final float 
-	ENERGY_PULSE_DELAY = 20f,
+	ENERGY_PULSE_DELAY = 16f,
 	ENERGY_PULSE_AMOUNT = 1f/8f;
 
 	public static final float
@@ -23,7 +24,11 @@ public class Game {
 	public static int selected_level = -1, collisions = 0;
 
 	public static float level_fuel, level_energy, level_ammo;
-	public static float energyPulseTimer, endStateTimer;
+	public static float energyPulseTimer, endStateTimer, endStateTimerMeta;
+
+	public static EndState state;
+
+	public static Color endStateColor;
 
 	public static void restart(){
 		Ship.ships.clear();
@@ -35,8 +40,11 @@ public class Game {
 		level_ammo = 0f;
 
 		collisions = 0;
-		
+
+		state = EndState.IN_PROGRESS;
 		endStateTimer = 0f;
+		endStateTimerMeta = 5f;
+		endStateColor = Color.white;
 
 		energyPulseTimer = ENERGY_PULSE_DELAY;
 		LevelShipSequencer.spawnedTutorial = false;
@@ -45,27 +53,51 @@ public class Game {
 	}
 
 	public static void update(float delta){
-		energyPulseTimer = HvlMath.stepTowards(energyPulseTimer, delta, 0f);
-		if(energyPulseTimer == 0){
-			level_energy -= ENERGY_PULSE_AMOUNT;
-			energyPulseTimer = ENERGY_PULSE_DELAY;
+		if(state == EndState.IN_PROGRESS){
+			energyPulseTimer = HvlMath.stepTowards(energyPulseTimer, delta, 0f);
+			if(energyPulseTimer == 0){
+				level_energy -= ENERGY_PULSE_AMOUNT;
+				energyPulseTimer = ENERGY_PULSE_DELAY;
+			}
 		}
+
+		if(state == EndState.IN_PROGRESS){
+			if(level_energy == 0){
+				state = EndState.LOSS_ENERGY;
+			}else if(level_fuel == 1){
+				state = EndState.WIN;
+				endStateTimerMeta = 7f;
+			}
+		}
+		if(state != EndState.IN_PROGRESS){
+			endStateTimer = HvlMath.stepTowards(endStateTimer, (state == EndState.WIN ? 0.25f : 1f) * delta, 1f);
+			endStateTimerMeta = HvlMath.stepTowards(endStateTimerMeta, delta, 0f);
+			if(state == EndState.LOSS_ENERGY){
+				float value = HvlMath.map(endStateTimer, 1f, 0f, 0.2f, 1f);
+				endStateColor = new Color(value, value, value);
+			}
+			if(state == EndState.WIN){
+				float value = HvlMath.limit(HvlMath.map(endStateTimer, 1f, 0.75f, 0f, 1f), 0f, 1f);
+				endStateColor = new Color(1f, 1f, 1f, value);
+			}
+			if(endStateTimerMeta == 0) HvlMenu.setCurrent(MenuManager.end);
+		}
+
 		LevelShipSequencer.updateLevels(delta);
 
 		FlightPath.update(delta);
-		
+
 		ShipSelector.drawZones(delta);
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);
 		SpaceStation.update(delta);
-		
-		
+
 		for(Explosion e : Ship.exps) e.draw(delta);
-		
+
 		if(collisions > 0) Main.font.drawWord("disasters: " + collisions, 8f, Display.getHeight() - 24f, Color.white, 0.125f);
 
-		level_fuel = HvlMath.limit(level_fuel, 0f, 1f);
-		level_energy = HvlMath.limit(level_energy, 0f, 1f);
+		level_fuel = state == EndState.WIN ? 1f : HvlMath.limit(level_fuel, 0f, 1f);
+		level_energy = state == EndState.LOSS_ENERGY ? 0f : HvlMath.limit(level_energy, 0f, 1f);
 		level_ammo = HvlMath.limit(level_ammo, 0f, 1f);
 
 		FancyOverlay.drawGameLevels(delta);

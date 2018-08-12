@@ -47,7 +47,7 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 		}
 
 		hvlRotate(x, y, turretRotation - 90);
-		hvlDrawQuadc(x, y, GRID_SIZE, GRID_SIZE, Main.getTexture(Main.INDEX_STATION_TURRET));
+		hvlDrawQuadc(x, y, GRID_SIZE, GRID_SIZE, Main.getTexture(Main.INDEX_STATION_TURRET), Game.endStateColor);
 		hvlResetRotation();
 	}
 

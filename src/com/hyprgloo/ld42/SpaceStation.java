@@ -81,7 +81,7 @@ public class SpaceStation {
 					hvlDrawQuadc(part.x, part.y, size, size, Color.blue);
 				}
 			}else{
-				hvlDrawQuadc(part.x, part.y, GRID_SIZE, GRID_SIZE, Main.getTexture(part.textureIndex));
+				hvlDrawQuadc(part.x, part.y, GRID_SIZE, GRID_SIZE, Main.getTexture(part.textureIndex), Game.endStateColor);
 			}
 			hvlResetRotation();
 

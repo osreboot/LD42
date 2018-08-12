@@ -28,7 +28,7 @@ public class MenuManager {
 	
 	private static HashMap<HvlLabeledButton, ButtonWrapper> buttonWrappers = new HashMap<>();
 
-	public static HvlMenu main, levels, game, pause, options, credits;
+	public static HvlMenu main, levels, game, pause, options, credits, end;
 	
 	public static void initialize(){
 		
@@ -66,6 +66,7 @@ public class MenuManager {
 		pause = new HvlMenu();
 		options = new HvlMenu();
 		credits = new HvlMenu();
+		end = new HvlMenu();
 		
 		main.add(new HvlArrangerBox.Builder().build());
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").setClickedCommand(new HvlButtonMenuLink(levels)).build());
@@ -132,6 +133,11 @@ public class MenuManager {
 		credits.add(new HvlArrangerBox.Builder().build());
 		credits.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		credits.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		
+		end.add(new HvlArrangerBox.Builder().build());
+		end.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("levels").setClickedCommand(new HvlButtonMenuLink(levels)).build());
+		end.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		end.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlButtonMenuLink(main)).build());
 		
 		HvlMenu.setCurrent(main);
 	}
