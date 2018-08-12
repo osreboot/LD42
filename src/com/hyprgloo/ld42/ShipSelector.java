@@ -71,9 +71,17 @@ public class ShipSelector {
 		selectShip.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
+
 				if(selectedShip == null && getClosestShip() != null) {
+	
 					float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
 					if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving) {
+						HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR));
+						HvlCursor.setNativeHidden(true);
+						HvlCursor.setHeight(32);
+						HvlCursor.setWidth(32);
+						HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+						HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
 						selectedShip = getClosestShip();
 					}
 				}else if(selectedShip != null) selectedShip = null;
@@ -82,7 +90,14 @@ public class ShipSelector {
 		chooseLocation.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
+
 				if(selectedShip != null) {
+					HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
+					HvlCursor.setNativeHidden(true);
+					HvlCursor.setHeight(32);
+					HvlCursor.setWidth(32);
+					HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+					HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
 					SpaceStationPart dockingPart = null;
 					for(SpaceStationPart p : SpaceStation.stationParts){
 						if(p.textureIndex <= selectedShip.dockingReq){
@@ -133,12 +148,12 @@ public class ShipSelector {
 	public static void update(float delta) {
 		if(selectedShip != null) {
 
-			hvlDrawLine(selectedShip.x, selectedShip.y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), Color.white);
+			hvlDrawLine(selectedShip.x, selectedShip.y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), Main.COLOR_GREEN1);
 		}
 		if(selectedShip == null && getClosestShip() != null) {
 			float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
 			if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving) {
-				hvlDrawLine(getClosestShip().x, getClosestShip().y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), new Color(0f, 0f, 1f, 0.8f));
+				hvlDrawLine(getClosestShip().x, getClosestShip().y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), new Color(0f, 1f, 0f, 0.8f));
 			}
 		}
 	}
