@@ -66,12 +66,12 @@ public class ShipSelector {
 		selectShip.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-				if(selectedShip == null && getClosestShip() != null) {
-					float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
-					if(currentMouseToClose < Math.abs(MAX_DISTANCE)) {
-						selectedShip = getClosestShip();
-					}
-				}else if(selectedShip != null) selectedShip = null;
+					if(selectedShip == null && getClosestShip() != null) {
+						float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
+						if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving) {
+							selectedShip = getClosestShip();
+						}
+					}else if(selectedShip != null) selectedShip = null;
 			}
 		});
 		chooseLocation.setPressedAction(new HvlAction1<HvlInput>() {
@@ -112,11 +112,12 @@ public class ShipSelector {
 	}
 	public static void update(float delta) {
 		if(selectedShip != null) {
+			
 			hvlDrawLine(selectedShip.x, selectedShip.y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), Color.white);
 		}
 		if(selectedShip == null && getClosestShip() != null) {
 			float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
-			if(currentMouseToClose < Math.abs(MAX_DISTANCE)) {
+			if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving) {
 				hvlDrawLine(getClosestShip().x, getClosestShip().y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), new Color(0f, 0f, 1f, 0.8f));
 			}
 		}
