@@ -144,17 +144,17 @@ public class ShipSelector {
 	}
 
 	public static void drawZones(float delta){
-		hvlDrawQuad(Display.getWidth() - 96f, 0, 96f, Display.getHeight(), Main.getTexture(Main.INDEX_MOVEON), new Color(1f, 1f, 1f, HvlCursor.getCursorX() > Display.getWidth() - 96f ? 0.9f : 0.6f));
+		hvlDrawQuad(Display.getWidth() - 96f, 0, 96f, Display.getHeight(), Main.getTexture(Main.INDEX_MOVEON), new Color(0f, 1f, 0f, HvlCursor.getCursorX() > Display.getWidth() - 96f ? 0.8f : 0.5f));
 
 		boolean upperZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() < LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
 		hvlDrawQuad(0, 0, Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
 				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
-				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, upperZoneCursor ? 0.675f : 0.55f));
+				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, upperZoneCursor ? 0.625f : 0.3f));
 		boolean lowerZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
 		hvlDrawQuad(0, Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
 				Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
 				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
-				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, lowerZoneCursor ? 0.675f : 0.55f));
+				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, lowerZoneCursor ? 0.625f : 0.3f));
 	}
 
 	public static void update(float delta) {

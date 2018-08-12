@@ -1,5 +1,6 @@
 package com.hyprgloo.ld42;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotation;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
@@ -35,6 +36,8 @@ public class Game {
 	public static EndState state;
 
 	public static Color endStateColor;
+	
+	public static int backgroundTexture;
 
 	public static void restart(){
 		Ship.ships.clear();
@@ -57,10 +60,19 @@ public class Game {
 		SpaceStation.restart();
 		LevelShipSequencer.reset();
 	
-
+		backgroundTexture = HvlMath.randomInt(2) == 0 ? Main.INDEX_NEBULA1 : Main.INDEX_NEBULA2;
 	}
 
 	public static void update(float delta){
+		float backgroundOffset = Main.getNewestInstance().getTimer().getTotalTime()*-10f;
+		backgroundOffset = backgroundOffset%Display.getWidth();
+		hvlDrawQuad(backgroundOffset, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(backgroundTexture));
+		hvlDrawQuad(Display.getWidth() + backgroundOffset, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(backgroundTexture));
+		float backgroundOffset2 = Main.getNewestInstance().getTimer().getTotalTime()*-20f;
+		backgroundOffset2 = backgroundOffset2%Display.getWidth();
+		hvlDrawQuad(backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
+		hvlDrawQuad(Display.getWidth() + backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
+		
 		if(state == EndState.IN_PROGRESS){
 			energyPulseTimer = HvlMath.stepTowards(energyPulseTimer, delta, 0f);
 			if(energyPulseTimer == 0){
