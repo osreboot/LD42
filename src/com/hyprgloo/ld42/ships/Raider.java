@@ -92,7 +92,7 @@ public class Raider extends Ship{
 						this.setGoal(this.x-128, 680);
 		
 					}else {
-						this.setGoal(this.x+128, 40);
+						this.setGoal(this.x-128, 40);
 
 					}
 					docked = false;
