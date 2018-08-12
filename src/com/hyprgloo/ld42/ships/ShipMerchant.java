@@ -16,10 +16,12 @@ import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
 
 public class ShipMerchant extends Ship{
+	
+	public static final float HOLDING_SPEED = 30f;
 
 	public float tradeTime, maxTradeTime, dockRotationOffset, cargoMultiplier;
 	public Cargo cargo;
-	public boolean docking = false, docked = false;
+	public boolean docking = false, docked = false, holding = true;
 	public int dockingReq;
 
 	public FlightPath flightPath;
@@ -39,16 +41,19 @@ public class ShipMerchant extends Ship{
 
 	@Override
 	public void update(float delta){
-		if(checkCollision()){
+		super.update(delta);
+		if(checkCollision() || isDead){
+			if(!isDead) Game.collisions++;
 			isDead = true;
 			docking = false;
 			docked = false;
 			isLeaving = true;
-			doDeadMovement();
+			doDeadMovement(delta);
 		}else{
 			float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
 			float newRotation = 0f;
 			if(flightPath != null){
+				holding = false;
 				xGoal = flightPath.path.get(flightPathIndex).c.x;
 				yGoal = flightPath.path.get(flightPathIndex).c.y;
 				goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
@@ -66,7 +71,7 @@ public class ShipMerchant extends Ship{
 				docked = true;
 			}
 			if(!docked){
-				speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, goalDistance));
+				speed = holding ? HOLDING_SPEED : HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, goalDistance));
 				HvlCoord2D speedCoord = new HvlCoord2D(xGoal - x, yGoal - y);
 				speedCoord.normalize();
 				if(Float.isNaN(speedCoord.x)) speedCoord.x = 0;
@@ -113,6 +118,7 @@ public class ShipMerchant extends Ship{
 		super.setGoal(xArg, yArg);
 		flightPath = null;
 		flightPathIndex = 0;
+		holding = false;
 	}
 
 	public boolean canDock(int dockingReqArg){

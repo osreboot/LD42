@@ -18,7 +18,7 @@ public class FlightPath {
 	public static void restart(){
 		paths.clear();
 		if(Game.selected_level == 1){
-			paths.add(new FlightPath("A1-1:0", new HvlCoord2D(500, 500 + 48), 
+			paths.add(new FlightPath("A3-Light", new HvlCoord2D(500, 500 + 48), 
 					new PathNode(new HvlCoord2D(500, 500), false), 
 					new PathNode(new HvlCoord2D(550, 500), true), 
 					new PathNode(new HvlCoord2D(600, 500), true), 
@@ -26,7 +26,7 @@ public class FlightPath {
 					new PathNode(new HvlCoord2D(700, 500), true), 
 					new PathNode(new HvlCoord2D(750, 500), false), 
 					new PathNode(new HvlCoord2D(750, 450), false)));
-			paths.add(new FlightPath("A2-1:0", new HvlCoord2D(350, 220 - 48), 
+			paths.add(new FlightPath("A1-Light", new HvlCoord2D(350, 220 - 48), 
 					new PathNode(new HvlCoord2D(350, 220), false), 
 					new PathNode(new HvlCoord2D(400, 220), true), 
 					new PathNode(new HvlCoord2D(450, 220), true), 
@@ -37,6 +37,11 @@ public class FlightPath {
 					new PathNode(new HvlCoord2D(700, 220), true), 
 					new PathNode(new HvlCoord2D(750, 220), false), 
 					new PathNode(new HvlCoord2D(750, 270), false)));
+			paths.add(new FlightPath("A2-Heavy", new HvlCoord2D(150, 360 - 48), 
+					new PathNode(new HvlCoord2D(150, 360), false), 
+					new PathNode(new HvlCoord2D(250, 360), true),
+					new PathNode(new HvlCoord2D(350, 360), true),
+					new PathNode(new HvlCoord2D(450, 360), false)));
 		}
 	}
 

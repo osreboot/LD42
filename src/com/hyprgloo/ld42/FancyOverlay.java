@@ -47,7 +47,7 @@ public class FancyOverlay {
 	public static void gameRestart(){
 		level_fuel_track = 0f;
 		level_energy_track = 1f;
-		level_ammo_track = 1f;
+		level_ammo_track = 0f;
 		TextParticle.particles.clear();
 	}
 
