@@ -161,7 +161,7 @@ public class MenuManager {
 	}
 	
 	public static void update(float delta){
-		if(HvlMenu.getCurrent() == pause){
+		if(HvlMenu.getCurrent() == pause || HvlMenu.getCurrent() == end){
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), new Color(0f, 0f, 0f, 0.4f));
 		}

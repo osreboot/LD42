@@ -15,7 +15,7 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 
 	public float turretRotation;
 
-	public static final float KILL_TIME = 7;
+	public static final float KILL_TIME = 6;
 	public static final float KILL_RANGE = 400;
 	public float killTimer = KILL_TIME;
 
@@ -48,10 +48,10 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 				else newRotation += 360f;
 			}
 			turretRotation = HvlMath.stepTowards(turretRotation, delta * 100f, newRotation);
-			if(HvlMath.distance(x, y, target.x, target.y) < KILL_RANGE && !target.isDead && Game.level_ammo >= Game.RESUPPLY_AMMO_AMOUNT*2) {
+			if(HvlMath.distance(x, y, target.x, target.y) < KILL_RANGE && !target.isDead && Game.level_ammo >= Game.SHOOT_AMMO_COST) {
 				killTimer = HvlMath.stepTowards(killTimer, delta, 0);
 				if(killTimer <= 0) {
-					Game.level_ammo -= Game.RESUPPLY_AMMO_AMOUNT*2;
+					Game.level_ammo -= Game.SHOOT_AMMO_COST;
 					target.isDead = true;
 					killTimer = KILL_TIME;
 				} 

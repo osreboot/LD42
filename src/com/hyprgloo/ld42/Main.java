@@ -19,7 +19,6 @@ public class Main extends HvlTemplateInteg2D{
 	/*
 	 * TUTORIALS - menus
 	 * TUTORIALS - level
-	 * pause screen fbo
 	 * music
 	 * sound effects
 	 * gameplay backgrounds

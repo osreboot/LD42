@@ -22,7 +22,7 @@ public class LevelShipSequencer {
 	static float smallShipTimer = 0;
 	static float medShipTimer = 0;
 	static float largeShipTimer = 0;
-	static float raiderShipTimer = RAID_TIME;
+	static float raiderShipTimer = RAID_TIME * 1.5f;
 	
 	public static boolean spawnedTutorial = false;
 	
@@ -32,7 +32,7 @@ public class LevelShipSequencer {
 		smallShipTimer = 0;
 		medShipTimer = 0;
 		largeShipTimer = LAR_TIME;
-		raiderShipTimer = RAID_TIME;
+		raiderShipTimer = RAID_TIME * 1.5f;
 	}
 	
 	public static void spawnRaider() {
