@@ -26,7 +26,7 @@ public class ShipSelector {
 
 	public static ShipMerchant getClosestShip() {
 		ShipMerchant closestShip = null;
-		if(Ship.ships.size() > 0) {
+		if(Ship.getMerchantCount() > 0) {
 			for(Ship allShips : Ship.ships) {
 				if(closestShip == null && allShips instanceof ShipMerchant) {
 					closestShip = (ShipMerchant)allShips;

@@ -28,7 +28,7 @@ public class LevelShipSequencer {
 	
 	public static ArrayList<SpaceStationPart> raiderCompParts = new ArrayList<>();
 	
-	public static void spawnRaider() {
+	public static void spawnRaider(float y) {
 		for(SpaceStationPart allParts : SpaceStation.stationParts) {
 			if(allParts.raiderCompatible) {
 				raiderCompParts.add(allParts);
@@ -37,9 +37,12 @@ public class LevelShipSequencer {
 		int targetIndex = HvlMath.randomInt(raiderCompParts.size());
 		
 		if(raiderCompParts.get(targetIndex).y <= 360) {
-			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, -128, raiderCompParts.get(targetIndex).x, SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
+			ShipRaiderLight SRL = new ShipRaiderLight(-128, y, raiderCompParts.get(targetIndex).x, SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
+			SRL.setGoal(raiderCompParts.get(targetIndex).x, y);
 		} else if (raiderCompParts.get(targetIndex).y > 360) {
-			new ShipRaiderLight(raiderCompParts.get(targetIndex).x, Display.getHeight() + 128, raiderCompParts.get(targetIndex).x, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
+			ShipRaiderLight SRL = new ShipRaiderLight(-128, y, raiderCompParts.get(targetIndex).x, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
+			SRL.setGoal(raiderCompParts.get(targetIndex).x, y);
+
 		}
 	}
 
@@ -84,7 +87,11 @@ public class LevelShipSequencer {
 				medShipTimer = MED_TIME;
 			}
 			if(raiderShipTimer <= 0) {
-				//spawnRaider();
+				float startY;
+				do{
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
+				}while(Ship.shipInProximity(-128, startY, ShipRaiderLight.COLLISION_SIZE));
+				spawnRaider(startY);
 				raiderShipTimer = RAID_TIME;
 			}
 			
