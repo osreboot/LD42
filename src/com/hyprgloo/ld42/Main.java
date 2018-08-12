@@ -164,6 +164,11 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void update(float delta){
+		if(HvlMenu.getCurrent() == MenuManager.pause) {
+			HvlCursor.setNativeHidden(false);
+		} else {
+			HvlCursor.setNativeHidden(true);
+		}
 		MenuManager.update(delta);
 	}
 

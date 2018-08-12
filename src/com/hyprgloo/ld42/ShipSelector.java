@@ -11,6 +11,7 @@ import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.action.HvlAction1;
 import com.osreboot.ridhvl.input.HvlInput;
+import com.osreboot.ridhvl.menu.HvlMenu;
 import com.osreboot.ridhvl.painter.HvlCursor;
 
 public class ShipSelector {
@@ -71,17 +72,26 @@ public class ShipSelector {
 		selectShip.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-
+				if(HvlMenu.getCurrent() != MenuManager.pause) {
+					HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
+					HvlCursor.setHeight(32);
+					HvlCursor.setWidth(32);
+					HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+					HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+				} 
 				if(selectedShip == null && getClosestShip() != null) {
 	
 					float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
-					if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving) {
-						HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR));
-						HvlCursor.setNativeHidden(true);
-						HvlCursor.setHeight(32);
-						HvlCursor.setWidth(32);
-						HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
-						HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+
+					
+					if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving && HvlMenu.getCurrent() != MenuManager.pause) {
+						if(HvlMenu.getCurrent() != MenuManager.pause) {
+							HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR));
+							HvlCursor.setHeight(32);
+							HvlCursor.setWidth(32);
+							HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+							HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+						}
 						selectedShip = getClosestShip();
 					}
 				}else if(selectedShip != null) selectedShip = null;
@@ -92,12 +102,14 @@ public class ShipSelector {
 			public void run(HvlInput a) {
 
 				if(selectedShip != null) {
-					HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
-					HvlCursor.setNativeHidden(true);
-					HvlCursor.setHeight(32);
-					HvlCursor.setWidth(32);
-					HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
-					HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+					if(HvlMenu.getCurrent() != MenuManager.pause) {
+						HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
+						HvlCursor.setHeight(32);
+						HvlCursor.setWidth(32);
+						HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+						HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+					} 
+
 					SpaceStationPart dockingPart = null;
 					for(SpaceStationPart p : SpaceStation.stationParts){
 						if(p.textureIndex <= selectedShip.dockingReq){
