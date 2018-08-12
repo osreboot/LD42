@@ -16,9 +16,9 @@ public class Raider extends Ship{
 	public boolean docking = false, docked = false;
 	SpaceStationPart goalPart;
 	
-	public Raider(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg,
+	public Raider(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg, float collisionSizeArg,
 			float tradeTimeArg, float dockRotationOffsetArg, SpaceStationPart goalPartArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, maxSpeedArg);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, maxSpeedArg, collisionSizeArg);
 		cargo = Cargo.EMPTY;
 		tradeTime = tradeTimeArg;
 		dockRotationOffset = dockRotationOffsetArg;
@@ -28,6 +28,8 @@ public class Raider extends Ship{
 	
 	@Override
 	public void update(float delta){
+		if(checkCollision()) isDead = true;
+		
 		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
 		if(!docking && goalDistance < AUTO_DOCK_DISTANCE){
 			idleTime = HvlMath.stepTowards(idleTime, delta, 0f);

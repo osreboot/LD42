@@ -101,6 +101,14 @@ public class FancyOverlay {
 		}
 	}
 	
+	public static void spawnAmmoTextExplosion(boolean plus){
+		for(float f = 0; f < PARTICLE_EXPLOSION_COUNT; f++){
+			new TextParticle(plus ? "+" : "-", plus ? Color.green : Color.red, 
+					HvlMath.randomFloatBetween(GAME_LEVEL_AMMO_X + 12, GAME_LEVEL_AMMO_X + 12 + 128), 16, 
+					HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED), HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED));
+		}
+	}
+	
 	public static class TextParticle{
 		
 		public static ArrayList<TextParticle> particles = new ArrayList<>();

@@ -12,7 +12,7 @@ import com.hyprgloo.ld42.SpaceStationPart;
 public class ShipRaiderLight extends Raider{
 
 	public ShipRaiderLight(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, SpaceStationPart goalPartArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 40f, 15f, 90f, goalPartArg);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 40f, 32f, 15f, 90f, goalPartArg);
 	}
 	
 	@Override

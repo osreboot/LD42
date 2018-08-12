@@ -3,8 +3,6 @@ package com.hyprgloo.ld42;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
-import com.hyprgloo.ld42.ships.ShipMerchantLight;
-import com.hyprgloo.ld42.ships.ShipMerchantMedium;
 import com.osreboot.ridhvl.HvlMath;
 
 public class Game {
@@ -15,7 +13,8 @@ public class Game {
 
 	public static final float
 	RESUPPLY_ENERGY_AMOUNT = 1f/4f,
-	RESUPPLY_FUEL_AMOUNT = 1f/10f;
+	RESUPPLY_FUEL_AMOUNT = 1f/10f,
+	RESUPPLY_AMMO_AMOUNT = 1/6f;
 
 	public static int selected_level = -1, collisions = 0;
 

@@ -5,15 +5,16 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.Display;
 
 import com.hyprgloo.ld42.ships.ShipMerchantLight;
+import com.hyprgloo.ld42.ships.ShipMerchantMedium;
 import com.hyprgloo.ld42.ships.ShipRaiderLight;
 import com.osreboot.ridhvl.HvlMath;
 
 public class LevelShipSequencer {
 	
-	public static final float SHIP_SPAWN_EDGE_SPACING = 64f;
+	public static final float SHIP_SPAWN_EDGE_SPACING = 256f;
 	
-	public static final float SMALL_TIME = 10;
-	public static final float MED_TIME = 10;
+	public static final float SMALL_TIME = 8;
+	public static final float MED_TIME = 16;
 	public static final float LAR_TIME = 10;
 	public static final float RAID_TIME = 15;
 
@@ -57,12 +58,27 @@ public class LevelShipSequencer {
 
 		} else if(Game.selected_level == 1){
 			if(smallShipTimer <= 0) {
-				float startY = HvlMath.randomFloatBetween(100,600);
-				new ShipMerchantLight(-128, startY , SHIP_SPAWN_EDGE_SPACING, startY, 0, Cargo.FUEL);
+				float startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(0, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight());
+				Cargo cargo = Cargo.EMPTY;
+				int cargoSelect = HvlMath.randomInt(3);
+				if(cargoSelect == 0) cargo = Cargo.FUEL;
+				if(cargoSelect == 1) cargo = Cargo.ENERGY;
+				if(cargoSelect == 2) cargo = Cargo.AMMO;
+				new ShipMerchantLight(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
 				smallShipTimer = SMALL_TIME;
 			}
+			if(medShipTimer <= 0) {
+				float startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(0, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight());
+				Cargo cargo = Cargo.EMPTY;
+				int cargoSelect = HvlMath.randomInt(3);
+				if(cargoSelect == 0) cargo = Cargo.FUEL;
+				if(cargoSelect == 1) cargo = Cargo.ENERGY;
+				if(cargoSelect == 2) cargo = Cargo.AMMO;
+				new ShipMerchantMedium(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
+				medShipTimer = MED_TIME;
+			}
 			if(raiderShipTimer <= 0) {
-				spawnRaider();
+				//spawnRaider();
 				raiderShipTimer = RAID_TIME;
 			}
 			

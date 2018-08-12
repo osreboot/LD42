@@ -28,7 +28,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_STATION_TURRET_MOUNT = 10,
 	INDEX_STATION_DOCKING_PORT_MED = 11,
 	INDEX_STATION_DOCKING_PORT_LRG = 12,
-	INDEX_STATION_TURRET = 13;
+	INDEX_STATION_TURRET = 13,
+	INDEX_MOVEON = 14;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -62,6 +63,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("StationDockingPortMed");//11
 		getTextureLoader().loadResource("StationDockingPortLrg");//12
 		getTextureLoader().loadResource("StationTurret");//13
+		getTextureLoader().loadResource("MoveOn");//14
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);

@@ -9,8 +9,10 @@ import com.hyprgloo.ld42.Main;
 
 public class ShipMerchantMedium extends ShipMerchant{
 
+	public static final float TRADE_TIME = 22f;
+	
 	public ShipMerchantMedium(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 30f, cargoArg, 15f, 180f, -2, 2f);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 30f, 64f, cargoArg, TRADE_TIME, 180f, -2, 2f);
 	}
 
 	@Override
@@ -22,6 +24,7 @@ public class ShipMerchantMedium extends ShipMerchant{
 			hvlDrawQuadc(x + 22f, y - 8f, 16f, 16f, Main.getTexture(cargo.texture));
 		}
 		hvlResetRotation();
+		drawTradeProgressBar(x, y);
 		super.draw(delta);
 	}
 

@@ -26,7 +26,7 @@ public class Ship {
 		for(Ship s : ships) if(s instanceof ShipMerchant) count++;
 		return count;
 	}
-	
+
 	public static boolean shipInProximity(float xArg, float yArg, float distance){
 		for(Ship s : ships){
 			if(HvlMath.distance(s.x, s.y, xArg, yArg) < distance) return true;
@@ -41,9 +41,10 @@ public class Ship {
 		return false;
 	}
 
-	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, maxSpeed;
+	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, lastRotation, maxSpeed, collisionSize;
+	public boolean isLeaving = false, isDead = false;
 
-	public Ship(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg){
+	public Ship(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg, float collisionSizeArg){
 		x = xArg;
 		y = yArg;
 		xs = 0;
@@ -53,6 +54,7 @@ public class Ship {
 		yGoal = yGoalArg;
 		rotation = rotationArg;
 		maxSpeed = maxSpeedArg;
+		collisionSize = collisionSizeArg;
 		ships.add(this);
 	}
 
@@ -85,6 +87,14 @@ public class Ship {
 	public void setGoal(float xArg, float yArg){
 		xGoal = xArg;
 		yGoal = yArg;
+	}
+	
+	public boolean checkCollision(){
+		return shipInProximity(x, y, collisionSize, this);
+	}
+	
+	public void doDeadMovement(){
+		
 	}
 
 }
