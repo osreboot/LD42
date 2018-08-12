@@ -3,6 +3,7 @@ package com.hyprgloo.ld42;
 import java.io.File;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.action.HvlAction1;
@@ -85,7 +86,7 @@ public class Main extends HvlTemplateInteg2D{
 
 	public static HvlFontPainter2D font;
 
-	public static HvlInput inputPause;
+	public static HvlInput inputPause, inputTutorialSkip;
 
 	public static final String PATH_SETTINGS = "res\\settings.cfg";
 	public static Settings settings;
@@ -147,6 +148,19 @@ public class Main extends HvlTemplateInteg2D{
 				}
 			}
 		});
+		
+		inputTutorialSkip = new HvlInput(new HvlInput.InputFilter(){
+			@Override
+			public float getCurrentOutput(){
+				return Keyboard.isKeyDown(Keyboard.KEY_SPACE) || Mouse.isButtonDown(0) ? 1 : 0;
+			}
+		});
+		inputTutorialSkip.setPressedAction(new HvlAction1<HvlInput>(){
+			@Override
+			public void run(HvlInput aArg){
+				TutorialManager.advanceTutorial();
+			}
+		});
 
 		File config = new File(PATH_SETTINGS);
 		if(config.exists()){
@@ -163,6 +177,7 @@ public class Main extends HvlTemplateInteg2D{
 		HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
 		ShipSelector.initialize();
 		MenuManager.initialize();
+		TutorialManager.initialize();
 	}
 
 	@Override

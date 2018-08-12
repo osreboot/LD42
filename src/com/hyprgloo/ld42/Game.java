@@ -10,7 +10,6 @@ import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.menu.HvlMenu;
-import com.osreboot.ridhvl.painter.HvlCursor;
 
 public class Game {
 
