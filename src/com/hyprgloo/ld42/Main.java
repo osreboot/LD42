@@ -10,6 +10,7 @@ import com.osreboot.ridhvl.config.HvlConfig;
 import com.osreboot.ridhvl.display.collection.HvlDisplayModeDefault;
 import com.osreboot.ridhvl.input.HvlInput;
 import com.osreboot.ridhvl.menu.HvlMenu;
+import com.osreboot.ridhvl.painter.HvlCursor;
 import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 import com.osreboot.ridhvl.template.HvlTemplateInteg2D;
 
@@ -65,7 +66,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_EXP = 16,
 	INDEX_RAIDER = 17,
 	INDEX_BUTTON_TARGET = 18,
-	INDEX_BLINK = 19;
+	INDEX_BLINK = 19,
+	INDEX_CURSOR = 20;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -108,6 +110,8 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Raider1"); //17
 		getTextureLoader().loadResource("ButtonTarget"); //18
 		getTextureLoader().loadResource("Blink"); //19
+		getTextureLoader().loadResource("cursor"); //20
+
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
@@ -136,7 +140,12 @@ public class Main extends HvlTemplateInteg2D{
 			HvlConfig.saveToFile(new Settings(), PATH_SETTINGS);
 			settings = HvlConfig.loadFromFile(PATH_SETTINGS);
 		}
-
+		HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR));
+		HvlCursor.setNativeHidden(true);
+		HvlCursor.setHeight(32);
+		HvlCursor.setWidth(32);
+		HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+		HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
 		ShipSelector.initialize();
 		MenuManager.initialize();
 	}
