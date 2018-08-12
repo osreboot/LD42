@@ -1,8 +1,11 @@
 package com.hyprgloo.ld42;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotation;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
+
+import org.newdawn.slick.Color;
 
 import com.hyprgloo.ld42.ships.Raider;
 import com.hyprgloo.ld42.ships.ShipMerchant;
@@ -14,6 +17,10 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 
 	public float turretRotation;
 
+	public static final float KILL_TIME = 12;
+	public static final float KILL_RANGE = 200;
+	public float killTimer = KILL_TIME;
+
 	public SpaceStationPartTurret(float xGridArg, float yGridArg, float rotationArg){
 		super(xGridArg, yGridArg, rotationArg, Main.INDEX_STATION_TURRET_MOUNT);
 		turretRotation = 0;
@@ -23,16 +30,15 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 		Raider target = null;
 		for(Ship s : Ship.ships){
 			
-				if(target == null && s instanceof Raider) {
+			if(target == null && s instanceof Raider) {
+				target = (Raider)s;
+			}
+			if(target != null && !target.isDead) {
+			float distance = HvlMath.distance(x, y, target.x, target.y);
+			float distanceTest = HvlMath.distance(x, y, s.x, s.y);
+				if(distanceTest < distance && s instanceof Raider) {
 					target = (Raider)s;
 				}
-				if(target != null) {
-					float distance = HvlMath.distance(x, y, target.x, target.y);
-					float distanceTest = HvlMath.distance(x, y, s.x, s.y);
-
-					if(distanceTest < distance && s instanceof Raider) {
-						target = (Raider)s;
-					}
 			}
 		}
 
@@ -44,6 +50,19 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 				else newRotation += 360f;
 			}
 			turretRotation = HvlMath.stepTowards(turretRotation, delta * 100f, newRotation);
+			if(HvlMath.distance(x, y, target.x, target.y) < KILL_RANGE && !target.isDead && Game.level_ammo >= Game.RESUPPLY_AMMO_AMOUNT*2) {
+				killTimer = HvlMath.stepTowards(killTimer, delta, 0);
+				if(killTimer <= 0) {
+					Game.level_ammo -= Game.RESUPPLY_AMMO_AMOUNT*2;
+					target.isDead = true;
+					killTimer = KILL_TIME;
+				} 
+				if(!target.isDead) {
+					hvlDrawLine(target.x, target.y, x, y, Color.pink);
+					hvlDrawLine(target.x+1, target.y, x+1, y, Color.pink);
+					hvlDrawLine(target.x-1, target.y, x-1, y, Color.pink);
+				}
+			}
 		}
 
 		hvlRotate(x, y, turretRotation - 90);
