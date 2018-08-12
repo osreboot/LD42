@@ -75,7 +75,7 @@ public class Ship {
 	public void update(float delta){
 		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
 		if(goalDistance < AUTO_DOCK_DISTANCE && (y < LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING || 
-				y > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING) && !(this instanceof Raider)){
+				y > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING) && (!(this instanceof Raider) || (this instanceof Raider && ((Raider)this).cargo != Cargo.EMPTY))){
 			holding = true;
 		}
 		if(holding){
