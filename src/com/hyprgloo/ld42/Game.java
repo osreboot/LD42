@@ -24,7 +24,8 @@ public class Game {
 	public static final float
 	RESUPPLY_ENERGY_AMOUNT = 1f/4f,
 	RESUPPLY_FUEL_AMOUNT = 1f/10f,
-	RESUPPLY_AMMO_AMOUNT = 1/6f;
+	RESUPPLY_AMMO_AMOUNT = 1/6f,
+	SHOOT_AMMO_COST = (1f/6f) * 1.5f;
 
 	public static int selected_level = -1, collisions = 0;
 
@@ -78,7 +79,7 @@ public class Game {
 			endStateTimer = HvlMath.stepTowards(endStateTimer, (state == EndState.WIN ? 0.25f : 1f) * delta, 1f);
 			endStateTimerMeta = HvlMath.stepTowards(endStateTimerMeta, delta, 0f);
 			if(state == EndState.LOSS_ENERGY){
-				float value = HvlMath.map(endStateTimer, 1f, 0f, 0.2f, 1f);
+				float value = HvlMath.map(endStateTimer, 1f, 0f, 0.4f, 1f);
 				endStateColor = new Color(value, value, value);
 			}
 			if(state == EndState.WIN){

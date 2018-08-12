@@ -1,5 +1,6 @@
 package com.hyprgloo.ld42;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
@@ -10,6 +11,10 @@ import org.newdawn.slick.Color;
 import com.osreboot.ridhvl.HvlMath;
 
 public class FancyOverlay {
+	
+	public static void drawMainBackground(float delta){
+		
+	}
 	
 	public static final float 
 	GAME_LEVEL_FUEL_X = 16f,
@@ -51,11 +56,15 @@ public class FancyOverlay {
 		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12, 8, 128f, 8f, Color.black);
 		hvlDrawQuad(GAME_LEVEL_ENERGY_X + 12, 8, level_energy_track * 128f, 8f, Main.COLOR_BLUE0);
+		hvlDrawLine(GAME_LEVEL_ENERGY_X + 12 + (Game.ENERGY_PULSE_AMOUNT * 128f), 8, 
+				GAME_LEVEL_ENERGY_X + 12 + (Game.ENERGY_PULSE_AMOUNT * 128f), 16, Color.white);
 
 		hvlDrawQuadc(GAME_LEVEL_AMMO_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_AMMO));
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, 128f, 8f, Color.black);
 		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, level_ammo_track * 128f, 8f, Color.green);
+		hvlDrawLine(GAME_LEVEL_AMMO_X + 12 + (Game.SHOOT_AMMO_COST * 128f), 8, 
+				GAME_LEVEL_AMMO_X + 12 + (Game.SHOOT_AMMO_COST * 128f), 16, Color.white);
 	}
 	
 	public static final float 
