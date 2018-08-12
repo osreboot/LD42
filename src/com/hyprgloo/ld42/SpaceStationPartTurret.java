@@ -5,8 +5,10 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotatio
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
 
 import com.hyprgloo.ld42.ships.Raider;
+import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
+import com.osreboot.ridhvl.painter.HvlCursor;
 
 public class SpaceStationPartTurret extends SpaceStationPart{
 
@@ -20,8 +22,18 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 	public void updateTurretRotation(float delta){
 		Raider target = null;
 		for(Ship s : Ship.ships){
-			if(s instanceof Raider) 
-				target = (Raider)s;
+			
+				if(target == null && s instanceof Raider) {
+					target = (Raider)s;
+				}
+				if(target != null) {
+					float distance = HvlMath.distance(x, y, target.x, target.y);
+					float distanceTest = HvlMath.distance(x, y, s.x, s.y);
+
+					if(distanceTest < distance && s instanceof Raider) {
+						target = (Raider)s;
+					}
+			}
 		}
 
 		if(target != null){

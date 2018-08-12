@@ -29,7 +29,7 @@ public class Game {
 		Ship.ships.clear();
 		FancyOverlay.gameRestart();
 		FlightPath.restart();
-
+		Ship.exps.clear();
 		level_fuel = 0f;
 		level_energy = 1f;
 		level_ammo = 0f;
@@ -58,6 +58,7 @@ public class Game {
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);
 		SpaceStation.update(delta);
+		
 		
 		for(Explosion e : Ship.exps) e.draw(delta);
 		
