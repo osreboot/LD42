@@ -10,6 +10,7 @@ import org.newdawn.slick.Color;
 import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
+import com.osreboot.ridhvl.painter.HvlCursor;
 
 public class Ship {
 
@@ -92,6 +93,10 @@ public class Ship {
 	}
 
 	public void doDeadMovement(float delta){
+		
+		hvlDrawQuadc(x, y, 128, 128, Main.explosionAnimation);
+		Main.explosionAnimation.updateTextures(delta);
+
 		deadLife = HvlMath.stepTowards(deadLife, delta, 0f);
 		if(deadRotationSpeed == 0) deadRotationSpeed = HvlMath.randomFloatBetween(-90, 90);
 		xs = HvlMath.stepTowards(xs, delta * 20f, 0f);
