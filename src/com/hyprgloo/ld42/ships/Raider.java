@@ -24,7 +24,7 @@ public class Raider extends Ship{
 		tradeTime = tradeTimeArg;
 		dockRotationOffset = dockRotationOffsetArg;
 		goalPart = goalPartArg;
-		idleTime = 3f;
+		idleTime = 1f;
 	}
 	public boolean isOccupied() {
 		for(SpaceStationPart p : LevelShipSequencer.raiderCompParts) {
