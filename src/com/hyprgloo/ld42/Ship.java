@@ -93,9 +93,9 @@ public class Ship {
 	}
 
 	public void doDeadMovement(float delta){
-		
+
+		Main.explosionAnimation.setRunning(true);
 		hvlDrawQuadc(x, y, 128, 128, Main.explosionAnimation);
-		Main.explosionAnimation.updateTextures(delta);
 
 		deadLife = HvlMath.stepTowards(deadLife, delta, 0f);
 		if(deadRotationSpeed == 0) deadRotationSpeed = HvlMath.randomFloatBetween(-90, 90);
