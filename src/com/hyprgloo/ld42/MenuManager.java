@@ -28,7 +28,7 @@ public class MenuManager {
 	
 	private static HashMap<HvlLabeledButton, ButtonWrapper> buttonWrappers = new HashMap<>();
 
-	public static HvlMenu main, levels, game;
+	public static HvlMenu main, levels, game, pause, options, credits;
 	
 	public static void initialize(){
 		
@@ -63,13 +63,16 @@ public class MenuManager {
 		main = new HvlMenu();
 		levels = new HvlMenu();
 		game = new HvlMenu();
+		pause = new HvlMenu();
+		options = new HvlMenu();
+		credits = new HvlMenu();
 		
 		main.add(new HvlArrangerBox.Builder().build());
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").setClickedCommand(new HvlButtonMenuLink(levels)).build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
-		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("credits").build());
+		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setClickedCommand(new HvlButtonMenuLink(credits)).setText("credits").build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
-		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("options").build());
+		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setClickedCommand(new HvlButtonMenuLink(options)).setText("options").build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlAction1<HvlButton>(){
 			@Override
@@ -117,20 +120,37 @@ public class MenuManager {
 		levels.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
 		
+		pause.add(new HvlArrangerBox.Builder().build());
+		pause.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("resume").setClickedCommand(new HvlButtonMenuLink(game)).build());
+		pause.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		pause.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		
+		options.add(new HvlArrangerBox.Builder().build());
+		options.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		
+		credits.add(new HvlArrangerBox.Builder().build());
+		credits.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		credits.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		
 		HvlMenu.setCurrent(main);
 	}
 	
 	public static void update(float delta){
+		if(HvlMenu.getCurrent() == pause){
+			
+		}
+		
 		HvlMenu.updateMenus(delta);
 		
-		if(HvlMenu.getCurrent() == main || HvlMenu.getCurrent() == levels){
+		if(HvlMenu.getCurrent() != game){
 			for(HvlLabeledButton b : buttonWrappers.keySet()){
 				buttonWrappers.get(b).update(delta, b.isHovering(), HvlMenu.getCurrent().getFirstArrangerBox().getChildren().contains(b));
 				hvlDrawQuad(b.getX() - (buttonWrappers.get(b).fade * BUTTON_TARGET_SIZE/2f), b.getY() - (buttonWrappers.get(b).fade * BUTTON_TARGET_SIZE/2f), 
 						b.getWidth() + (buttonWrappers.get(b).fade * BUTTON_TARGET_SIZE), b.getHeight() + (buttonWrappers.get(b).fade * BUTTON_TARGET_SIZE), 
 						Main.getTexture(Main.INDEX_BUTTON_TARGET), new Color(1f, 1f, 1f, buttonWrappers.get(b).fade));
 			}
-		}else if(HvlMenu.getCurrent() == game){
+		}else{
 			Game.update(delta);
 		}
 	}

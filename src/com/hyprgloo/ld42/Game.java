@@ -6,6 +6,10 @@ import org.newdawn.slick.Color;
 import com.osreboot.ridhvl.HvlMath;
 
 public class Game {
+	
+	public static enum EndState{
+		WIN, LOSS_ENERGY
+	}
 
 	public static final float 
 	ENERGY_PULSE_DELAY = 20f,
@@ -19,7 +23,7 @@ public class Game {
 	public static int selected_level = -1, collisions = 0;
 
 	public static float level_fuel, level_energy, level_ammo;
-	public static float energyPulseTimer;
+	public static float energyPulseTimer, endStateTimer;
 
 	public static void restart(){
 		Ship.ships.clear();
@@ -31,6 +35,8 @@ public class Game {
 		level_ammo = 0f;
 
 		collisions = 0;
+		
+		endStateTimer = 0f;
 
 		energyPulseTimer = ENERGY_PULSE_DELAY;
 		LevelShipSequencer.spawnedTutorial = false;

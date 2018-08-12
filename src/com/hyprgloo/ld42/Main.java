@@ -3,14 +3,38 @@ package com.hyprgloo.ld42;
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 
+import com.osreboot.ridhvl.action.HvlAction1;
 import com.osreboot.ridhvl.display.collection.HvlDisplayModeDefault;
 import com.osreboot.ridhvl.input.HvlInput;
-import com.osreboot.ridhvl.painter.HvlAnimatedTextureUV;
+import com.osreboot.ridhvl.menu.HvlMenu;
 import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 import com.osreboot.ridhvl.template.HvlTemplateInteg2D;
 
 public class Main extends HvlTemplateInteg2D{
 
+	//TODO
+	/*
+	 * TUTORIALS - menus
+	 * TUTORIALS - level
+	 * pause screen fbo
+	 * music
+	 * sound effects
+	 * gameplay backgrounds
+	 * station 2
+	 * station 3
+	 * main menu background
+	 * large merchants
+	 * options config
+	 * raider/turret shooting
+	 * energy capsule effect
+	 * game loss states
+	 * interaction textures (select, target, targetoptions)
+	 * menu titles
+	 * credits screen
+	 * splash screen
+	 * 
+	 */
+	
 	public static void main(String[] args){
 		new Main();
 	}
@@ -84,6 +108,16 @@ public class Main extends HvlTemplateInteg2D{
 			@Override
 			public float getCurrentOutput(){
 				return Keyboard.isKeyDown(Keyboard.KEY_ESCAPE) || Keyboard.isKeyDown(Keyboard.KEY_P) ? 1 : 0;
+			}
+		});
+		inputPause.setPressedAction(new HvlAction1<HvlInput>(){
+			@Override
+			public void run(HvlInput aArg){
+				if(HvlMenu.getCurrent() == MenuManager.game){
+					HvlMenu.setCurrent(MenuManager.pause);
+				}else if(HvlMenu.getCurrent() == MenuManager.pause){
+					HvlMenu.setCurrent(MenuManager.game);
+				}
 			}
 		});
 
