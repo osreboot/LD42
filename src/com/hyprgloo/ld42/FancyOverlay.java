@@ -110,13 +110,15 @@ public class FancyOverlay {
 			hvlDrawQuadc(GAME_LEVEL_ENERGY_X, 12, energySize+20, energySize+20, Main.getTexture(HvlMath.randomIntBetween(Main.INDEX_LIGHT_1, Main.INDEX_LIGHT_3+1)));
 			hvlResetRotation();
 		}
+		if(Game.selected_level > 1) {
+			hvlDrawQuadc(GAME_LEVEL_AMMO_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_AMMO));
+			hvlDrawQuad(GAME_LEVEL_AMMO_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
+			hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, 128f, 8f, Color.black);
+			hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, level_ammo_track * 128f, 8f, Color.green);
+			hvlDrawLine(GAME_LEVEL_AMMO_X + 12 + (Game.SHOOT_AMMO_COST * 128f), 8, 
+					GAME_LEVEL_AMMO_X + 12 + (Game.SHOOT_AMMO_COST * 128f), 16, Color.white);
+		}
 
-		hvlDrawQuadc(GAME_LEVEL_AMMO_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_AMMO));
-		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
-		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, 128f, 8f, Color.black);
-		hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, level_ammo_track * 128f, 8f, Color.green);
-		hvlDrawLine(GAME_LEVEL_AMMO_X + 12 + (Game.SHOOT_AMMO_COST * 128f), 8, 
-				GAME_LEVEL_AMMO_X + 12 + (Game.SHOOT_AMMO_COST * 128f), 16, Color.white);
 	}
 	
 	public static final float 
@@ -140,10 +142,12 @@ public class FancyOverlay {
 	}
 	
 	public static void spawnAmmoTextExplosion(boolean plus){
-		for(float f = 0; f < PARTICLE_EXPLOSION_COUNT; f++){
-			new TextParticle(plus ? "+" : "-", plus ? Color.green : Color.red, 
-					HvlMath.randomFloatBetween(GAME_LEVEL_AMMO_X + 12, GAME_LEVEL_AMMO_X + 12 + 128), 16, 
-					HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED), HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED));
+		if(Game.selected_level > 1) {
+			for(float f = 0; f < PARTICLE_EXPLOSION_COUNT; f++){
+				new TextParticle(plus ? "+" : "-", plus ? Color.green : Color.red, 
+						HvlMath.randomFloatBetween(GAME_LEVEL_AMMO_X + 12, GAME_LEVEL_AMMO_X + 12 + 128), 16, 
+						HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED), HvlMath.randomFloatBetween(-PARTICLE_EXPLOSION_SPEED, PARTICLE_EXPLOSION_SPEED));
+			}
 		}
 	}
 	

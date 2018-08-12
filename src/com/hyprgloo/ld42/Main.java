@@ -3,6 +3,8 @@ package com.hyprgloo.ld42;
 import java.io.File;
 
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.action.HvlAction1;
@@ -169,18 +171,24 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void update(float delta){
-		if(HvlMenu.getCurrent() == MenuManager.pause) {
+		if(settings.customCursor) {
+			if(HvlMenu.getCurrent() == MenuManager.pause) {
+				HvlCursor.setTexture(getTexture(INDEX_CLEAR));
+				HvlCursor.setNativeHidden(false);
+
+			} else {
+				if(HvlCursor.getTexture() == getTexture(INDEX_CLEAR)) {
+					HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
+					HvlCursor.setHeight(32);
+					HvlCursor.setWidth(32);
+					HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+					HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+				}
+				HvlCursor.setNativeHidden(true);
+			}
+		}else {
 			HvlCursor.setTexture(getTexture(INDEX_CLEAR));
 			HvlCursor.setNativeHidden(false);
-		} else {
-			if(HvlCursor.getTexture() == getTexture(INDEX_CLEAR)) {
-				HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
-				HvlCursor.setHeight(32);
-				HvlCursor.setWidth(32);
-				HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
-				HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
-			}
-			HvlCursor.setNativeHidden(true);
 		}
 		MenuManager.update(delta);
 	}
