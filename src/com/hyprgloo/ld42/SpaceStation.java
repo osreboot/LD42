@@ -79,7 +79,7 @@ public class SpaceStation {
 			if(part.textureIndex == -1 || part.textureIndex == -2 || part.textureIndex == -3){
 				if(ShipSelector.selectedShip != null && ShipSelector.selectedShip.canDock(part.textureIndex) && !Ship.shipInProximity(part.x, part.y, 32f, ShipSelector.selectedShip)){
 					float size = HvlMath.map((float)Math.sin(Main.getNewestInstance().getTimer().getTotalTime() * 10f), -1f, 1f, 10f, 20f);
-					hvlDrawQuadc(part.x, part.y, size, size, Color.blue);
+					hvlDrawQuadc(part.x, part.y, size, size, Main.getTexture(Main.INDEX_DOCKING_ICON));
 				}
 			}else{
 				hvlDrawQuadc(part.x, part.y, GRID_SIZE, GRID_SIZE, Main.getTexture(part.textureIndex), Game.endStateColor);

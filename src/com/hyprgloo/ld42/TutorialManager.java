@@ -35,7 +35,9 @@ public class TutorialManager {
 		}else{
 			for(Tutorial t : tutorials.keySet()){
 				if(!tutorials.get(t) && t.isTriggered.run()){
-					
+					tutorials.put(t, true);
+					current = t;
+					break;
 				}
 			}
 		}

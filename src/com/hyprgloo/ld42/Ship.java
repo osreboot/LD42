@@ -92,7 +92,7 @@ public class Ship {
 
 	public void draw(float delta){
 		if(!isDead && !isLeaving)
-			hvlDrawQuadc(xGoal, yGoal, 10, 10, new Color(1f, 1f, 1f, 0.1f));
+			hvlDrawQuadc(xGoal, yGoal, 32, 32, Main.getTexture(Main.INDEX_TARGET_INDICATOR));
 	}
 
 	public void setGoal(float xArg, float yArg){
@@ -104,11 +104,11 @@ public class Ship {
 	public boolean checkCollision(){
 		for(Ship s : ships){
 			if(HvlMath.distance(s.x, s.y, x, y) < s.collisionSize + collisionSize && s != this) return true;
-			for(SpaceStationPart sp : SpaceStation.stationParts) {
-				if(sp.textureIndex >= 0 && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT && 
-						sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_LRG && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_MED) {
-					if(HvlMath.distance(sp.x,  sp.y, x, y) < s.collisionSize + SpaceStation.GRID_SIZE/2  && s!= this) return true;
-				}
+		}
+		for(SpaceStationPart sp : SpaceStation.stationParts) {
+			if(sp.textureIndex >= 0 && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT && 
+					sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_LRG && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_MED) {
+				if(HvlMath.distance(sp.x,  sp.y, x, y) < collisionSize + SpaceStation.GRID_SIZE/2) return true;
 			}
 		}
 		

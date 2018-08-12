@@ -27,14 +27,11 @@ public class Main extends HvlTemplateInteg2D{
 	 * station 3
 	 * large merchants
 	 * options config
-	 * raider/turret shooting (low draw index)
-	 * energy capsule effect
 	 * game loss states (just titles left)
 	 * interaction textures (select, target, targetoptions)
 	 * menu titles
 	 * credits screen
 	 * splash screen
-	 * station collision
 	 * disaster fail state?
 	 * 
 	 * cursor?
@@ -75,7 +72,9 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_LIGHT_2 = 26,
 	INDEX_LIGHT_3 = 27,
 	INDEX_CURSOR_2 = 28,
-	INDEX_CLEAR = 29;
+	INDEX_CLEAR = 29,
+	INDEX_TARGET_INDICATOR = 30,
+	INDEX_DOCKING_ICON = 31;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
@@ -119,7 +118,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Raider1"); //17
 		getTextureLoader().loadResource("ButtonTarget"); //18
 		getTextureLoader().loadResource("Blink"); //19
-		getTextureLoader().loadResource("CargoShipMedium"); //20//TODO placeholder
+		getTextureLoader().loadResource("CargoShipLarge"); //20
 		getTextureLoader().loadResource("cursor"); //21
 		getTextureLoader().loadResource("Nebula1"); //22
 		getTextureLoader().loadResource("Nebula2"); //23
@@ -129,6 +128,8 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("lightning3"); //27
 		getTextureLoader().loadResource("cursor2"); //28
 		getTextureLoader().loadResource("clear"); //29
+		getTextureLoader().loadResource("TargetIndicator"); //30
+		getTextureLoader().loadResource("Docking_Icon"); //31
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
@@ -150,7 +151,7 @@ public class Main extends HvlTemplateInteg2D{
 				}
 			}
 		});
-		
+
 		inputTutorialSkip = new HvlInput(new HvlInput.InputFilter(){
 			@Override
 			public float getCurrentOutput(){

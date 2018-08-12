@@ -160,7 +160,7 @@ public class ShipSelector {
 	public static void update(float delta) {
 		if(selectedShip != null) {
 
-			hvlDrawLine(selectedShip.x, selectedShip.y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), Main.COLOR_GREEN1);
+			hvlDrawLine(selectedShip.x, selectedShip.y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), Main.COLOR_GREEN1, 2f);
 		}
 		if(selectedShip == null && getClosestShip() != null) {
 			float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);

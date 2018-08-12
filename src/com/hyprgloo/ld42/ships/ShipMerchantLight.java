@@ -19,6 +19,7 @@ public class ShipMerchantLight extends ShipMerchant{
 
 	@Override
 	public void draw(float delta){
+		super.draw(delta);
 		Color deadColor = new Color(isDead ? 0.4f : 1f, isDead ? 0.4f : 1f, isDead ? 0.4f : 1f, 1f);
 		hvlRotate(x, y, rotation - 90f);
 		hvlDrawQuadc(x, y, 32f, 32f, Main.getTexture(Main.INDEX_CARGO_SHIP_SMALL), deadColor);
@@ -27,7 +28,6 @@ public class ShipMerchantLight extends ShipMerchant{
 		}
 		hvlResetRotation();
 		drawTradeProgressBar(x, y);
-		super.draw(delta);
 	}
 
 }
