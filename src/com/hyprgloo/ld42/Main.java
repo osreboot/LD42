@@ -171,6 +171,7 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void update(float delta){
+		//TODO Add mouse menu remembrance
 		if(settings.customCursor) {
 			if(HvlMenu.getCurrent() == MenuManager.pause) {
 				HvlCursor.setTexture(getTexture(INDEX_CLEAR));
