@@ -4,6 +4,7 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
 import java.util.ArrayList;
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.hyprgloo.ld42.ships.ShipMerchant;
@@ -17,8 +18,13 @@ public class Ship {
 	public static ArrayList<Ship> ships = new ArrayList<>();
 
 	public static void updateShips(float delta){
-		for(Ship s : ships) s.update(delta);
+		ArrayList<Ship> cleanup = new ArrayList<>();
+		for(Ship s : ships){
+			s.update(delta);
+			if(s.isDead && s.deadLife == 0) cleanup.add(s);
+		}
 		for(Ship s : ships) s.draw(delta);
+		for(Ship s : cleanup) ships.remove(s);
 	}
 
 	public static int getMerchantCount(){
@@ -41,7 +47,7 @@ public class Ship {
 		return false;
 	}
 
-	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, lastRotation, maxSpeed, collisionSize;
+	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, deadRotationSpeed, deadLife, maxSpeed, collisionSize;
 	public boolean isLeaving = false, isDead = false;
 
 	public Ship(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg, float collisionSizeArg){
@@ -55,46 +61,44 @@ public class Ship {
 		rotation = rotationArg;
 		maxSpeed = maxSpeedArg;
 		collisionSize = collisionSizeArg;
+		deadLife = 5f;
 		ships.add(this);
 	}
 
 	public void update(float delta){
-		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
-		float newRotation = 0f;
-		speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, goalDistance));
-		HvlCoord2D speedCoord = new HvlCoord2D(xGoal - x, yGoal - y);
-		speedCoord.normalize();
-		if(Float.isNaN(speedCoord.x)) speedCoord.x = 0;
-		if(Float.isNaN(speedCoord.y)) speedCoord.y = 0;
-		speedCoord.mult(speed);
-		xs = HvlMath.stepTowards(xs, delta * maxSpeed, speedCoord.x);
-		ys = HvlMath.stepTowards(ys, delta * maxSpeed, speedCoord.y);
-		x += xs * delta;
-		y += ys * delta;
-		newRotation = (float)Math.toDegrees(HvlMath.fullRadians(new HvlCoord2D(x, y), new HvlCoord2D(xGoal, yGoal)));
-		while(Math.abs(newRotation - rotation) > 180f){
-			if(Math.abs(newRotation - 360f - rotation) < Math.abs(newRotation + 360f - rotation))
-				newRotation -= 360f;
-			else newRotation += 360f;
+		if(x > Display.getWidth() - 96){
+			isLeaving = true;
+			xGoal = Display.getWidth() + 128;
+			yGoal = y;
 		}
-		if(goalDistance > 64f) rotation = HvlMath.stepTowards(rotation, delta * maxSpeed * 2f, newRotation);
+		if(x > Display.getWidth() + 64 || y < -64 || y > Display.getHeight() + 64) isDead = true;
 	}
 
 	public void draw(float delta){
-		hvlDrawQuadc(xGoal, yGoal, 10, 10, new Color(1f, 1f, 1f, 0.1f));
+		if(!isDead && !isLeaving)
+			hvlDrawQuadc(xGoal, yGoal, 10, 10, new Color(1f, 1f, 1f, 0.1f));
 	}
 
 	public void setGoal(float xArg, float yArg){
 		xGoal = xArg;
 		yGoal = yArg;
 	}
-	
+
 	public boolean checkCollision(){
-		return shipInProximity(x, y, collisionSize, this);
+		for(Ship s : ships){
+			if(HvlMath.distance(s.x, s.y, x, y) < s.collisionSize + collisionSize && s != this) return true;
+		}
+		return false;
 	}
-	
-	public void doDeadMovement(){
-		
+
+	public void doDeadMovement(float delta){
+		deadLife = HvlMath.stepTowards(deadLife, delta, 0f);
+		if(deadRotationSpeed == 0) deadRotationSpeed = HvlMath.randomFloatBetween(-90, 90);
+		xs = HvlMath.stepTowards(xs, delta * 20f, 0f);
+		ys = HvlMath.stepTowards(ys, delta * 20f, 0f);
+		x += xs * delta;
+		y += ys * delta;
+		rotation += deadRotationSpeed * delta;
 	}
 
 }

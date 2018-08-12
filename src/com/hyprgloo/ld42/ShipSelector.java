@@ -1,8 +1,10 @@
 package com.hyprgloo.ld42;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.hyprgloo.ld42.ships.ShipMerchant;
@@ -120,6 +122,6 @@ public class ShipSelector {
 				hvlDrawLine(getClosestShip().x, getClosestShip().y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), new Color(0f, 0f, 1f, 0.8f));
 			}
 		}
-
+		hvlDrawQuad(Display.getWidth() - 96f, 0, 96f, Display.getHeight(), Main.getTexture(Main.INDEX_MOVEON), new Color(1f, 1f, 1f, HvlCursor.getCursorX() > Display.getWidth() - 96f ? 0.4f : 0.05f));
 	}
 }

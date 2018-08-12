@@ -30,7 +30,7 @@ public class Game {
 		level_energy = 1f;
 		level_ammo = 0f;
 
-		collisions = 1;
+		collisions = 0;
 
 		energyPulseTimer = ENERGY_PULSE_DELAY;
 		LevelShipSequencer.spawnedTutorial = false;
@@ -51,7 +51,7 @@ public class Game {
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);
 		SpaceStation.update(delta);
-		if(collisions > 0) Main.font.drawWord("collisions: " + collisions, 8f, Display.getHeight() - 24f, Color.white, 0.125f);
+		if(collisions > 0) Main.font.drawWord("disasters: " + collisions, 8f, Display.getHeight() - 24f, Color.white, 0.125f);
 
 		level_fuel = HvlMath.limit(level_fuel, 0f, 1f);
 		level_energy = HvlMath.limit(level_energy, 0f, 1f);
