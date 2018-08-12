@@ -40,7 +40,7 @@ public class Main extends HvlTemplateInteg2D{
 	 * cursor?
 	 * 
 	 */
-	
+
 	public static void main(String[] args){
 		new Main();
 	}
@@ -65,14 +65,16 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_EXP = 16,
 	INDEX_RAIDER = 17,
 	INDEX_BUTTON_TARGET = 18,
-	INDEX_BLINK = 19;
+	INDEX_BLINK = 19,
+	INDEX_CARGO_SHIP_LARGE = 20;
 
 	public static final Color 
-	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
-	COLOR_BLUE1 = new Color(0f, 0f, 1.0f),
-	COLOR_BLUE2 = new Color(0f, 0f, 0.8f),
-	COLOR_BLUE3 = new Color(0f, 0f, 0.6f),
-	COLOR_BLUE4 = new Color(0f, 0f, 0.4f);
+	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
+	COLOR_GREEN1 = new Color(0f, 0.8f, 0f),
+	COLOR_GREEN2 = new Color(0f, 0.6f, 0f),
+	COLOR_GREEN3 = new Color(0f, 0.4f, 0f),
+	COLOR_GREEN4 = new Color(0f, 0.2f, 0f),
+	COLOR_GREEN5 = new Color(0f, 0.1f, 0f);
 
 	public static HvlFontPainter2D font;
 
@@ -108,6 +110,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Raider1"); //17
 		getTextureLoader().loadResource("ButtonTarget"); //18
 		getTextureLoader().loadResource("Blink"); //19
+		getTextureLoader().loadResource("CargoShipMedium"); //20//TODO placeholder
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
@@ -128,7 +131,7 @@ public class Main extends HvlTemplateInteg2D{
 				}
 			}
 		});
-		
+
 		File config = new File(PATH_SETTINGS);
 		if(config.exists()){
 			settings = HvlConfig.loadFromFile(PATH_SETTINGS);
@@ -145,9 +148,9 @@ public class Main extends HvlTemplateInteg2D{
 	public void update(float delta){
 		MenuManager.update(delta);
 	}
-	
+
 	public static void saveConfig(){
 		HvlConfig.saveToFile(settings, PATH_SETTINGS);
 	}
-	
+
 }

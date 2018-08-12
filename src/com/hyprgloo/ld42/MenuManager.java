@@ -46,19 +46,19 @@ public class MenuManager {
 		HvlLabeledButton defaultLabeledButton = new HvlLabeledButton(256, 64, new HvlComponentDrawable(){
 			@Override
 			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
-				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_BLUE2);
+				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_GREEN2);
 			}
 		}, new HvlComponentDrawable(){
 			@Override
 			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
-				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_BLUE3);
+				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_GREEN3);
 			}
 		}, new HvlComponentDrawable(){
 			@Override
 			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
-				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_BLUE4);
+				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_GREEN4);
 			}
-		}, Main.font, "", Color.white);
+		}, Main.font, "", Main.COLOR_GREEN5);
 		defaultLabeledButton.setUpdateOverride(new HvlAction2<HvlComponent, Float>(){
 			@Override
 			public void run(HvlComponent aArg, Float delta){
@@ -136,7 +136,13 @@ public class MenuManager {
 		pause.add(new HvlArrangerBox.Builder().build());
 		pause.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("resume").setClickedCommand(new HvlButtonMenuLink(game)).build());
 		pause.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
-		pause.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		pause.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				HvlMenu.setCurrent(main);
+				FancyOverlay.resetMainBackground();
+			}
+		}).build());
 		
 		options.add(new HvlArrangerBox.Builder().build());
 		options.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
@@ -153,17 +159,34 @@ public class MenuManager {
 		credits.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
 		
 		end.add(new HvlArrangerBox.Builder().build());
-		end.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("levels").setClickedCommand(new HvlButtonMenuLink(levels)).build());
+		end.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("levels").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				HvlMenu.setCurrent(levels);
+				FancyOverlay.resetMainBackground();
+			}
+		}).build());
 		end.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
-		end.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		end.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				HvlMenu.setCurrent(main);
+				FancyOverlay.resetMainBackground();
+			}
+		}).build());
 		
 		HvlMenu.setCurrent(main);
+		FancyOverlay.resetMainBackground();
 	}
 	
 	public static void update(float delta){
 		if(HvlMenu.getCurrent() == pause || HvlMenu.getCurrent() == end){
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), new Color(0f, 0f, 0f, 0.4f));
+		}
+		
+		if(HvlMenu.getCurrent() == main || HvlMenu.getCurrent() == levels || HvlMenu.getCurrent() == options || HvlMenu.getCurrent() == credits){
+			FancyOverlay.drawMainBackground(delta);
 		}
 		
 		HvlMenu.updateMenus(delta);
@@ -183,6 +206,13 @@ public class MenuManager {
 				}
 			});
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
+		}
+		
+		if(HvlMenu.getCurrent() == main){
+			if(FancyOverlay.mainTimer > 2f){
+				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5 + 6f, Display.getHeight()/2 + 16f + 6f, Main.COLOR_GREEN5);
+				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5, Display.getHeight()/2 + 16f, Main.COLOR_GREEN1);
+			}
 		}
 	}
 	
