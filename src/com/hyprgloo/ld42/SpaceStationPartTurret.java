@@ -15,8 +15,8 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 
 	public float turretRotation;
 
-	public static final float KILL_TIME = 6;
-	public static final float KILL_RANGE = 500;
+	public static final float KILL_TIME = 7;
+	public static final float KILL_RANGE = 400;
 	public float killTimer = KILL_TIME;
 
 	public SpaceStationPartTurret(float xGridArg, float yGridArg, float rotationArg){
@@ -57,8 +57,8 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 				} 
 				if(!target.isDead) {
 					hvlDrawLine(target.x, target.y, x, y, Color.pink);
-					hvlDrawLine(target.x+1, target.y, x+1, y, Color.pink);
-					hvlDrawLine(target.x-1, target.y, x-1, y, Color.pink);
+					hvlDrawLine(target.x+1, target.y, x+1, y, Color.magenta);
+					hvlDrawLine(target.x-1, target.y, x-1, y, Color.magenta);
 				}
 			}
 		}else killTimer = KILL_TIME;

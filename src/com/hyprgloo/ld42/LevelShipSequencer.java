@@ -16,7 +16,7 @@ public class LevelShipSequencer {
 	public static final float SMALL_TIME = 6;
 	public static final float MED_TIME = 12;
 	public static final float LAR_TIME = 20;
-	public static final float RAID_TIME = 45;
+	public static final float RAID_TIME = 40;
 
 	
 	static float smallShipTimer = 0;
