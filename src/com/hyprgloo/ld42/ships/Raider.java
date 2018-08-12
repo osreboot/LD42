@@ -3,6 +3,7 @@ package com.hyprgloo.ld42.ships;
 import com.hyprgloo.ld42.Cargo;
 import com.hyprgloo.ld42.FancyOverlay;
 import com.hyprgloo.ld42.Game;
+import com.hyprgloo.ld42.LevelShipSequencer;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
 import com.hyprgloo.ld42.SpaceStationPart;
@@ -25,6 +26,17 @@ public class Raider extends Ship{
 		goalPart = goalPartArg;
 		idleTime = 3f;
 	}
+	public boolean isOccupied() {
+		for(SpaceStationPart p : LevelShipSequencer.raiderCompParts) {
+			for(Ship r : Ship.ships) {
+				if(this.goalPart == p && r instanceof Raider && ((Raider)r).docked && r != this) {
+					return true;
+				}
+			}
+
+		}
+		return false;
+	}
 
 	@Override
 	public void update(float delta){
@@ -41,7 +53,7 @@ public class Raider extends Ship{
 			if(!docking && goalDistance < AUTO_DOCK_DISTANCE){
 				idleTime = HvlMath.stepTowards(idleTime, delta, 0f);
 			}
-			if(idleTime == 0 && !docking && cargo == Cargo.EMPTY){
+			if(idleTime == 0 && !docking && cargo == Cargo.EMPTY && !isOccupied()){
 				if(!shipInProximity(goalPart.x, goalPart.y, SpaceStation.GRID_SIZE)){
 					docking = true;
 					xGoal = goalPart.x;
@@ -77,10 +89,10 @@ public class Raider extends Ship{
 
 					if(HvlMath.randomFloatBetween(0f, 1f) > 0.5f) cargo = Cargo.FUEL; else cargo = Cargo.ENERGY;
 					if(this.y > 360) {
-						this.setGoal(this.x, 680);
+						this.setGoal(this.x-128, 680);
 		
 					}else {
-						this.setGoal(this.x, 40);
+						this.setGoal(this.x+128, 40);
 
 					}
 					docked = false;
