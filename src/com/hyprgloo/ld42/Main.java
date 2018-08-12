@@ -33,7 +33,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_MOVEON = 14,
 	INDEX_ZONE = 15, 
 	INDEX_EXP = 16,
-	INDEX_RAIDER = 17;
+	INDEX_RAIDER = 17,
+	INDEX_BUTTON_TARGET = 18;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -45,9 +46,9 @@ public class Main extends HvlTemplateInteg2D{
 	public static HvlFontPainter2D font;
 
 	public static HvlInput inputPause;
-	
-	
-	
+
+
+
 
 	public Main(){
 		super(144, 1280, 720, "Airlock Gridlock by HYPRGLOO", new HvlDisplayModeDefault());
@@ -74,9 +75,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Zone");//15
 		getTextureLoader().loadResource("explosion"); //16
 		getTextureLoader().loadResource("Raider1"); //17
-
-		
-		
+		getTextureLoader().loadResource("ButtonTarget"); //18
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);

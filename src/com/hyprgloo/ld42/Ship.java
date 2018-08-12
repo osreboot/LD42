@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
+import com.hyprgloo.ld42.ships.Raider;
 import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.painter.HvlCursor;
@@ -74,7 +75,7 @@ public class Ship {
 	public void update(float delta){
 		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
 		if(goalDistance < AUTO_DOCK_DISTANCE && (y < LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING || 
-				y > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING)){
+				y > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING) && !(this instanceof Raider)){
 			holding = true;
 		}
 		if(holding){
