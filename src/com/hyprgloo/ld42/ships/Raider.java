@@ -23,7 +23,7 @@ public class Raider extends Ship{
 		tradeTime = tradeTimeArg;
 		dockRotationOffset = dockRotationOffsetArg;
 		goalPart = goalPartArg;
-		idleTime = 8f;
+		idleTime = 3f;
 	}
 
 	@Override
@@ -76,7 +76,13 @@ public class Raider extends Ship{
 				if(tradeTime == 0){
 
 					if(HvlMath.randomFloatBetween(0f, 1f) > 0.5f) cargo = Cargo.FUEL; else cargo = Cargo.ENERGY;
+					if(this.y > 360) {
+						this.setGoal(this.x, 680);
+		
+					}else {
+						this.setGoal(this.x, 40);
 
+					}
 					docked = false;
 					if(cargo == Cargo.FUEL){
 						Game.level_fuel -= Game.RESUPPLY_FUEL_AMOUNT;
