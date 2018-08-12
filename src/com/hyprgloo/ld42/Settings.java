@@ -8,5 +8,6 @@ public class Settings implements Serializable{
 	public boolean soundEnabled = true;
 	public boolean musicEnabled = true;
 	public boolean tutorialsEnabled = true;
+	public boolean customCursor = true;
 	
 }

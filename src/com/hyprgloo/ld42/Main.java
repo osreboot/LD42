@@ -22,10 +22,8 @@ public class Main extends HvlTemplateInteg2D{
 	 * TUTORIALS - level
 	 * music
 	 * sound effects
-	 * gameplay backgrounds
 	 * station 2
 	 * station 3
-	 * main menu background
 	 * large merchants
 	 * options config
 	 * raider/turret shooting (low draw index)
