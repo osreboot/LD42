@@ -68,7 +68,7 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_BUTTON_TARGET = 18,
 	INDEX_BLINK = 19,
 	INDEX_CARGO_SHIP_LARGE = 20,
-	INDEX_CURSOR = 22;
+	INDEX_CURSOR = 21;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
