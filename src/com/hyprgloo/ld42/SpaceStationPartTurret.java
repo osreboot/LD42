@@ -40,7 +40,7 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 			}
 		}
 
-		if(target != null){
+		if(target != null && Game.state != Game.EndState.LOSS_ENERGY){
 			float newRotation = (float)Math.toDegrees(HvlMath.fullRadians(new HvlCoord2D(x, y), new HvlCoord2D(target.x, target.y)));
 			while(Math.abs(newRotation - turretRotation) > 180f){
 				if(Math.abs(newRotation - 360f - turretRotation) < Math.abs(newRotation + 360f - turretRotation))

@@ -9,6 +9,7 @@ import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.menu.HvlMenu;
+import com.osreboot.ridhvl.painter.HvlCursor;
 
 public class Game {
 
@@ -55,6 +56,8 @@ public class Game {
 		LevelShipSequencer.spawnedTutorial = false;
 		SpaceStation.restart();
 		LevelShipSequencer.reset();
+	
+
 	}
 
 	public static void update(float delta){
@@ -96,6 +99,8 @@ public class Game {
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);
 		SpaceStation.update(delta);
+		
+
 
 		for(Explosion e : Ship.exps) e.draw(delta);
 
@@ -106,6 +111,7 @@ public class Game {
 		level_ammo = HvlMath.limit(level_ammo, 0f, 1f);
 
 		FancyOverlay.drawGameLevels(delta);
+		
 		
 		if(state == EndState.WIN){
 			float value = HvlMath.limit(HvlMath.map(endStateTimer, 0.8f, 0.9f, 0f, 1f), 0f, 1f) - HvlMath.limit(HvlMath.map(endStateTimer, 0.9f, 1f, 0f, 1f), 0f, 1f);
