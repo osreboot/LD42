@@ -10,7 +10,6 @@ import org.newdawn.slick.Color;
 import com.hyprgloo.ld42.ships.Raider;
 import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlMath;
-import com.osreboot.ridhvl.painter.HvlCursor;
 
 public class Ship {
 

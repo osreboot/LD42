@@ -1,9 +1,12 @@
 package com.hyprgloo.ld42;
 
+import java.io.File;
+
 import org.lwjgl.input.Keyboard;
 import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.action.HvlAction1;
+import com.osreboot.ridhvl.config.HvlConfig;
 import com.osreboot.ridhvl.display.collection.HvlDisplayModeDefault;
 import com.osreboot.ridhvl.input.HvlInput;
 import com.osreboot.ridhvl.menu.HvlMenu;
@@ -25,13 +28,15 @@ public class Main extends HvlTemplateInteg2D{
 	 * main menu background
 	 * large merchants
 	 * options config
-	 * raider/turret shooting
+	 * raider/turret shooting (low draw index)
 	 * energy capsule effect
-	 * game loss states
+	 * game loss states (just titles left)
 	 * interaction textures (select, target, targetoptions)
 	 * menu titles
 	 * credits screen
 	 * splash screen
+	 * station collision
+	 * disaster fail state?
 	 * 
 	 * cursor?
 	 * 
@@ -60,7 +65,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_ZONE = 15, 
 	INDEX_EXP = 16,
 	INDEX_RAIDER = 17,
-	INDEX_BUTTON_TARGET = 18;
+	INDEX_BUTTON_TARGET = 18,
+	INDEX_BLINK = 19;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -73,8 +79,8 @@ public class Main extends HvlTemplateInteg2D{
 
 	public static HvlInput inputPause;
 
-
-
+	public static final String PATH_SETTINGS = "res\\settings.cfg";
+	public static Settings settings;
 
 	public Main(){
 		super(144, 1280, 720, "Airlock Gridlock by HYPRGLOO", new HvlDisplayModeDefault());
@@ -102,6 +108,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("explosion"); //16
 		getTextureLoader().loadResource("Raider1"); //17
 		getTextureLoader().loadResource("ButtonTarget"); //18
+		getTextureLoader().loadResource("Blink"); //19
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
@@ -122,6 +129,14 @@ public class Main extends HvlTemplateInteg2D{
 				}
 			}
 		});
+		
+		File config = new File(PATH_SETTINGS);
+		if(config.exists()){
+			settings = HvlConfig.loadFromFile(PATH_SETTINGS);
+		}else{
+			HvlConfig.saveToFile(new Settings(), PATH_SETTINGS);
+			settings = HvlConfig.loadFromFile(PATH_SETTINGS);
+		}
 
 		ShipSelector.initialize();
 		MenuManager.initialize();
@@ -131,5 +146,9 @@ public class Main extends HvlTemplateInteg2D{
 	public void update(float delta){
 		MenuManager.update(delta);
 	}
-
+	
+	public static void saveConfig(){
+		HvlConfig.saveToFile(settings, PATH_SETTINGS);
+	}
+	
 }

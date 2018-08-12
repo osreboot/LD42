@@ -2,7 +2,6 @@ package com.hyprgloo.ld42;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
-import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
@@ -118,17 +117,17 @@ public class ShipSelector {
 	}
 
 	public static void drawZones(float delta){
-		hvlDrawQuad(Display.getWidth() - 96f, 0, 96f, Display.getHeight(), Main.getTexture(Main.INDEX_MOVEON), new Color(1f, 1f, 1f, HvlCursor.getCursorX() > Display.getWidth() - 96f ? 0.6f : 0.2f));
+		hvlDrawQuad(Display.getWidth() - 96f, 0, 96f, Display.getHeight(), Main.getTexture(Main.INDEX_MOVEON), new Color(1f, 1f, 1f, HvlCursor.getCursorX() > Display.getWidth() - 96f ? 0.9f : 0.6f));
 
 		boolean upperZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() < LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
 		hvlDrawQuad(0, 0, Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
 				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
-				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, upperZoneCursor ? 0.35f : 0.15f));
+				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, upperZoneCursor ? 0.675f : 0.55f));
 		boolean lowerZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
 		hvlDrawQuad(0, Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
 				Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
 				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
-				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, lowerZoneCursor ? 0.35f : 0.15f));
+				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, lowerZoneCursor ? 0.675f : 0.55f));
 	}
 
 	public static void update(float delta) {

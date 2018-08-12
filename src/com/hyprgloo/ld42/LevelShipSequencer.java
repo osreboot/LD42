@@ -15,18 +15,25 @@ public class LevelShipSequencer {
 	
 	public static final float SMALL_TIME = 6;
 	public static final float MED_TIME = 12;
-	public static final float LAR_TIME = 10;
-	public static final float RAID_TIME = 15;
+	public static final float LAR_TIME = 20;
+	public static final float RAID_TIME = 45;
 
 	
 	static float smallShipTimer = 0;
 	static float medShipTimer = 0;
 	static float largeShipTimer = 0;
-	static float raiderShipTimer = 5;
+	static float raiderShipTimer = RAID_TIME;
 	
 	public static boolean spawnedTutorial = false;
 	
 	public static ArrayList<SpaceStationPart> raiderCompParts = new ArrayList<>();
+	
+	public static void reset(){
+		smallShipTimer = 0;
+		medShipTimer = 0;
+		largeShipTimer = LAR_TIME;
+		raiderShipTimer = RAID_TIME;
+	}
 	
 	public static void spawnRaider() {
 		for(SpaceStationPart allParts : SpaceStation.stationParts) {

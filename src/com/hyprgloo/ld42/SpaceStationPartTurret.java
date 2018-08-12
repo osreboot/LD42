@@ -8,17 +8,15 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
 import org.newdawn.slick.Color;
 
 import com.hyprgloo.ld42.ships.Raider;
-import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
-import com.osreboot.ridhvl.painter.HvlCursor;
 
 public class SpaceStationPartTurret extends SpaceStationPart{
 
 	public float turretRotation;
 
-	public static final float KILL_TIME = 12;
-	public static final float KILL_RANGE = 200;
+	public static final float KILL_TIME = 6;
+	public static final float KILL_RANGE = 500;
 	public float killTimer = KILL_TIME;
 
 	public SpaceStationPartTurret(float xGridArg, float yGridArg, float rotationArg){
@@ -63,7 +61,7 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 					hvlDrawLine(target.x-1, target.y, x-1, y, Color.pink);
 				}
 			}
-		}
+		}else killTimer = KILL_TIME;
 
 		hvlRotate(x, y, turretRotation - 90);
 		hvlDrawQuadc(x, y, GRID_SIZE, GRID_SIZE, Main.getTexture(Main.INDEX_STATION_TURRET), Game.endStateColor);

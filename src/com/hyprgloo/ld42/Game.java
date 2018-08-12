@@ -1,5 +1,9 @@
 package com.hyprgloo.ld42;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotation;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
+
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
@@ -49,7 +53,7 @@ public class Game {
 		energyPulseTimer = ENERGY_PULSE_DELAY;
 		LevelShipSequencer.spawnedTutorial = false;
 		SpaceStation.restart();
-
+		LevelShipSequencer.reset();
 	}
 
 	public static void update(float delta){
@@ -101,6 +105,13 @@ public class Game {
 		level_ammo = HvlMath.limit(level_ammo, 0f, 1f);
 
 		FancyOverlay.drawGameLevels(delta);
+		
+		if(state == EndState.WIN){
+			float value = HvlMath.limit(HvlMath.map(endStateTimer, 0.8f, 0.9f, 0f, 1f), 0f, 1f) - HvlMath.limit(HvlMath.map(endStateTimer, 0.9f, 1f, 0f, 1f), 0f, 1f);
+			hvlRotate(Display.getWidth()/2, Display.getHeight()/2, Main.getNewestInstance().getTimer().getTotalTime() * 720f);
+			hvlDrawQuadc(Display.getWidth()/2, Display.getHeight()/2, value * 256, value * 256, Main.getTexture(Main.INDEX_BLINK));
+			hvlResetRotation();
+		}
 	}
 
 }

@@ -1,7 +1,6 @@
 package com.hyprgloo.ld42;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
-import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
 import java.util.HashMap;
 
@@ -9,6 +8,7 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.HvlMath;
+import com.osreboot.ridhvl.action.HvlAction0;
 import com.osreboot.ridhvl.action.HvlAction1;
 import com.osreboot.ridhvl.action.HvlAction2;
 import com.osreboot.ridhvl.menu.HvlButtonMenuLink;
@@ -16,15 +16,18 @@ import com.osreboot.ridhvl.menu.HvlComponent;
 import com.osreboot.ridhvl.menu.HvlComponentDefault;
 import com.osreboot.ridhvl.menu.HvlMenu;
 import com.osreboot.ridhvl.menu.component.HvlArrangerBox;
-import com.osreboot.ridhvl.menu.component.HvlButton;
 import com.osreboot.ridhvl.menu.component.HvlArrangerBox.ArrangementStyle;
+import com.osreboot.ridhvl.menu.component.HvlButton;
 import com.osreboot.ridhvl.menu.component.HvlComponentDrawable;
 import com.osreboot.ridhvl.menu.component.HvlSpacer;
 import com.osreboot.ridhvl.menu.component.collection.HvlLabeledButton;
+import com.osreboot.ridhvl.painter.HvlRenderFrame;
 
 public class MenuManager {
 	
 	public static final float BUTTON_SPACING = 16f;
+	
+	public static HvlRenderFrame pauseFrame;
 	
 	private static HashMap<HvlLabeledButton, ButtonWrapper> buttonWrappers = new HashMap<>();
 
@@ -32,11 +35,20 @@ public class MenuManager {
 	
 	public static void initialize(){
 		
+		try{
+			pauseFrame = new HvlRenderFrame(Display.getWidth(), Display.getHeight());
+		}catch(Exception e){}
+		
 		HvlArrangerBox defaultArrangerBox = new HvlArrangerBox(Display.getWidth(), Display.getHeight(), ArrangementStyle.VERTICAL);
 		defaultArrangerBox.setxAlign(0.05f);
 		HvlComponentDefault.setDefault(defaultArrangerBox);
 		
 		HvlLabeledButton defaultLabeledButton = new HvlLabeledButton(256, 64, new HvlComponentDrawable(){
+			@Override
+			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
+				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_BLUE2);
+			}
+		}, new HvlComponentDrawable(){
 			@Override
 			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
 				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_BLUE3);
@@ -128,7 +140,13 @@ public class MenuManager {
 		
 		options.add(new HvlArrangerBox.Builder().build());
 		options.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
-		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
+		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				HvlMenu.setCurrent(main);
+				Main.saveConfig();
+			}
+		}).build());
 		
 		credits.add(new HvlArrangerBox.Builder().build());
 		credits.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
@@ -144,7 +162,8 @@ public class MenuManager {
 	
 	public static void update(float delta){
 		if(HvlMenu.getCurrent() == pause){
-			
+			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
+			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), new Color(0f, 0f, 0f, 0.4f));
 		}
 		
 		HvlMenu.updateMenus(delta);
@@ -157,7 +176,13 @@ public class MenuManager {
 						Main.getTexture(Main.INDEX_BUTTON_TARGET), new Color(1f, 1f, 1f, buttonWrappers.get(b).fade));
 			}
 		}else{
-			Game.update(delta);
+			pauseFrame.doCapture(true, new HvlAction0(){
+				@Override
+				public void run(){
+					Game.update(delta);
+				}
+			});
+			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
 		}
 	}
 	

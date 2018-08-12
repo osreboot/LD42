@@ -42,7 +42,6 @@ public class Raider extends Ship{
 	public void update(float delta){
 		super.update(delta);
 		if(checkCollision() || isDead){
-			if(!isDead) Game.collisions++;
 			isDead = true;
 			docking = false;
 			docked = false;
@@ -97,10 +96,10 @@ public class Raider extends Ship{
 					}
 					docked = false;
 					if(cargo == Cargo.FUEL){
-						Game.level_fuel -= Game.RESUPPLY_FUEL_AMOUNT;
+						Game.level_fuel -= Game.RESUPPLY_FUEL_AMOUNT * 3f;
 						FancyOverlay.spawnFuelTextExplosion(false);
 					}else if(cargo == Cargo.ENERGY){
-						Game.level_energy -= Game.RESUPPLY_ENERGY_AMOUNT;
+						Game.level_energy -= Game.RESUPPLY_ENERGY_AMOUNT * 2f;
 						FancyOverlay.spawnEnergyTextExplosion(false);
 					}
 				}
