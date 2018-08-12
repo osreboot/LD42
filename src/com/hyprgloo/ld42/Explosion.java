@@ -20,7 +20,6 @@ public class Explosion {
 	public void draw(float delta) {
 		if(explosionAnimation.isRunning()) {
 			hvlDrawQuadc(x, y, 128, 128, explosionAnimation, Color.lightGray);
-
 		}
 	}
 }
