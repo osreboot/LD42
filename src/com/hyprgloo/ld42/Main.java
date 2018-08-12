@@ -68,7 +68,10 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_BUTTON_TARGET = 18,
 	INDEX_BLINK = 19,
 	INDEX_CARGO_SHIP_LARGE = 20,
-	INDEX_CURSOR = 22;
+	INDEX_CURSOR = 21,
+	INDEX_NEBULA1 = 22,
+	INDEX_NEBULA2 = 23,
+	INDEX_STARS = 24;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
@@ -114,6 +117,9 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Blink"); //19
 		getTextureLoader().loadResource("CargoShipMedium"); //20//TODO placeholder
 		getTextureLoader().loadResource("cursor"); //21
+		getTextureLoader().loadResource("Nebula1"); //22
+		getTextureLoader().loadResource("Nebula2"); //23
+		getTextureLoader().loadResource("Stars"); //24
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);

@@ -17,13 +17,25 @@ import com.osreboot.ridhvl.HvlMath;
 public class FancyOverlay {
 	
 	public static float mainTimer = 0f;
+	public static int backgroundTexture;
 	
 	public static void resetMainBackground(){
 		mainTimer = 0f;
+		backgroundTexture = HvlMath.randomInt(2) == 0 ? Main.INDEX_NEBULA1 : Main.INDEX_NEBULA2;
 	}
 	
 	public static void drawMainBackground(float delta){
 		mainTimer += delta;
+		
+		float backgroundOffset = Main.getNewestInstance().getTimer().getTotalTime()*-10f;
+		backgroundOffset = backgroundOffset%Display.getWidth();
+		hvlDrawQuad(backgroundOffset, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(backgroundTexture));
+		hvlDrawQuad(Display.getWidth() + backgroundOffset, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(backgroundTexture));
+		float backgroundOffset2 = Main.getNewestInstance().getTimer().getTotalTime()*-20f;
+		backgroundOffset2 = backgroundOffset2%Display.getWidth();
+		hvlDrawQuad(backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
+		hvlDrawQuad(Display.getWidth() + backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
+		hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), new Color(0f, 0f, 0f, 0.2f));
 		if(mainTimer < 1.5f){
 			float location = HvlMath.map(mainTimer, 0f, 1f, -1000, 2000);
 			HvlCoord2D loc = new HvlCoord2D(location*1.5f, 1000 - location);
