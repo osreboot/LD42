@@ -46,7 +46,7 @@ public class Main extends HvlTemplateInteg2D{
 
 	public static HvlInput inputPause;
 	
-	public static HvlAnimatedTextureUV explosionAnimation;
+	
 	
 
 	public Main(){
@@ -76,8 +76,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Raider1"); //17
 
 		
-		explosionAnimation = new HvlAnimatedTextureUV(getTexture(INDEX_EXP), 128, 26, 0.083f);
-		explosionAnimation.setAutoStop(true);
+		
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);

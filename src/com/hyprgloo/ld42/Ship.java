@@ -18,7 +18,9 @@ public class Ship {
 	HOLDING_SPEED = 30f;
 
 	public static ArrayList<Ship> ships = new ArrayList<>();
+	public static ArrayList<Explosion> exps = new ArrayList<>();
 
+	public boolean exploded;
 	public static void updateShips(float delta){
 		ArrayList<Ship> cleanup = new ArrayList<>();
 		for(Ship s : ships){
@@ -65,6 +67,7 @@ public class Ship {
 		realMaxSpeed = maxSpeedArg;
 		collisionSize = collisionSizeArg;
 		deadLife = 5f;
+		exploded = false;
 		ships.add(this);
 	}
 
@@ -106,9 +109,11 @@ public class Ship {
 	}
 
 	public void doDeadMovement(float delta){
-
-		Main.explosionAnimation.setRunning(true);
-		hvlDrawQuadc(x, y, 128, 128, Main.explosionAnimation);
+		if(!exploded) {
+			Explosion exp = new Explosion(x, y);
+			exps.add(exp);
+			exploded = true;
+		}
 
 		deadLife = HvlMath.stepTowards(deadLife, delta, 0f);
 		if(deadRotationSpeed == 0) deadRotationSpeed = HvlMath.randomFloatBetween(-90, 90);
