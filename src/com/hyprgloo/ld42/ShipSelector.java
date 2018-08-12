@@ -31,12 +31,15 @@ public class ShipSelector {
 				if(closestShip == null && allShips instanceof ShipMerchant) {
 					closestShip = (ShipMerchant)allShips;
 				}
-				float distance = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), closestShip.x, closestShip.y);
-				float distanceTest = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), allShips.x, allShips.y);
+				if(closestShip != null) {
+					float distance = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), closestShip.x, closestShip.y);
+					float distanceTest = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), allShips.x, allShips.y);
 
-				if(distanceTest < distance && allShips instanceof ShipMerchant) {
-					closestShip = (ShipMerchant)allShips;
+					if(distanceTest < distance && allShips instanceof ShipMerchant) {
+						closestShip = (ShipMerchant)allShips;
+					}
 				}
+
 			}
 		}
 
