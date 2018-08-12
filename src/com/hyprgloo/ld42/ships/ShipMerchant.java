@@ -3,25 +3,26 @@ package com.hyprgloo.ld42.ships;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
+import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.hyprgloo.ld42.Cargo;
 import com.hyprgloo.ld42.FancyOverlay;
 import com.hyprgloo.ld42.FlightPath;
 import com.hyprgloo.ld42.Game;
+import com.hyprgloo.ld42.LevelShipSequencer;
 import com.hyprgloo.ld42.Ship;
+import com.hyprgloo.ld42.ShipSelector;
 import com.hyprgloo.ld42.SpaceStation;
 import com.hyprgloo.ld42.SpaceStationPart;
 import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
 
 public class ShipMerchant extends Ship{
-	
-	public static final float HOLDING_SPEED = 30f;
 
 	public float tradeTime, maxTradeTime, dockRotationOffset, cargoMultiplier;
 	public Cargo cargo;
-	public boolean docking = false, docked = false, holding = true;
+	public boolean docking = false, docked = false;
 	public int dockingReq;
 
 	public FlightPath flightPath;
@@ -43,7 +44,7 @@ public class ShipMerchant extends Ship{
 	public void update(float delta){
 		super.update(delta);
 		if(checkCollision() || isDead){
-			if(!isDead) Game.collisions++;
+			if(!isDead && x < Display.getWidth() && x > 0) Game.collisions++;
 			isDead = true;
 			docking = false;
 			docked = false;
@@ -71,7 +72,7 @@ public class ShipMerchant extends Ship{
 				docked = true;
 			}
 			if(!docked){
-				speed = holding ? HOLDING_SPEED : HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, goalDistance));
+				speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, goalDistance));
 				HvlCoord2D speedCoord = new HvlCoord2D(xGoal - x, yGoal - y);
 				speedCoord.normalize();
 				if(Float.isNaN(speedCoord.x)) speedCoord.x = 0;
@@ -118,7 +119,6 @@ public class ShipMerchant extends Ship{
 		super.setGoal(xArg, yArg);
 		flightPath = null;
 		flightPathIndex = 0;
-		holding = false;
 	}
 
 	public boolean canDock(int dockingReqArg){
@@ -128,6 +128,7 @@ public class ShipMerchant extends Ship{
 	public void setFlightPath(FlightPath flightPathArg){
 		flightPath = flightPathArg;
 		flightPathIndex = 0;
+		holding = false;
 	}
 
 	public boolean isShipAheadInFlightPath(int steps){

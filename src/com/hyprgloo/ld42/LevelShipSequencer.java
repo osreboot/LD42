@@ -11,7 +11,7 @@ import com.osreboot.ridhvl.HvlMath;
 
 public class LevelShipSequencer {
 	
-	public static final float SHIP_SPAWN_EDGE_SPACING = 128f;
+	public static final float SHIP_SPAWN_EDGE_SPACING = 128f, SHIP_SPAWN_EDGE_SPACING_MIN = 16f;
 	
 	public static final float SMALL_TIME = 6;
 	public static final float MED_TIME = 12;
@@ -60,7 +60,7 @@ public class LevelShipSequencer {
 			if(smallShipTimer <= 0) {
 				float startY;
 				do{
-					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(0, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight());
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
 				}while(Ship.shipInProximity(-128, startY, ShipMerchantLight.COLLISION_SIZE));
 				Cargo cargo = Cargo.EMPTY;
 				int cargoSelect = HvlMath.randomInt(3);
@@ -73,7 +73,7 @@ public class LevelShipSequencer {
 			if(medShipTimer <= 0) {
 				float startY;
 				do{
-					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(0, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight());
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
 				}while(Ship.shipInProximity(-128, startY, ShipMerchantMedium.COLLISION_SIZE));
 				Cargo cargo = Cargo.EMPTY;
 				int cargoSelect = HvlMath.randomInt(3);

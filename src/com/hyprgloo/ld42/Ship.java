@@ -8,12 +8,13 @@ import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
 import com.hyprgloo.ld42.ships.ShipMerchant;
-import com.osreboot.ridhvl.HvlCoord2D;
 import com.osreboot.ridhvl.HvlMath;
 
 public class Ship {
 
-	public static final float AUTO_DOCK_DISTANCE = 5f;
+	public static final float 
+	AUTO_DOCK_DISTANCE = 5f,
+	HOLDING_SPEED = 30f;
 
 	public static ArrayList<Ship> ships = new ArrayList<>();
 
@@ -47,8 +48,8 @@ public class Ship {
 		return false;
 	}
 
-	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, deadRotationSpeed, deadLife, maxSpeed, collisionSize;
-	public boolean isLeaving = false, isDead = false;
+	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, deadRotationSpeed, deadLife, maxSpeed, realMaxSpeed, collisionSize;
+	public boolean isLeaving = false, isDead = false, holding = true;
 
 	public Ship(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg, float collisionSizeArg){
 		x = xArg;
@@ -60,12 +61,23 @@ public class Ship {
 		yGoal = yGoalArg;
 		rotation = rotationArg;
 		maxSpeed = maxSpeedArg;
+		realMaxSpeed = maxSpeedArg;
 		collisionSize = collisionSizeArg;
 		deadLife = 5f;
 		ships.add(this);
 	}
 
 	public void update(float delta){
+		float goalDistance = HvlMath.distance(x, y, xGoal, yGoal);
+		if(goalDistance < AUTO_DOCK_DISTANCE && (y < LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING || 
+				y > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING)){
+			holding = true;
+		}
+		if(holding){
+			maxSpeed = HOLDING_SPEED; 
+			xGoal = Display.getWidth() + 128f;
+			yGoal = y;
+		}else maxSpeed = realMaxSpeed;
 		if(x > Display.getWidth() - 96){
 			isLeaving = true;
 			xGoal = Display.getWidth() + 128;
@@ -82,6 +94,7 @@ public class Ship {
 	public void setGoal(float xArg, float yArg){
 		xGoal = xArg;
 		yGoal = yArg;
+		holding = false;
 	}
 
 	public boolean checkCollision(){

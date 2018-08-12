@@ -68,12 +68,12 @@ public class ShipSelector {
 		selectShip.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-					if(selectedShip == null && getClosestShip() != null) {
-						float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
-						if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving) {
-							selectedShip = getClosestShip();
-						}
-					}else if(selectedShip != null) selectedShip = null;
+				if(selectedShip == null && getClosestShip() != null) {
+					float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
+					if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving) {
+						selectedShip = getClosestShip();
+					}
+				}else if(selectedShip != null) selectedShip = null;
 			}
 		});
 		chooseLocation.setPressedAction(new HvlAction1<HvlInput>() {
@@ -112,9 +112,24 @@ public class ShipSelector {
 			}
 		});
 	}
+
+	public static void drawZones(float delta){
+		hvlDrawQuad(Display.getWidth() - 96f, 0, 96f, Display.getHeight(), Main.getTexture(Main.INDEX_MOVEON), new Color(1f, 1f, 1f, HvlCursor.getCursorX() > Display.getWidth() - 96f ? 0.6f : 0.2f));
+
+		boolean upperZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() < LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
+		hvlDrawQuad(0, 0, Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
+				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
+				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, upperZoneCursor ? 0.35f : 0.15f));
+		boolean lowerZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
+		hvlDrawQuad(0, Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
+				Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
+				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
+				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, lowerZoneCursor ? 0.35f : 0.15f));
+	}
+
 	public static void update(float delta) {
 		if(selectedShip != null) {
-			
+
 			hvlDrawLine(selectedShip.x, selectedShip.y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), Color.white);
 		}
 		if(selectedShip == null && getClosestShip() != null) {
@@ -123,16 +138,5 @@ public class ShipSelector {
 				hvlDrawLine(getClosestShip().x, getClosestShip().y,HvlCursor.getCursorX(), HvlCursor.getCursorY(), new Color(0f, 0f, 1f, 0.8f));
 			}
 		}
-		hvlDrawQuad(Display.getWidth() - 96f, 0, 96f, Display.getHeight(), Main.getTexture(Main.INDEX_MOVEON), new Color(1f, 1f, 1f, HvlCursor.getCursorX() > Display.getWidth() - 96f ? 0.4f : 0.05f));
-		
-		boolean upperZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() < LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
-		hvlDrawQuad(0, 0, Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
-				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
-				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, upperZoneCursor ? 0.2f : 0.1f));
-		boolean lowerZoneCursor = HvlCursor.getCursorX() < Display.getWidth() - 96f && HvlCursor.getCursorY() > Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING;
-		hvlDrawQuad(0, Display.getHeight() - LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
-				Display.getWidth() - 96f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING, 
-				0, 0, (Display.getWidth() - 96f)/16f, LevelShipSequencer.SHIP_SPAWN_EDGE_SPACING/16f, 
-				Main.getTexture(Main.INDEX_ZONE), new Color(0f, 1f, 0f, lowerZoneCursor ? 0.2f : 0.08f));
 	}
 }

@@ -62,7 +62,7 @@ public class FlightPath {
 	}
 
 	public void draw(float delta){
-		Color color = isMouseHovering() ? Color.green : new Color(0f, 0.2f, 0f);
+		Color color = isMouseHovering() ? Color.green : new Color(0f, 0.3f, 0f);
 		hvlDrawQuadc(boxLocation.x, boxLocation.y, BOX_WIDTH + 2, BOX_HEIGHT + 2, color);
 		hvlDrawQuadc(boxLocation.x, boxLocation.y, BOX_WIDTH, BOX_HEIGHT, Color.black);
 		Main.font.drawWordc(name, boxLocation.x, boxLocation.y, color, 0.125f);

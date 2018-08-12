@@ -48,8 +48,9 @@ public class Game {
 
 		FlightPath.update(delta);
 		
-		ShipSelector.update(delta);
+		ShipSelector.drawZones(delta);
 		Ship.updateShips(delta);
+		ShipSelector.update(delta);
 		SpaceStation.update(delta);
 		if(collisions > 0) Main.font.drawWord("disasters: " + collisions, 8f, Display.getHeight() - 24f, Color.white, 0.125f);
 
