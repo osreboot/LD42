@@ -5,6 +5,7 @@ import org.newdawn.slick.Color;
 
 import com.osreboot.ridhvl.display.collection.HvlDisplayModeDefault;
 import com.osreboot.ridhvl.input.HvlInput;
+import com.osreboot.ridhvl.painter.HvlAnimatedTextureUV;
 import com.osreboot.ridhvl.painter.painter2d.HvlFontPainter2D;
 import com.osreboot.ridhvl.template.HvlTemplateInteg2D;
 
@@ -30,7 +31,9 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_STATION_DOCKING_PORT_LRG = 12,
 	INDEX_STATION_TURRET = 13,
 	INDEX_MOVEON = 14,
-	INDEX_ZONE = 15;
+	INDEX_ZONE = 15, 
+	INDEX_EXP = 16,
+	INDEX_RAIDER = 17;
 
 	public static final Color 
 	COLOR_BLUE0 = new Color(0.2f, 0.2f, 1.0f),
@@ -42,6 +45,9 @@ public class Main extends HvlTemplateInteg2D{
 	public static HvlFontPainter2D font;
 
 	public static HvlInput inputPause;
+	
+	public static HvlAnimatedTextureUV explosionAnimation;
+	
 
 	public Main(){
 		super(144, 1280, 720, "Airlock Gridlock by HYPRGLOO", new HvlDisplayModeDefault());
@@ -66,6 +72,12 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("StationTurret");//13
 		getTextureLoader().loadResource("MoveOn");//14
 		getTextureLoader().loadResource("Zone");//15
+		getTextureLoader().loadResource("explosion"); //16
+		getTextureLoader().loadResource("Raider1"); //17
+
+		
+		explosionAnimation = new HvlAnimatedTextureUV(getTexture(INDEX_EXP), 128, 26, 0.083f);
+		explosionAnimation.setAutoStop(true);
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
 		font.setCharSpacing(16f);
