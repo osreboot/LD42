@@ -30,8 +30,8 @@ public class FancyOverlay {
 	}
 
 	public static void drawMainButton(float delta, HvlLabeledButton b){
-		mainCrossHairGoal.x = b.getX();
-		mainCrossHairGoal.y = b.getY() + (b.getHeight()/2);
+//		mainCrossHairGoal.x = b.getX();
+//		mainCrossHairGoal.y = b.getY() + (b.getHeight()/2);
 	}
 	
 	public static final float 
