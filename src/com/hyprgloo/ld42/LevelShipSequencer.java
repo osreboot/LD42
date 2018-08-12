@@ -11,7 +11,7 @@ import com.osreboot.ridhvl.HvlMath;
 
 public class LevelShipSequencer {
 	
-	public static final float SHIP_SPAWN_EDGE_SPACING = 192f;
+	public static final float SHIP_SPAWN_EDGE_SPACING = 128f;
 	
 	public static final float SMALL_TIME = 6;
 	public static final float MED_TIME = 12;
