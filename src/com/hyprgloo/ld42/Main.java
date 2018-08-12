@@ -74,7 +74,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_LIGHT_1 = 25,
 	INDEX_LIGHT_2 = 26,
 	INDEX_LIGHT_3 = 27,
-	INDEX_CURSOR_2 = 28;
+	INDEX_CURSOR_2 = 28,
+	INDEX_CLEAR = 29;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
@@ -127,6 +128,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("lightning2"); //26
 		getTextureLoader().loadResource("lightning3"); //27
 		getTextureLoader().loadResource("cursor2"); //28
+		getTextureLoader().loadResource("clear"); //29
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
@@ -182,10 +184,25 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void update(float delta){
-		if(HvlMenu.getCurrent() == MenuManager.pause) {
+		//TODO Add mouse menu remembrance
+		if(settings.customCursor) {
+			if(HvlMenu.getCurrent() == MenuManager.pause) {
+				HvlCursor.setTexture(getTexture(INDEX_CLEAR));
+				HvlCursor.setNativeHidden(false);
+
+			} else {
+				if(HvlCursor.getTexture() == getTexture(INDEX_CLEAR)) {
+					HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
+					HvlCursor.setHeight(32);
+					HvlCursor.setWidth(32);
+					HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+					HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+				}
+				HvlCursor.setNativeHidden(true);
+			}
+		}else {
+			HvlCursor.setTexture(getTexture(INDEX_CLEAR));
 			HvlCursor.setNativeHidden(false);
-		} else {
-			HvlCursor.setNativeHidden(true);
 		}
 		MenuManager.update(delta);
 	}

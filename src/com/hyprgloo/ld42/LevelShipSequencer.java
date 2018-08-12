@@ -98,16 +98,71 @@ public class LevelShipSequencer {
 				new ShipMerchantMedium(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
 				medShipTimer = MED_TIME;
 			}
+			
+		} else if(Game.selected_level == 2) {
+			if(smallShipTimer <= 0) {
+				float startY;
+				do{
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
+				}while(Ship.shipInProximity(-128, startY, ShipMerchantLight.COLLISION_SIZE));
+				Cargo cargo = Cargo.EMPTY;
+				int cargoSelect = HvlMath.randomInt(3);
+				if(cargoSelect == 0) cargo = Cargo.FUEL;
+				if(cargoSelect == 1) cargo = Cargo.ENERGY;
+				if(cargoSelect == 2) cargo = Cargo.AMMO;
+				new ShipMerchantLight(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
+				smallShipTimer = SMALL_TIME;
+			}
+			if(medShipTimer <= 0) {
+				float startY;
+				do{
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
+				}while(Ship.shipInProximity(-128, startY, ShipMerchantMedium.COLLISION_SIZE));
+				Cargo cargo = Cargo.EMPTY;
+				int cargoSelect = HvlMath.randomInt(3);
+				if(cargoSelect == 0) cargo = Cargo.FUEL;
+				if(cargoSelect == 1) cargo = Cargo.ENERGY;
+				if(cargoSelect == 2) cargo = Cargo.AMMO;
+				new ShipMerchantMedium(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
+				medShipTimer = MED_TIME;
+			}
 			if(raiderShipTimer <= 0) {
 
 				spawnRaider();
 				raiderShipTimer = RAID_TIME;
 			}
-			
-		} else if(Game.selected_level == 2) {
-			
 		} else if(Game.selected_level == 3) {
-			
+			if(smallShipTimer <= 0) {
+				float startY;
+				do{
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
+				}while(Ship.shipInProximity(-128, startY, ShipMerchantLight.COLLISION_SIZE));
+				Cargo cargo = Cargo.EMPTY;
+				int cargoSelect = HvlMath.randomInt(3);
+				if(cargoSelect == 0) cargo = Cargo.FUEL;
+				if(cargoSelect == 1) cargo = Cargo.ENERGY;
+				if(cargoSelect == 2) cargo = Cargo.AMMO;
+				new ShipMerchantLight(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
+				smallShipTimer = SMALL_TIME;
+			}
+			if(medShipTimer <= 0) {
+				float startY;
+				do{
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
+				}while(Ship.shipInProximity(-128, startY, ShipMerchantMedium.COLLISION_SIZE));
+				Cargo cargo = Cargo.EMPTY;
+				int cargoSelect = HvlMath.randomInt(3);
+				if(cargoSelect == 0) cargo = Cargo.FUEL;
+				if(cargoSelect == 1) cargo = Cargo.ENERGY;
+				if(cargoSelect == 2) cargo = Cargo.AMMO;
+				new ShipMerchantMedium(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
+				medShipTimer = MED_TIME;
+			}
+			if(raiderShipTimer <= 0) {
+
+				spawnRaider();
+				raiderShipTimer = RAID_TIME;
+			}
 		}
 	}
 	
