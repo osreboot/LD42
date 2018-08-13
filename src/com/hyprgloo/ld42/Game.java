@@ -15,7 +15,7 @@ import com.osreboot.ridhvl.menu.HvlMenu;
 public class Game {
 
 	public static enum EndState{
-		IN_PROGRESS, WIN, LOSS_ENERGY, LOSS_COLLISIONS, LOSS_TUTORIAL
+		IN_PROGRESS, WIN, LOSS_ENERGY, LOSS_COLLISIONS, LOSS_TUTORIAL, WIN_TUTORIAL
 	}
 
 	public static final float 
@@ -68,24 +68,27 @@ public class Game {
 	}
 
 	public static void update(float delta){
-		if(Ship.ships.size() > 1 && selected_level == 0){
-			if(tutorialStageIndex < 2 || Ship.ships.get(0).xGoal < 32f){
+		if(selected_level == 0 && collisions > 0) state = EndState.LOSS_TUTORIAL;
+		if(Ship.ships.size() > 0 && selected_level == 0){
+			if(tutorialStageIndex < 2 || Ship.ships.get(0).xGoal < 128f){
 				Ship.ships.get(1).x = -128;
 			}
-			if(Ship.ships.get(0).isDead || Ship.ships.get(1).isDead) state = EndState.LOSS_TUTORIAL;
-			if(tutorialStageIndex <= 2){
-				if(((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.ENERGY) level_energy = 1f - ENERGY_PULSE_AMOUNT;
-				else level_energy = 1f;
-			}
+			
+			if(((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.ENERGY) level_energy = 1f - ENERGY_PULSE_AMOUNT;
+			else level_energy = 1f;
+			
 			if(tutorialStageIndex == 2 && Ship.ships.get(1).x > 0){
 				boolean dockFound = false;
 				for(SpaceStationPart p : SpaceStation.stationParts){
 					if(Ship.ships.get(0).xGoal == p.x && Ship.ships.get(0).yGoal == p.y) dockFound = true;
 				}
-				if(!dockFound && Ship.ships.get(0).xGoal > 32f){
+				if(!dockFound && Ship.ships.get(0).xGoal > 128f){
 					state = EndState.LOSS_TUTORIAL;
 				}
 			}
+		}
+		if(selected_level == 0 && level_energy == 1f && level_fuel > 0f){
+			state = EndState.WIN_TUTORIAL;
 		}
 
 		float backgroundOffset = Main.getNewestInstance().getTimer().getTotalTime()*-10f;

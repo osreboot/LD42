@@ -140,6 +140,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Tutorial4"); //35
 		getTextureLoader().loadResource("Tutorial5"); //36
 		getTextureLoader().loadResource("Tutorial6"); //37
+		getTextureLoader().loadResource("Tutorial7"); //38
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);

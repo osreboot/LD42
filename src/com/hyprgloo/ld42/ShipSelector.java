@@ -72,70 +72,73 @@ public class ShipSelector {
 		selectShip.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-				if(HvlMenu.getCurrent() != MenuManager.pause && Main.settings.customCursor) {
-					HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
-					HvlCursor.setHeight(32);
-					HvlCursor.setWidth(32);
-					HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
-					HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
-				} 
-				if(selectedShip == null && getClosestShip() != null) {
-	
-					float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
-
-					
-					if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving && HvlMenu.getCurrent() != MenuManager.pause ) {
-						if(HvlMenu.getCurrent() != MenuManager.pause  && Main.settings.customCursor) {
-							HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR));
-							HvlCursor.setHeight(32);
-							HvlCursor.setWidth(32);
-							HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
-							HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
-						}
-						selectedShip = getClosestShip();
-					}
-				}else if(selectedShip != null) selectedShip = null;
-			}
-		});
-		chooseLocation.setPressedAction(new HvlAction1<HvlInput>() {
-			@Override
-			public void run(HvlInput a) {
-
-				if(selectedShip != null) {
-					if(HvlMenu.getCurrent() != MenuManager.pause  && Main.settings.customCursor) {
+				if(TutorialManager.current == null){
+					if(HvlMenu.getCurrent() != MenuManager.pause && Main.settings.customCursor) {
 						HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
 						HvlCursor.setHeight(32);
 						HvlCursor.setWidth(32);
 						HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
 						HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
 					} 
+					if(selectedShip == null && getClosestShip() != null) {
 
-					SpaceStationPart dockingPart = null;
-					for(SpaceStationPart p : SpaceStation.stationParts){
-						if(p.textureIndex <= selectedShip.dockingReq){
-							if(HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), p.x, p.y) < MAX_DOCK_DISTANCE && (dockingPart == null ||
-									HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), p.x, p.y) < HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), dockingPart.x, dockingPart.y))){
-								dockingPart = p;
+						float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
+
+
+						if(currentMouseToClose < Math.abs(MAX_DISTANCE) && !getClosestShip().isDead && !getClosestShip().isLeaving && HvlMenu.getCurrent() != MenuManager.pause ) {
+							if(HvlMenu.getCurrent() != MenuManager.pause  && Main.settings.customCursor) {
+								HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR));
+								HvlCursor.setHeight(32);
+								HvlCursor.setWidth(32);
+								HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+								HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+							}
+							selectedShip = getClosestShip();
+						}
+					}else if(selectedShip != null) selectedShip = null;
+				}
+			}
+		});
+		chooseLocation.setPressedAction(new HvlAction1<HvlInput>() {
+			@Override
+			public void run(HvlInput a) {
+				if(TutorialManager.current == null){
+					if(selectedShip != null) {
+						if(HvlMenu.getCurrent() != MenuManager.pause  && Main.settings.customCursor) {
+							HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
+							HvlCursor.setHeight(32);
+							HvlCursor.setWidth(32);
+							HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+							HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
+						} 
+
+						SpaceStationPart dockingPart = null;
+						for(SpaceStationPart p : SpaceStation.stationParts){
+							if(p.textureIndex <= selectedShip.dockingReq){
+								if(HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), p.x, p.y) < MAX_DOCK_DISTANCE && (dockingPart == null ||
+										HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), p.x, p.y) < HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), dockingPart.x, dockingPart.y))){
+									dockingPart = p;
+								}
 							}
 						}
-					}
-					if(dockingPart != null){
-						if(!Ship.shipInProximity(dockingPart.x, dockingPart.y, SpaceStation.GRID_SIZE, selectedShip) && selectedShip.canDock(dockingPart.textureIndex)){
-							selectedShip.setGoal(dockingPart.x, dockingPart.y);
-							selectedShip.docking = true;
-							selectedShip = null;
-						}
-					}else{
-						FlightPath path = null;
-						for(FlightPath p : FlightPath.paths) if(p.isMouseHovering()) path = p;
-						if(path != null){
-							selectedShip.setFlightPath(path);
-							selectedShip.docking = false;
-							selectedShip = null;
+						if(dockingPart != null){
+							if(!Ship.shipInProximity(dockingPart.x, dockingPart.y, SpaceStation.GRID_SIZE, selectedShip) && selectedShip.canDock(dockingPart.textureIndex)){
+								selectedShip.setGoal(dockingPart.x, dockingPart.y);
+								selectedShip.docking = true;
+								selectedShip = null;
+							}
 						}else{
-							selectedShip.setGoal(HvlCursor.getCursorX(), HvlCursor.getCursorY());
-							selectedShip.docking = false;
-							selectedShip = null;
+							FlightPath path = null;
+							for(FlightPath p : FlightPath.paths) if(p.isMouseHovering()) path = p;
+							if(path != null){
+								selectedShip.setFlightPath(path);
+								selectedShip.docking = false;
+								selectedShip = null;
+							}else{
+								selectedShip.setGoal(HvlCursor.getCursorX(), HvlCursor.getCursorY());
+								selectedShip.docking = false;
+								selectedShip = null;
+							}
 						}
 					}
 				}
