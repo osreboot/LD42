@@ -79,6 +79,9 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_TARGET_INDICATOR = 30,
 	INDEX_DOCKING_ICON = 31,
 	INDEX_TUTORIAL = 32,
+	
+	
+	
 	INDEX_HYPRGLOO = 38;
 
 	public static final Color 
