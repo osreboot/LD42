@@ -40,7 +40,6 @@ public class TutorialManager {
 			@Override
 			public void run(Float delta, Integer stage){
 				if(stage == 1){
-					TutorialManager.emphasize(Ship.ships.get(1).x, Ship.ships.get(1).y, 64, 64);
 					Main.font.drawWordc("Now tell this ship to exit the radio space.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
 				}
 			}
