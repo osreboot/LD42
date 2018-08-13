@@ -84,8 +84,11 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_ELECTRIC3 = 9,
 	INDEX_ITEM_COMPLETE = 10,
 	INDEX_ITEM_STOLEN = 11,
-	INDEX_BATTERY_DEATH = 12;
+	INDEX_BATTERY_DEATH = 12,
+	INDEX_JUMP = 13,
+	INDEX_LASER2 = 14;
 
+	
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
 	COLOR_GREEN1 = new Color(0f, 0.8f, 0f),
@@ -168,6 +171,8 @@ public class Main extends HvlTemplateInteg2D{
 		getSoundLoader().loadResource("ItemComplete");//10
 		getSoundLoader().loadResource("ItemStolen");//11
 		getSoundLoader().loadResource("BatteryDeath");//12
+		getSoundLoader().loadResource("Jump");//13
+		getSoundLoader().loadResource("Laser2");//14
 
 		
 

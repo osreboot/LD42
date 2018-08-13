@@ -42,6 +42,7 @@ public class Game {
 	public static int tutorialStageIndex = 0;
 
 	public static boolean hasPlayedEnergySound = false;
+	public static boolean hasPlayedJumpSound = false;
 	
 	public static void restart(){
 		Ship.ships.clear();
@@ -107,8 +108,8 @@ public class Game {
 		hvlDrawQuad(backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
 		hvlDrawQuad(Display.getWidth() + backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
 		if(state == EndState.IN_PROGRESS){
-			if(energyPulseTimer < 1.5 && hasPlayedEnergySound == false) {
-			Main.getSound(Main.INDEX_ELECTRIC3).playAsSoundEffect(1.5f, 0.09f, false);
+			if(energyPulseTimer < 1.5 && hasPlayedEnergySound == false && !(Game.selected_level == 0)) {
+			Main.getSound(Main.INDEX_ELECTRIC3).playAsSoundEffect(1.5f, 0.075f, false);
 			hasPlayedEnergySound = true;
 			}
 			energyPulseTimer = HvlMath.stepTowards(energyPulseTimer, delta, 0f);
@@ -120,6 +121,9 @@ public class Game {
 		}
 
 		if(state == EndState.IN_PROGRESS){
+			if(hasPlayedJumpSound) {
+			hasPlayedJumpSound = false;
+			}
 			if(level_energy == 0){
 				state = EndState.LOSS_ENERGY;
 				Main.getSound(Main.INDEX_BATTERY_DEATH).playAsSoundEffect(1f, 0.7f, false);
@@ -136,6 +140,10 @@ public class Game {
 				endStateColor = new Color(value, value, value);
 			}
 			if(state == EndState.WIN){
+				if(hasPlayedJumpSound == false) {
+				Main.getSound(Main.INDEX_JUMP).playAsSoundEffect(1.5f, 0.075f, false);
+				hasPlayedJumpSound = true;
+				}
 				float value = HvlMath.limit(HvlMath.map(endStateTimer, 1f, 0.75f, 0f, 1f), 0f, 1f);
 				endStateColor = new Color(1f, 1f, 1f, value);
 			}
