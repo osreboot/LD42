@@ -34,6 +34,7 @@ public class LevelShipSequencer {
 		medShipTimer = 1;
 		largeShipTimer = 2;
 		raiderShipTimer = RAID_TIME * 1.2f;
+		raiderCompParts.clear();
 	}
 	
 	public static void spawnRaider() {

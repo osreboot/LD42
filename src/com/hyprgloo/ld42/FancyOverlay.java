@@ -46,9 +46,11 @@ public class FancyOverlay {
 		if(mainTimer > 2f){
 			float raiderOffset = HvlMath.limit(HvlMath.map(mainTimer%16f, 8f, 12f, -2000, 3000), -2000, 3000);
 			float raiderOffset2 = HvlMath.limit(HvlMath.map(mainTimer%16f, 10f, 14f, -2000, 3000), -2000, 3000);
+			float xwingOffset = HvlMath.limit(HvlMath.map(mainTimer%48f, 33f, 37f, -2000, 3000), -2000, 3000);
 			float zoom = HvlMath.limit(HvlMath.map(mainTimer, 2f, 3f, 8f, 1f), 1f, 8f);
 			HvlCoord2D offset = new HvlCoord2D((float)Math.sin(mainTimer) * 4f, (float)Math.sin(mainTimer) * 16f);
 			hvlRotate(Display.getWidth()/2, Display.getHeight()/2, 60);
+			hvlDrawQuadc((Display.getWidth()/2) + (offset.x*0.5f)  - 400, (Display.getHeight()/2) + (offset.x*0.5f) - xwingOffset, zoom * 32, zoom * 32, Main.getTexture(Main.INDEX_XWING));
 			hvlDrawQuadc((Display.getWidth()/2) + (offset.x*0.5f) - 300, (Display.getHeight()/2) + (offset.x*0.5f) - raiderOffset2 - 200, zoom * 96, zoom * 96, Main.getTexture(Main.INDEX_RAIDER));
 			hvlDrawQuadc((Display.getWidth()/2) + (offset.x*0.5f) + (100f * zoom) - 100, (Display.getHeight()/2) + (offset.x*0.5f) - raiderOffset - 200, zoom * 96, zoom * 96, Main.getTexture(Main.INDEX_RAIDER));
 			hvlDrawQuadc((Display.getWidth()/2) + (offset.x*0.5f) + (100f * zoom), (Display.getHeight()/2) + (offset.x*0.5f) - raiderOffset, zoom * 96, zoom * 96, Main.getTexture(Main.INDEX_RAIDER));

@@ -16,18 +16,6 @@ import com.osreboot.ridhvl.template.HvlTemplateInteg2D;
 
 public class Main extends HvlTemplateInteg2D{
 
-	//TODO
-	/*
-	 * sound effects
-	 * station 4
-	 * window icon
-	 * 
-	 * ship chart viewer?
-	 * 
-	 * xwing?
-	 * 
-	 */
-
 	public static void main(String[] args){
 		new Main();
 	}
@@ -69,8 +57,9 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_HYPRGLOO = 41,
 	INDEX_STRUT = 42,
 	INDEX_CHART = 43,
-	INDEX_BUTTON = 44;
-	
+	INDEX_BUTTON = 44,
+	INDEX_XWING = 45;
+
 	public static final int 
 	INDEX_CRASH = 0,
 	INDEX_ELECTRIC = 1,
@@ -88,7 +77,7 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_JUMP = 13,
 	INDEX_LASER2 = 14;
 
-	
+
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
 	COLOR_GREEN1 = new Color(0f, 0.8f, 0f),
@@ -106,7 +95,7 @@ public class Main extends HvlTemplateInteg2D{
 	public static int musicPreference = 1;
 
 	public Main(){
-		super(144, 1280, 720, "Airlock Gridlock by HYPRGLOO", new HvlDisplayModeDefault());
+		super(144, 1280, 720, "Airlock Gridlock by HYPRGLOO", "CargoShipSmall", new HvlDisplayModeDefault());
 	}
 
 	@Override
@@ -157,7 +146,8 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("strut");//42
 		getTextureLoader().loadResource("SizeChart");//43
 		getTextureLoader().loadResource("Button");//44
-		
+		getTextureLoader().loadResource("XWing");//45
+
 		getSoundLoader().loadResource("CrashExplode");//0
 		getSoundLoader().loadResource("Electric");//1
 		getSoundLoader().loadResource("Electric2");//2
@@ -174,13 +164,13 @@ public class Main extends HvlTemplateInteg2D{
 		getSoundLoader().loadResource("Jump");//13
 		getSoundLoader().loadResource("Laser2");//14
 
-		
 
 
-		
 
-		
-		
+
+
+
+
 		musicPreference = 1;
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
@@ -250,8 +240,8 @@ public class Main extends HvlTemplateInteg2D{
 		if(getSound(INDEX_SHIPTOCATCH).isPlaying() && !settings.musicEnabled){
 			Main.getSound(Main.INDEX_SHIPTOCATCH).stop();
 		}
-	
-		
+
+
 		//TODO Add mouse menu remembrance
 		if(settings.customCursor) {
 			//			if(HvlMenu.getCurrent() == MenuManager.pause) {
