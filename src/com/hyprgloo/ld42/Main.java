@@ -81,6 +81,15 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_TUTORIAL = 32,
 	INDEX_HYPRGLOO = 39,
 	INDEX_STRUT = 40;
+	
+	public static final int 
+	INDEX_CRASH = 0,
+	INDEX_ELECTRIC = 1,
+	INDEX_ELECTRIC2 = 2,
+	INDEX_LASER = 3,
+	INDEX_MENU_BLIP = 4,
+	INDEX_SHIP_SELECT = 5,
+	INDEX_SHIP_COMMAND = 6;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
@@ -145,6 +154,14 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Tutorial7"); //38
 		getTextureLoader().loadResource("HYPRGLOO"); //39
 		getTextureLoader().loadResource("strut");//40
+		
+		getSoundLoader().loadResource("CrashExplode");//0
+		getSoundLoader().loadResource("Electric");//1
+		getSoundLoader().loadResource("Electric2");//2
+		getSoundLoader().loadResource("LaserPew");//3
+		getSoundLoader().loadResource("MenuBlipGood");//4;
+		getSoundLoader().loadResource("ShipSelect");//5
+		getSoundLoader().loadResource("ShipCommand");//6
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);

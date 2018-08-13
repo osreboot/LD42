@@ -94,6 +94,7 @@ public class ShipSelector {
 								HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
 							}
 							selectedShip = getClosestShip();
+							if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_SHIP_SELECT).playAsSoundEffect(1, 0.3f, false);
 						}
 					}else if(selectedShip != null) selectedShip = null;
 				}
@@ -123,6 +124,7 @@ public class ShipSelector {
 						}
 						if(dockingPart != null){
 							if(!Ship.shipInProximity(dockingPart.x, dockingPart.y, SpaceStation.GRID_SIZE, selectedShip) && selectedShip.canDock(dockingPart.textureIndex)){
+								if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_SHIP_COMMAND).playAsSoundEffect(1, 0.3f, false);
 								selectedShip.setGoal(dockingPart.x, dockingPart.y);
 								selectedShip.docking = true;
 								selectedShip = null;
@@ -134,10 +136,13 @@ public class ShipSelector {
 								selectedShip.setFlightPath(path);
 								selectedShip.docking = false;
 								selectedShip = null;
+								if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_SHIP_COMMAND).playAsSoundEffect(1, 0.3f, false);
 							}else{
 								selectedShip.setGoal(HvlCursor.getCursorX(), HvlCursor.getCursorY());
 								selectedShip.docking = false;
 								selectedShip = null;
+								if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_SHIP_COMMAND).playAsSoundEffect(1, 0.3f, false);
+
 							}
 						}
 					}
