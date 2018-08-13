@@ -49,17 +49,17 @@ public class MenuManager {
 		HvlLabeledButton defaultLabeledButton = new HvlLabeledButton(256, 64, new HvlComponentDrawable(){
 			@Override
 			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
-				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_GREEN2);
+				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.getTexture(Main.INDEX_BUTTON), Main.COLOR_GREEN2);
 			}
 		}, new HvlComponentDrawable(){
 			@Override
 			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
-				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_GREEN3);
+				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.getTexture(Main.INDEX_BUTTON), Main.COLOR_GREEN3);
 			}
 		}, new HvlComponentDrawable(){
 			@Override
 			public void draw(float deltaArg, float xArg, float yArg, float widthArg, float heightArg){
-				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.COLOR_GREEN4);
+				hvlDrawQuad(xArg, yArg, widthArg, heightArg, Main.getTexture(Main.INDEX_BUTTON), Main.COLOR_GREEN4);
 			}
 		}, Main.font, "", Main.COLOR_GREEN5);
 		defaultLabeledButton.setUpdateOverride(new HvlAction2<HvlComponent, Float>(){
