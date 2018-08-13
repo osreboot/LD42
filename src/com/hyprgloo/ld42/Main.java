@@ -67,7 +67,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_TUTORIAL = 32,
 	INDEX_HYPRGLOO = 41,
 	INDEX_STRUT = 42,
-	INDEX_CHART = 43;
+	INDEX_CHART = 43,
+	INDEX_BUTTON = 44;
 	
 	public static final int 
 	INDEX_CRASH = 0,
@@ -151,6 +152,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("HYPRGLOO"); //41
 		getTextureLoader().loadResource("strut");//42
 		getTextureLoader().loadResource("SizeChart");//43
+		getTextureLoader().loadResource("Button");//44
 		
 		getSoundLoader().loadResource("CrashExplode");//0
 		getSoundLoader().loadResource("Electric");//1
