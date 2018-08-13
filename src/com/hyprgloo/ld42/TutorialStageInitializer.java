@@ -188,6 +188,34 @@ public class TutorialStageInitializer {
 				Game.tutorialStageIndex++;
 			}
 		}));
+		
+		TutorialManager.stageTutorials.add(new Tutorial(2, new HvlAction2<Float, Integer>(){
+			@Override
+			public void run(Float delta, Integer stage){
+				if(stage == 0){
+					TutorialManager.emphasize(Ship.ships.get(1).x, Ship.ships.get(1).y, 64, 64);
+					Main.font.drawWordc("Now tell this ship to exit the radio space.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+				}
+				if(stage == 1){
+					TutorialManager.emphasize(Display.getWidth() - 48f, Display.getHeight()/2, 96f, Display.getHeight());
+					Main.font.drawWordc("For future reference: any ship that enters the", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("far right zone will also leave your radio space.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					Main.font.drawWordc("You don't have to send them to the transit zones.", Display.getWidth()/2, Display.getHeight()/4*3 + 96f, Color.white, 0.25f);
+					hvlDrawQuadc(Display.getWidth()/4*3, Display.getHeight()/4*2, 192, 192, Main.getTexture(Main.INDEX_TUTORIAL + 4));
+				}
+			}
+		}, new HvlAction0r<Boolean>(){
+			@Override
+			public Boolean run(){
+				return Game.selected_level == 0 && Game.tutorialStageIndex == 6 && 
+						(((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.EMPTY);
+			}
+		}, new HvlAction0(){
+			@Override
+			public void run(){
+				Game.tutorialStageIndex++;
+			}
+		}));
 	}
 	
 }
