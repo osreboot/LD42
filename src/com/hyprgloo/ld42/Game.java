@@ -41,6 +41,8 @@ public class Game {
 
 	public static int tutorialStageIndex = 0;
 
+	public static boolean hasPlayedEnergySound = false;
+	
 	public static void restart(){
 		Ship.ships.clear();
 		FancyOverlay.gameRestart();
@@ -104,10 +106,14 @@ public class Game {
 		backgroundOffset2 = backgroundOffset2%Display.getWidth();
 		hvlDrawQuad(backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
 		hvlDrawQuad(Display.getWidth() + backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
-
 		if(state == EndState.IN_PROGRESS){
+			if(energyPulseTimer < 1.5 && hasPlayedEnergySound == false) {
+			Main.getSound(Main.INDEX_ELECTRIC3).playAsSoundEffect(1.5f, 0.09f, false);
+			hasPlayedEnergySound = true;
+			}
 			energyPulseTimer = HvlMath.stepTowards(energyPulseTimer, delta, 0f);
 			if(energyPulseTimer == 0){
+				hasPlayedEnergySound = false;
 				level_energy -= ENERGY_PULSE_AMOUNT;
 				energyPulseTimer = ENERGY_PULSE_DELAY;
 			}
@@ -116,7 +122,7 @@ public class Game {
 		if(state == EndState.IN_PROGRESS){
 			if(level_energy == 0){
 				state = EndState.LOSS_ENERGY;
-				Main.getSound(Main.INDEX_BATTERY_DEATH).playAsSoundEffect(1f, 0.3f, false);
+				Main.getSound(Main.INDEX_BATTERY_DEATH).playAsSoundEffect(1f, 0.7f, false);
 			}else if(level_fuel == 1){
 				state = EndState.WIN;
 				endStateTimerMeta = 7f;
