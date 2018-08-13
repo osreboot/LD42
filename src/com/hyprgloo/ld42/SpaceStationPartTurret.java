@@ -18,6 +18,7 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 	public static final float KILL_TIME = 6;
 	public static final float KILL_RANGE = 400;
 	public float killTimer = KILL_TIME;
+	public static boolean laserSoundPlayed = false;
 
 	public SpaceStationPartTurret(float xGridArg, float yGridArg, float rotationArg){
 		super(xGridArg, yGridArg, rotationArg, Main.INDEX_STATION_TURRET_MOUNT);
@@ -49,10 +50,15 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 			}
 			turretRotation = HvlMath.stepTowards(turretRotation, delta * 100f, newRotation);
 			if(HvlMath.distance(x, y, target.x, target.y) < KILL_RANGE && !target.isDead && Game.level_ammo >= Game.SHOOT_AMMO_COST) {
+				if(!laserSoundPlayed) {
+					Main.getSound(Main.INDEX_LASER2).playAsSoundEffect(1f, 0.55f, false);
+					laserSoundPlayed = true;
+				}
 				killTimer = HvlMath.stepTowards(killTimer, delta, 0);
 				if(killTimer <= 0) {
 					Game.level_ammo -= Game.SHOOT_AMMO_COST;
 					target.isDead = true;
+					laserSoundPlayed = false;
 					if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.25f, false);
 					killTimer = KILL_TIME;
 				} 
