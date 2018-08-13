@@ -275,7 +275,13 @@ public class MenuManager {
 			float alpha = 1f - (Math.abs(introProgress - 0.5f)*2f);
 			hvlDrawQuadc(Display.getWidth()/2, Display.getHeight()/2, 512, 512, Main.getTexture(Main.INDEX_HYPRGLOO), new Color(1f, 1f, 1f, alpha));
 		} else if (HvlMenu.getCurrent() == end) {
-			switch
+			switch (Game.state) {
+			case WIN:
+				break;
+			default:
+				break;
+					
+			}
 		}
 	}
 
