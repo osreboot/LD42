@@ -67,6 +67,7 @@ public class Raider extends Ship{
 				y = yGoal;
 				docking = false;
 				docked = true;
+				Main.getSound(Main.INDEX_ITEM_STOLEN).playAsSoundEffect(1f, 0.25f, false);
 			}
 			if(!docked){
 				speed = HvlMath.stepTowards(speed, delta * maxSpeed, Math.min(maxSpeed, goalDistance));

@@ -88,8 +88,10 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_SHIP_SELECT = 5,
 	INDEX_SHIP_COMMAND = 6,
 	INDEX_WORLDOFFIRE = 7,
-	INDEX_SHIPTOCATCH = 8;
-
+	INDEX_SHIPTOCATCH = 8,
+	INDEX_ELECTRIC3 = 9,
+	INDEX_ITEM_COMPLETE = 10,
+	INDEX_ITEM_STOLEN = 11;
 	
 
 	public static final Color 
@@ -168,7 +170,9 @@ public class Main extends HvlTemplateInteg2D{
 		getSoundLoader().loadResource("ShipCommand");//6
 		getSoundLoader().loadResource("World of Fire");//7
 		getSoundLoader().loadResource("Ship to Catch");//8
-
+		getSoundLoader().loadResource("Electric3");//9
+		getSoundLoader().loadResource("ItemComplete");//10
+		getSoundLoader().loadResource("ItemStolen");//11
 		
 
 
@@ -233,12 +237,14 @@ public class Main extends HvlTemplateInteg2D{
 	public void update(float delta){
 		if(!getSound(INDEX_WORLDOFFIRE).isPlaying() && !getSound(INDEX_SHIPTOCATCH).isPlaying() && settings.musicEnabled && musicPreference == 2){
 			Main.getSound(Main.INDEX_WORLDOFFIRE).playAsSoundEffect(1f, 0.5f, false);
+			musicPreference = 1;
 		}
 		if(getSound(INDEX_WORLDOFFIRE).isPlaying() && !settings.musicEnabled){
 			Main.getSound(Main.INDEX_WORLDOFFIRE).stop();
 		}
 		if(!getSound(INDEX_WORLDOFFIRE).isPlaying() && !getSound(INDEX_SHIPTOCATCH).isPlaying() && settings.musicEnabled && musicPreference == 1){
 			Main.getSound(Main.INDEX_SHIPTOCATCH).playAsSoundEffect(1f, 0.5f, false);
+			musicPreference = 2;
 		}
 		if(getSound(INDEX_SHIPTOCATCH).isPlaying() && !settings.musicEnabled){
 			Main.getSound(Main.INDEX_SHIPTOCATCH).stop();
