@@ -36,11 +36,33 @@ public class TutorialManager {
 	public static void initialize(){
 		TutorialStageInitializer.initialize();
 		
-		tutorials.put(new Tutorial(2, new HvlAction2<Float, Integer>(){
+		tutorials.put(new Tutorial(5, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
+				if(stage == 0){
+					emphasize(250, 375, 475, 300);
+					Main.font.drawWordc("This station has flight paths.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+				}
 				if(stage == 1){
-					Main.font.drawWordc("Now tell this ship to exit the radio space.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					emphasize(775, 350, 250, 400);
+					Main.font.drawWordc("Flight paths are good for keeping", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("ships organized.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+				}
+				if(stage == 2){
+					emphasize(750, 250 - 48, FlightPath.BOX_WIDTH + 32f, FlightPath.BOX_HEIGHT + 32f);
+					Main.font.drawWordc("Tell a ship to use a flight pattern by", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("directing it towards the pattern's label.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					hvlDrawQuadc(Display.getWidth()/8*3, Display.getHeight()/8*2, 192, 192, Main.getTexture(Main.INDEX_TUTORIAL + 7));
+				}
+				if(stage == 3){
+					emphasize(750, 250 - 48, FlightPath.BOX_WIDTH + 32f, FlightPath.BOX_HEIGHT + 32f);
+					Main.font.drawWordc("Flight path movement can be cancelled at", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("any time.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+				}
+				if(stage == 4){
+					emphasize(750, 250 - 48, FlightPath.BOX_WIDTH - 32f, FlightPath.BOX_HEIGHT - 32f);
+					Main.font.drawWordc("Flight paths are labeled by ship size, using", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("inappropriate sizes won't guarantee safety!", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
 				}
 			}
 		}, new HvlAction0r<Boolean>(){
