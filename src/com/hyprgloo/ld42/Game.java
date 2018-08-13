@@ -139,6 +139,10 @@ public class Game {
 				float value = HvlMath.limit(HvlMath.map(endStateTimer, 1f, 0.75f, 0f, 1f), 0f, 1f);
 				endStateColor = new Color(1f, 1f, 1f, value);
 			}
+			if(state == EndState.LOSS_COLLISIONS){
+				float value = HvlMath.limit(HvlMath.map(endStateTimer, 1f, 0.75f, 1f, 0f), 0f, 1f);
+				endStateColor = new Color(1f, 1f - value, 1f - value);
+			}
 			if(endStateTimerMeta == 0) HvlMenu.setCurrent(MenuManager.end);
 		}
 
@@ -153,8 +157,9 @@ public class Game {
 
 		for(Explosion e : Ship.exps) e.draw(delta);
 
-		if(collisions > 0) Main.font.drawWord("disasters: " + collisions, 8f, Display.getHeight() - 24f, Color.white, 0.125f);
-
+		if(collisions > 0) Main.font.drawWord("disasters: " + collisions, 8f, Display.getHeight() - 24f, collisions >= 8 ? Color.red : Color.white, 0.125f);
+		if(collisions > 9 && state == EndState.IN_PROGRESS) state = EndState.LOSS_COLLISIONS;
+		
 		level_fuel = state == EndState.WIN ? 1f : HvlMath.limit(level_fuel, 0f, 1f);
 		level_energy = state == EndState.LOSS_ENERGY ? 0f : HvlMath.limit(level_energy, 0f, 1f);
 		level_ammo = HvlMath.limit(level_ammo, 0f, 1f);

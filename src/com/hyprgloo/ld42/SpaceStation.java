@@ -6,8 +6,6 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
 
 import java.util.ArrayList;
 
-import org.newdawn.slick.Color;
-
 import com.osreboot.ridhvl.HvlMath;
 
 public class SpaceStation {
