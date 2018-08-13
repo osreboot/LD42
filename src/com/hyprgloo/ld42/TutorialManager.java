@@ -99,7 +99,7 @@ public class TutorialManager {
 					hvlDrawQuadc(FancyOverlay.GAME_LEVEL_ENERGY_X + 64, 128, 96, 96, Main.getTexture(Main.INDEX_CANISTER_ENERGY));
 				}
 				if(stage == 3){
-					emphasize(64, Display.getHeight() - 32, 128, 64);
+					emphasize(64, Display.getHeight() - 32, 192, 32);
 					Main.font.drawWordc("You can't win if you're a serial killer.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
 					Main.font.drawWordc("Play by the rules and don't murder ships.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
 					Main.font.drawWord("disasters: 0", 8f, Display.getHeight() - 24f, Color.white, 0.125f);
