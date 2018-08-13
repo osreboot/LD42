@@ -77,7 +77,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_DOCKING_ICON = 31,
 	INDEX_TUTORIAL = 32,
 	INDEX_HYPRGLOO = 41,
-	INDEX_STRUT = 42;
+	INDEX_STRUT = 42,
+	INDEX_CHART = 43;
 	
 	public static final int 
 	INDEX_CRASH = 0,
@@ -158,6 +159,7 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Tutorial9"); //40
 		getTextureLoader().loadResource("HYPRGLOO"); //41
 		getTextureLoader().loadResource("strut");//42
+		getTextureLoader().loadResource("SizeChart");//43
 		
 		getSoundLoader().loadResource("CrashExplode");//0
 		getSoundLoader().loadResource("Electric");//1
