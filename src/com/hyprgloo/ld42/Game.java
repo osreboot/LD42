@@ -116,6 +116,7 @@ public class Game {
 		if(state == EndState.IN_PROGRESS){
 			if(level_energy == 0){
 				state = EndState.LOSS_ENERGY;
+				Main.getSound(Main.INDEX_BATTERY_DEATH).playAsSoundEffect(1f, 0.3f, false);
 			}else if(level_fuel == 1){
 				state = EndState.WIN;
 				endStateTimerMeta = 7f;
