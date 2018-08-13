@@ -321,11 +321,11 @@ public class MenuManager {
 
 		private void update(float delta, boolean hovering, boolean menu){
 			fade = menu ? HvlMath.stepTowards(fade, delta * 8f, hovering ? 1f : 0f) : 0f;
-			if(hovering && !rollover){
+			if(menu && hovering && !rollover){
 				rollover = true;
 				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_MENU_BLIP).playAsSoundEffect(1, 0.2f, false);
 			}
-			if(!hovering) rollover = false;
+			if(!hovering || !menu) rollover = false;
 		}
 
 	}

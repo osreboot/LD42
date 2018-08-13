@@ -68,7 +68,7 @@ public class TutorialManager {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Main.settings.tutorialsEnabled && Game.selected_level >= 1;
+				return Main.settings.tutorialsEnabled && Game.selected_level >= 2;
 			}
 		}, new HvlAction0(){
 			@Override
@@ -77,6 +77,50 @@ public class TutorialManager {
 				Main.saveConfig();
 			}
 		}), Main.settings.tutorial0Completed);
+		
+		tutorials.put(new Tutorial(5, new HvlAction2<Float, Integer>(){
+			@Override
+			public void run(Float delta, Integer stage){
+				if(stage == 0){
+					emphasize(Display.getWidth()/2, Display.getHeight()/2, 256 + 16, 128);
+					Main.font.drawWordc("There's a lot to do on board a space station,", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("so stay focused.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+				}
+				if(stage == 1){
+					emphasize(FancyOverlay.GAME_LEVEL_FUEL_X + 64, 16, 192, 24);
+					Main.font.drawWordc("You need to jump your ship out of this sector.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("Fill this bar up with hyper-fuel to win.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					hvlDrawQuadc(FancyOverlay.GAME_LEVEL_FUEL_X + 64, 128, 96, 96, Main.getTexture(Main.INDEX_CANISTER_FUEL));
+				}
+				if(stage == 2){
+					emphasize(FancyOverlay.GAME_LEVEL_ENERGY_X + 64, 16, 192, 24);
+					Main.font.drawWordc("A station uses up a lot of power, keep us", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("charged to stay in the game.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					hvlDrawQuadc(FancyOverlay.GAME_LEVEL_ENERGY_X + 64, 128, 96, 96, Main.getTexture(Main.INDEX_CANISTER_ENERGY));
+				}
+				if(stage == 3){
+					emphasize(64, Display.getHeight() - 32, 128, 64);
+					Main.font.drawWordc("You can't win if you're a serial killer.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("Play by the rules and don't murder ships.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					Main.font.drawWord("disasters: 0", 8f, Display.getHeight() - 24f, Color.white, 0.125f);
+				}
+				if(stage == 4){
+					emphasize(Display.getWidth()/2, Display.getHeight()/2, 256 + 16, 128);
+					Main.font.drawWordc("Good luck!", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+				}
+			}
+		}, new HvlAction0r<Boolean>(){
+			@Override
+			public Boolean run(){
+				return Main.settings.tutorialsEnabled && Game.selected_level >= 1;
+			}
+		}, new HvlAction0(){
+			@Override
+			public void run(){
+				Main.settings.tutorial1Completed = true;
+				Main.saveConfig();
+			}
+		}), Main.settings.tutorial1Completed);
 	}
 
 	public static void update(float delta){
