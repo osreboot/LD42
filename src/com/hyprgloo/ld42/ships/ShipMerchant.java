@@ -43,8 +43,9 @@ public class ShipMerchant extends Ship{
 	public void update(float delta){
 		super.update(delta);
 		if(checkCollision() || isDead){
-			if(!isDead && x < Display.getWidth() && x > 0) { Game.collisions++;
-			if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.3f, false);
+			if(!isDead && x < Display.getWidth() && x > 0) { 
+				Game.collisions++;
+				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.3f, false);
 			}
 			isDead = true;
 			docking = false;

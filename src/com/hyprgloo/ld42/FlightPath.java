@@ -17,7 +17,7 @@ public class FlightPath {
 
 	public static void restart(){
 		paths.clear();
-		if(Game.selected_level == 1){
+		if(Game.selected_level == 2){
 			paths.add(new FlightPath("A1-Medium", new HvlCoord2D(100, 500 - 48), 
 					new PathNode(new HvlCoord2D(100, 500), false), 
 					new PathNode(new HvlCoord2D(175, 500), true), 
