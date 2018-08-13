@@ -18,10 +18,10 @@ public class Main extends HvlTemplateInteg2D{
 
 	//TODO
 	/*
-	 * raider tutorial
 	 * sound effects
 	 * station 4
 	 * window icon
+	 * 
 	 * ship chart viewer?
 	 * 
 	 * xwing?
