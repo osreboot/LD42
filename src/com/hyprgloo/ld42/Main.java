@@ -231,13 +231,13 @@ public class Main extends HvlTemplateInteg2D{
 
 	@Override
 	public void update(float delta){
-		if(!getSound(INDEX_WORLDOFFIRE).isPlaying() && !getSound(INDEX_SHIPTOCATCH).isPlaying() && settings.musicEnabled && musicPreference == 1){
+		if(!getSound(INDEX_WORLDOFFIRE).isPlaying() && !getSound(INDEX_SHIPTOCATCH).isPlaying() && settings.musicEnabled && musicPreference == 2){
 			Main.getSound(Main.INDEX_WORLDOFFIRE).playAsSoundEffect(1f, 0.5f, false);
 		}
 		if(getSound(INDEX_WORLDOFFIRE).isPlaying() && !settings.musicEnabled){
 			Main.getSound(Main.INDEX_WORLDOFFIRE).stop();
 		}
-		if(!getSound(INDEX_WORLDOFFIRE).isPlaying() && !getSound(INDEX_SHIPTOCATCH).isPlaying() && settings.musicEnabled && musicPreference == 2){
+		if(!getSound(INDEX_WORLDOFFIRE).isPlaying() && !getSound(INDEX_SHIPTOCATCH).isPlaying() && settings.musicEnabled && musicPreference == 1){
 			Main.getSound(Main.INDEX_SHIPTOCATCH).playAsSoundEffect(1f, 0.5f, false);
 		}
 		if(getSound(INDEX_SHIPTOCATCH).isPlaying() && !settings.musicEnabled){
