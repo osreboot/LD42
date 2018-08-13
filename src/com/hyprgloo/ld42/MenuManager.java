@@ -251,6 +251,21 @@ public class MenuManager {
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5 + 6f, Display.getHeight()/2 + 16f + 6f, Main.COLOR_GREEN5);
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5, Display.getHeight()/2 + 16f, Main.COLOR_GREEN1);
 			}
+		} else if (HvlMenu.getCurrent() == credits) {
+			Main.font.drawWordc("CREDITS", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Main.COLOR_GREEN5, 0.5f);
+			Main.font.drawWordc("CREDITS", Display.getWidth()/2, Display.getHeight()/8, Main.COLOR_GREEN1, 0.5f);
+			Main.font.drawWordc("os_reboot", Display.getWidth()/2, Display.getHeight()*4/20 + 12, Main.COLOR_GREEN1, 0.325f);
+			Main.font.drawWordc("Twitter: os_reboot", Display.getWidth()/2, Display.getHeight()*5/20 + 24, Main.COLOR_GREEN3, 0.25f);
+			
+			Main.font.drawWordc("HaveANiceDay", Display.getWidth()/2, Display.getHeight()*8/20,Main.COLOR_GREEN1, 0.325f);
+			Main.font.drawWordc("github.com/haveaniceday33", Display.getWidth()/2, Display.getHeight()*9/20 + 12, Main.COLOR_GREEN3, 0.25f);
+			
+			Main.font.drawWordc("JKTransformers", Display.getWidth()/2, Display.getHeight()*12/20,Main.COLOR_GREEN1, 0.325f);	
+			
+			Main.font.drawWordc("Basset", Display.getWidth()/2, Display.getHeight()*15/20 - 12,Main.COLOR_GREEN1, 0.325f);
+			Main.font.drawWordc("Twitter: xbassetx", Display.getWidth()/2, Display.getHeight()*16/20, Main.COLOR_GREEN3, 0.25f);
+			
+			Main.font.drawWordc("Made in 72 hours for Ludum Dare 42", Display.getWidth()/2, Display.getHeight()*18/20 + 16, Main.COLOR_GREEN3, 0.15f);
 		}
 	}
 
