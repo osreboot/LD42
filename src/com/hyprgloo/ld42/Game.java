@@ -8,6 +8,7 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
+import com.hyprgloo.ld42.ships.ShipMerchant;
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.menu.HvlMenu;
 
@@ -51,6 +52,8 @@ public class Game {
 
 		collisions = 0;
 
+		tutorialStageIndex = 0;
+
 		state = EndState.IN_PROGRESS;
 		endStateTimer = 0f;
 		endStateTimerMeta = 5f;
@@ -65,10 +68,23 @@ public class Game {
 	}
 
 	public static void update(float delta){
-		if(selected_level == 0 && tutorialStageIndex < 2){
-			if(Ship.ships.size() > 1){
+		if(Ship.ships.size() > 1 && selected_level == 0){
+			if(tutorialStageIndex < 2 || Ship.ships.get(0).xGoal < 32f){
 				Ship.ships.get(1).x = -128;
-				if(Ship.ships.get(0).isDead || Ship.ships.get(1).isDead) state = EndState.LOSS_TUTORIAL;
+			}
+			if(Ship.ships.get(0).isDead || Ship.ships.get(1).isDead) state = EndState.LOSS_TUTORIAL;
+			if(tutorialStageIndex <= 2){
+				if(((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.ENERGY) level_energy = 1f - ENERGY_PULSE_AMOUNT;
+				else level_energy = 1f;
+			}
+			if(tutorialStageIndex == 2 && Ship.ships.get(1).x > 0){
+				boolean dockFound = false;
+				for(SpaceStationPart p : SpaceStation.stationParts){
+					if(Ship.ships.get(0).xGoal == p.x && Ship.ships.get(0).yGoal == p.y) dockFound = true;
+				}
+				if(!dockFound && Ship.ships.get(0).xGoal > 32f){
+					state = EndState.LOSS_TUTORIAL;
+				}
 			}
 		}
 

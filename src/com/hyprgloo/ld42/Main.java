@@ -136,6 +136,10 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Docking_Icon"); //31
 		getTextureLoader().loadResource("Tutorial1"); //32
 		getTextureLoader().loadResource("Tutorial2"); //33
+		getTextureLoader().loadResource("Tutorial3"); //34
+		getTextureLoader().loadResource("Tutorial4"); //35
+		getTextureLoader().loadResource("Tutorial5"); //36
+		getTextureLoader().loadResource("Tutorial6"); //37
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);

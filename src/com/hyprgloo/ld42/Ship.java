@@ -52,7 +52,7 @@ public class Ship {
 	}
 
 	public float x, y, xs, ys, speed, xGoal, yGoal, rotation, deadRotationSpeed, deadLife, maxSpeed, realMaxSpeed, collisionSize;
-	public boolean isLeaving = false, isDead = false, holding = true;
+	public boolean isLeaving = false, isDead = false, holding;
 
 	public Ship(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, float maxSpeedArg, float collisionSizeArg){
 		x = xArg;
@@ -68,6 +68,7 @@ public class Ship {
 		collisionSize = collisionSizeArg;
 		deadLife = 5f;
 		exploded = false;
+		holding = Game.selected_level == 0 ? false : true;
 		ships.add(this);
 	}
 
