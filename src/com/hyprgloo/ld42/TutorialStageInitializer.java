@@ -12,7 +12,7 @@ import com.osreboot.ridhvl.action.HvlAction2;
 public class TutorialStageInitializer {
 
 	public static void initialize(){
-		TutorialManager.tutorials.put(new Tutorial(3, new HvlAction2<Float, Integer>(){
+		TutorialManager.stageTutorials.add(new Tutorial(3, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
 				TutorialManager.emphasize(Ship.ships.get(0).x, Ship.ships.get(0).y, 64, 64);
@@ -34,8 +34,9 @@ public class TutorialStageInitializer {
 			public void run(){
 				Game.tutorialStageIndex++;
 			}
-		}), false);
-		TutorialManager.tutorials.put(new Tutorial(3, new HvlAction2<Float, Integer>(){
+		}));
+		
+		TutorialManager.stageTutorials.add(new Tutorial(3, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
 				if(stage == 0){
@@ -65,19 +66,35 @@ public class TutorialStageInitializer {
 			public void run(){
 				Game.tutorialStageIndex++;
 			}
-		}), false);
+		}));
 		
-		TutorialManager.tutorials.put(new Tutorial(2, new HvlAction2<Float, Integer>(){
+		TutorialManager.stageTutorials.add(new Tutorial(5, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
-				
 				if(stage == 0){
-					TutorialManager.emphasize(Ship.ships.get(1).x, Ship.ships.get(1).y, 64, 64);
-					Main.font.drawWordc("This is a ship, idiot.", 400, 200, Color.white, 0.25f);
+					TutorialManager.emphasize(Ship.ships.get(1).x, Ship.ships.get(1).y, 256, 256);
+					Main.font.drawWordc("Another ship just entered our radio space.", Display.getWidth()/2, Display.getHeight()/4, Color.white, 0.25f);
 				}
 				if(stage == 1){
-					TutorialManager.emphasize(512 - 32f, Display.getHeight()/2, 32, 32);
-					Main.font.drawWordc("It flies. Like ships do.", 400, 200, Color.white, 0.25f);
+					TutorialManager.emphasize(Ship.ships.get(1).x - 8, Ship.ships.get(1).y, 28, 28);
+					Main.font.drawWordc("This ship is carrying an energy cell.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+				}
+				if(stage == 2){
+					TutorialManager.emphasize(FancyOverlay.GAME_LEVEL_ENERGY_X + 64, 16, 192, 24);
+					Main.font.drawWordc("Our station could use some more power.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("Dock to recharge our batteries.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+				}
+				if(stage == 3){
+					TutorialManager.emphasize(512 - 32f, Display.getHeight()/2, 64, 64);
+					Main.font.drawWordc("Since another ship is already docking", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("we want to queue this one up behind the other.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					hvlDrawQuadc(Display.getWidth()/4*3, Display.getHeight()/4*2, 192, 192, Main.getTexture(Main.INDEX_TUTORIAL + 2));
+				}
+				if(stage == 4){
+					TutorialManager.emphasize(512 - 32f, Display.getHeight()/2, 64, 64);
+					Main.font.drawWordc("With the ship selected, right-click in empty", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("space to order the vessel behind the first.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					hvlDrawQuadc(Display.getWidth()/4*3, Display.getHeight()/4*2, 192, 192, Main.getTexture(Main.INDEX_TUTORIAL + 5));
 				}
 			}
 		}, new HvlAction0r<Boolean>(){
@@ -90,7 +107,7 @@ public class TutorialStageInitializer {
 			public void run(){
 				Game.tutorialStageIndex++;
 			}
-		}), false);
+		}));
 	}
 	
 }

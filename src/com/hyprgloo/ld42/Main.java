@@ -79,7 +79,7 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_TARGET_INDICATOR = 30,
 	INDEX_DOCKING_ICON = 31,
 	INDEX_TUTORIAL = 32,
-	INDEX_HYPRGLOO = 33;
+	INDEX_HYPRGLOO = 38;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
@@ -137,7 +137,11 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Docking_Icon"); //31
 		getTextureLoader().loadResource("Tutorial1"); //32
 		getTextureLoader().loadResource("Tutorial2"); //33
-		getTextureLoader().loadResource("HYPRGLOO"); //34
+		getTextureLoader().loadResource("Tutorial3"); //34
+		getTextureLoader().loadResource("Tutorial4"); //35
+		getTextureLoader().loadResource("Tutorial5"); //36
+		getTextureLoader().loadResource("Tutorial6"); //37
+		getTextureLoader().loadResource("HYPRGLOO"); //38
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
