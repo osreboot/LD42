@@ -21,8 +21,6 @@ public class Main extends HvlTemplateInteg2D{
 	 * raider tutorial
 	 * sound effects
 	 * station 4
-	 * fix sam's titles
-	 * disaster fail state?
 	 * window icon
 	 * 
 	 * xwing?

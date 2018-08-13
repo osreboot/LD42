@@ -290,7 +290,8 @@ public class MenuManager {
 			if(Game.state == EndState.WIN_TUTORIAL){
 				Main.font.drawWordc("TUTORIAL COMPLETE", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Main.COLOR_GREEN5, 0.5f);
 				Main.font.drawWordc("TUTORIAL COMPLETE", Display.getWidth()/2, Display.getHeight()/8, Main.COLOR_GREEN1, 0.5f);
-				Main.font.drawWordc("Great job!", Display.getWidth()/2, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Great job!", Display.getWidth()/8*5, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("You're ready for the real thing!", Display.getWidth()/8*5, Display.getHeight()/8*3 + 48f, Main.COLOR_GREEN1, 0.25f);
 			}else if(Game.state == EndState.LOSS_TUTORIAL){
 				Main.font.drawWordc("TUTORIAL FAILED", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Color.black, 0.5f);
 				Main.font.drawWordc("TUTORIAL FAILED", Display.getWidth()/2, Display.getHeight()/8, Color.red, 0.5f);
@@ -309,10 +310,16 @@ public class MenuManager {
 				Main.font.drawWordc("MORALITY DEPLETED", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Color.black, 0.5f);
 				Main.font.drawWordc("MORALITY DEPLETED", Display.getWidth()/2, Display.getHeight()/8, Color.red, 0.5f);
 				Main.font.drawWordc("try to...", Display.getWidth()/8*5, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
-				Main.font.drawWordc("Don't be evil.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 192f, Main.COLOR_GREEN1, 0.25f);
-				Main.font.drawWordc("Don't let raiders crash into", Display.getWidth()/8*5, Display.getHeight()/8*3 + 48f, Main.COLOR_GREEN1, 0.25f);
-				Main.font.drawWordc("merchant ships by stopping in", Display.getWidth()/8*5, Display.getHeight()/8*3 + 96f, Main.COLOR_GREEN1, 0.25f);
-				Main.font.drawWordc("the traffic lanes.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 144f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Don't be evil.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 48f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Don't let raiders crash into merchant", Display.getWidth()/8*5, Display.getHeight()/8*3 + 96f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("ships by stopping in the traffic lanes.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 144f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Complain to the developers about buggy", Display.getWidth()/8*5, Display.getHeight()/8*3 + 192f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("ship behavior.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 240f, Main.COLOR_GREEN1, 0.25f);
+			}if(Game.state == EndState.WIN){
+				Main.font.drawWordc("JUMP SUCCESSFUL", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Main.COLOR_GREEN5, 0.5f);
+				Main.font.drawWordc("JUMP SUCCESSFUL", Display.getWidth()/2, Display.getHeight()/8, Main.COLOR_GREEN1, 0.5f);
+				Main.font.drawWordc("Well done!", Display.getWidth()/8*5, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Onward to the next adventure!", Display.getWidth()/8*5, Display.getHeight()/8*3 + 48f, Main.COLOR_GREEN1, 0.25f);
 			}
 		}
 	}
