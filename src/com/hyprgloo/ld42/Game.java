@@ -74,7 +74,7 @@ public class Game {
 				Ship.ships.get(1).x = -128;
 			}
 			
-			if(((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.ENERGY) level_energy = 1f - ENERGY_PULSE_AMOUNT;
+			if(Ship.ships.size() > 1 && ((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.ENERGY) level_energy = 1f - ENERGY_PULSE_AMOUNT;
 			else level_energy = 1f;
 			
 			if(tutorialStageIndex == 2 && Ship.ships.get(1).x > 0){
@@ -87,8 +87,9 @@ public class Game {
 				}
 			}
 		}
-		if(selected_level == 0 && level_energy == 1f && level_fuel > 0f){
+		if(Ship.ships.size() == 0 && selected_level == 0 && level_energy == 1f && level_fuel > 0f){
 			state = EndState.WIN_TUTORIAL;
+			endStateTimer = 0f;
 		}
 
 		float backgroundOffset = Main.getNewestInstance().getTimer().getTotalTime()*-10f;
