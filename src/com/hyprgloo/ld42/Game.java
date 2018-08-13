@@ -140,10 +140,7 @@ public class Game {
 				endStateColor = new Color(value, value, value);
 			}
 			if(state == EndState.WIN){
-				if(hasPlayedJumpSound == false) {
-				Main.getSound(Main.INDEX_JUMP).playAsSoundEffect(1.5f, 0.075f, false);
-				hasPlayedJumpSound = true;
-				}
+				
 				float value = HvlMath.limit(HvlMath.map(endStateTimer, 1f, 0.75f, 0f, 1f), 0f, 1f);
 				endStateColor = new Color(1f, 1f, 1f, value);
 			}
@@ -176,6 +173,10 @@ public class Game {
 
 
 		if(state == EndState.WIN){
+			if(hasPlayedJumpSound == false && endStateTimerMeta < 3.75) {
+				Main.getSound(Main.INDEX_JUMP).playAsSoundEffect(1.0f, 0.5f, false);
+				hasPlayedJumpSound = true;
+				}
 			float value = HvlMath.limit(HvlMath.map(endStateTimer, 0.8f, 0.9f, 0f, 1f), 0f, 1f) - HvlMath.limit(HvlMath.map(endStateTimer, 0.9f, 1f, 0f, 1f), 0f, 1f);
 			hvlRotate(Display.getWidth()/2, Display.getHeight()/2, Main.getNewestInstance().getTimer().getTotalTime() * 720f);
 			hvlDrawQuadc(Display.getWidth()/2, Display.getHeight()/2, value * 256, value * 256, Main.getTexture(Main.INDEX_BLINK));
