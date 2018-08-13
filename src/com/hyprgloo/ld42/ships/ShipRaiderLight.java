@@ -24,6 +24,7 @@ public class ShipRaiderLight extends Raider{
 		hvlDrawQuadc(x, y, 48f, 48f, Main.getTexture(Main.INDEX_RAIDER), deadColor);
 		if(!docked && !isDead) hvlDrawQuadc(x, y + 18f, 16f, 16f, Main.getTexture(cargo.texture));
 		hvlResetRotation();
+		drawTradeProgressBar(x, y);
 		//super.draw(delta);
 	}
 

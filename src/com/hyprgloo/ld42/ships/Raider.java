@@ -1,10 +1,14 @@
 package com.hyprgloo.ld42.ships;
 
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
+
+import org.newdawn.slick.Color;
+
 import com.hyprgloo.ld42.Cargo;
 import com.hyprgloo.ld42.FancyOverlay;
 import com.hyprgloo.ld42.Game;
 import com.hyprgloo.ld42.LevelShipSequencer;
-import com.hyprgloo.ld42.Main;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
 import com.hyprgloo.ld42.SpaceStationPart;
@@ -13,7 +17,7 @@ import com.osreboot.ridhvl.HvlMath;
 
 public class Raider extends Ship{
 
-	public float tradeTime, dockRotationOffset, idleTime;
+	public float tradeTime, maxTradeTime, dockRotationOffset, idleTime;
 	public Cargo cargo;
 	public boolean docking = false, docked = false;
 	SpaceStationPart goalPart;
@@ -23,6 +27,7 @@ public class Raider extends Ship{
 		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, maxSpeedArg, collisionSizeArg);
 		cargo = Cargo.EMPTY;
 		tradeTime = tradeTimeArg;
+		maxTradeTime = tradeTimeArg;
 		dockRotationOffset = dockRotationOffsetArg;
 		goalPart = goalPartArg;
 		idleTime = 1f;
@@ -112,6 +117,16 @@ public class Raider extends Ship{
 				else newRotation += 360f;
 			}
 			rotation = HvlMath.stepTowards(rotation, delta * maxSpeed * 2f, newRotation);
+		}
+	}
+	
+	public static final float PROGRESS_BAR_WIDTH = 20f, PROGRESS_BAR_HEIGHT = 6f;
+
+	protected void drawTradeProgressBar(float xArg, float yArg){
+		if(docked){
+			hvlDrawQuadc(xArg, yArg, PROGRESS_BAR_WIDTH, PROGRESS_BAR_HEIGHT, Color.red);
+			hvlDrawQuadc(xArg, yArg, PROGRESS_BAR_WIDTH - 2, PROGRESS_BAR_HEIGHT - 2, Color.black);
+			hvlDrawQuad(xArg - ((PROGRESS_BAR_WIDTH - 2)/2f), yArg - ((PROGRESS_BAR_HEIGHT - 2)/2f), (PROGRESS_BAR_WIDTH - 2) * (1f - (tradeTime / maxTradeTime)), PROGRESS_BAR_HEIGHT - 2, Color.red);
 		}
 	}
 

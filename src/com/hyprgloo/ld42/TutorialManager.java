@@ -10,7 +10,7 @@ import java.util.HashMap;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
 
-import com.hyprgloo.ld42.ships.ShipMerchant;
+import com.hyprgloo.ld42.Game.EndState;
 import com.osreboot.ridhvl.action.HvlAction0;
 import com.osreboot.ridhvl.action.HvlAction0r;
 import com.osreboot.ridhvl.action.HvlAction2;
@@ -68,7 +68,7 @@ public class TutorialManager {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Main.settings.tutorialsEnabled && Game.selected_level >= 2;
+				return Main.settings.tutorialsEnabled && Game.selected_level == 2;
 			}
 		}, new HvlAction0(){
 			@Override
@@ -78,7 +78,7 @@ public class TutorialManager {
 			}
 		}), Main.settings.tutorial0Completed);
 		
-		tutorials.put(new Tutorial(5, new HvlAction2<Float, Integer>(){
+		tutorials.put(new Tutorial(6, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
 				if(stage == 0){
@@ -99,12 +99,19 @@ public class TutorialManager {
 					hvlDrawQuadc(FancyOverlay.GAME_LEVEL_ENERGY_X + 64, 128, 96, 96, Main.getTexture(Main.INDEX_CANISTER_ENERGY));
 				}
 				if(stage == 3){
-					emphasize(64, Display.getHeight() - 32, 192, 32);
+					emphasize(64, Display.getHeight() - 16, 192, 32);
 					Main.font.drawWordc("You can't win if you're a serial killer.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
 					Main.font.drawWordc("Play by the rules and don't murder ships.", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
 					Main.font.drawWord("disasters: 0", 8f, Display.getHeight() - 24f, Color.white, 0.125f);
 				}
 				if(stage == 4){
+					emphasize(Display.getWidth()/2, Display.getHeight()/2, 256 + 16, 128);
+					Main.font.drawWordc("Ship come in various sizes, and can each dock", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("to their size-specific ports (or the ports for", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					Main.font.drawWordc("larger ships).", Display.getWidth()/2, Display.getHeight()/4*3 + 96f, Color.white, 0.25f);
+					hvlDrawQuadc(Display.getWidth()/2, 256, 512, 512, Main.getTexture(Main.INDEX_CHART));
+				}
+				if(stage == 5){
 					emphasize(Display.getWidth()/2, Display.getHeight()/2, 256 + 16, 128);
 					Main.font.drawWordc("Good luck!", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
 				}
@@ -112,7 +119,7 @@ public class TutorialManager {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Main.settings.tutorialsEnabled && Game.selected_level >= 1;
+				return Main.settings.tutorialsEnabled && ((Game.selected_level == 0 && Game.state == EndState.WIN_TUTORIAL) || Game.selected_level > 0);
 			}
 		}, new HvlAction0(){
 			@Override
