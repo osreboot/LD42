@@ -1,12 +1,13 @@
 package com.hyprgloo.ld42;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
 import java.util.HashMap;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
-
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.action.HvlAction0;
 import com.osreboot.ridhvl.action.HvlAction1;
@@ -31,7 +32,7 @@ public class MenuManager {
 
 	private static HashMap<HvlLabeledButton, ButtonWrapper> buttonWrappers = new HashMap<>();
 
-	public static HvlMenu main, levels, game, pause, options, credits, end;
+	public static HvlMenu main, levels, game, pause, options, credits, end, intro;
 
 	public static void initialize(){
 
@@ -79,6 +80,7 @@ public class MenuManager {
 		options = new HvlMenu();
 		credits = new HvlMenu();
 		end = new HvlMenu();
+		intro = new HvlMenu();
 
 		main.add(new HvlArrangerBox.Builder().build());
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").setClickedCommand(new HvlButtonMenuLink(levels)).build());
@@ -210,9 +212,10 @@ public class MenuManager {
 			}
 		}).build());
 
-		HvlMenu.setCurrent(main);
+		HvlMenu.setCurrent(intro);
 		FancyOverlay.resetMainBackground();
 	}
+	private static float introProgress = 0f;
 
 	public static void update(float delta){
 		if(HvlMenu.getCurrent() == pause || HvlMenu.getCurrent() == end){
@@ -245,7 +248,7 @@ public class MenuManager {
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
 			TutorialManager.update(delta);
 		}
-		
+
 		if(HvlMenu.getCurrent() == main){
 			if(FancyOverlay.mainTimer > 2f){
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5 + 6f, Display.getHeight()/2 + 16f + 6f, Main.COLOR_GREEN5);
@@ -266,6 +269,11 @@ public class MenuManager {
 			Main.font.drawWordc("Twitter: xbassetx", Display.getWidth()/2, Display.getHeight()*16/20, Main.COLOR_GREEN3, 0.25f);
 			
 			Main.font.drawWordc("Made in 72 hours for Ludum Dare 42", Display.getWidth()/2, Display.getHeight()*18/20 + 16, Main.COLOR_GREEN3, 0.15f);
+		} else if (HvlMenu.getCurrent() == intro) {
+			introProgress += delta/4f;
+			if(introProgress >= 1f || (introProgress > 0.25f && Mouse.isButtonDown(0))) HvlMenu.setCurrent(main);
+			float alpha = 1f - (Math.abs(introProgress - 0.5f)*2f);
+			hvlDrawQuadc(Display.getWidth()/2, Display.getHeight()/2, 512, 512, Main.getTexture(Main.INDEX_HYPRGLOO), new Color(1f, 1f, 1f, alpha));
 		}
 	}
 
