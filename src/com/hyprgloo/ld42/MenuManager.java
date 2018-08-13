@@ -8,6 +8,8 @@ import java.util.HashMap;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
+
+import com.hyprgloo.ld42.Game.EndState;
 import com.osreboot.ridhvl.HvlMath;
 import com.osreboot.ridhvl.action.HvlAction0;
 import com.osreboot.ridhvl.action.HvlAction1;
@@ -264,7 +266,7 @@ public class MenuManager {
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5 + 6f, Display.getHeight()/2 + 16f + 6f, Main.COLOR_GREEN5);
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5, Display.getHeight()/2 + 16f, Main.COLOR_GREEN1);
 			}
-		} else if (HvlMenu.getCurrent() == credits) {
+		}else if (HvlMenu.getCurrent() == credits){
 			Main.font.drawWordc("CREDITS", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Main.COLOR_GREEN5, 0.5f);
 			Main.font.drawWordc("CREDITS", Display.getWidth()/2, Display.getHeight()/8, Main.COLOR_GREEN1, 0.5f);
 			Main.font.drawWordc("os_reboot", Display.getWidth()/2, Display.getHeight()*4/20 + 12, Main.COLOR_GREEN1, 0.325f);
@@ -279,33 +281,38 @@ public class MenuManager {
 			Main.font.drawWordc("Twitter: xbassetx", Display.getWidth()/2, Display.getHeight()*16/20, Main.COLOR_GREEN3, 0.25f);
 			
 			Main.font.drawWordc("Made in 72 hours for Ludum Dare 42", Display.getWidth()/2, Display.getHeight()*18/20 + 16, Main.COLOR_GREEN3, 0.15f);
-		} else if (HvlMenu.getCurrent() == intro) {
+		}else if (HvlMenu.getCurrent() == intro){
 			introProgress += delta/4f;
 			if(introProgress >= 1f || (introProgress > 0.25f && Mouse.isButtonDown(0))) HvlMenu.setCurrent(main);
 			float alpha = 1f - (Math.abs(introProgress - 0.5f)*2f);
 			hvlDrawQuadc(Display.getWidth()/2, Display.getHeight()/2, 512, 512, Main.getTexture(Main.INDEX_HYPRGLOO), new Color(1f, 1f, 1f, alpha));
-		} else if (HvlMenu.getCurrent() == end) {
-			switch (Game.state) {
-			case WIN:
-				Main.font.drawWordc("You escaped and completed the level!", 700, 300, Color.white, 0.3f);
-
-				break;
-			case LOSS_TUTORIAL:
-				Main.font.drawWordc("You failed the tutorial.", 700, 300, Color.white, 0.3f);
-
-				break;
-			case WIN_TUTORIAL:
-				Main.font.drawWordc("Congratulations for \n        completing the tutorial!", 700, 300, Color.white, 0.3f);
-
-				break;
-			case LOSS_ENERGY:
-				Main.font.drawWordc("Your ship ran out of power \n          and you lost.", 700, 300, Color.white, 0.3f);
-
-				break;
-			default:
-				Main.font.drawWordc("YOU SHOULD NOT HIT THIS STATE", 700, 300, Color.white, 0.3f);
-				break;
-					
+		}else if (HvlMenu.getCurrent() == end){
+			if(Game.state == EndState.WIN_TUTORIAL){
+				Main.font.drawWordc("TUTORIAL COMPLETE", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Main.COLOR_GREEN5, 0.5f);
+				Main.font.drawWordc("TUTORIAL COMPLETE", Display.getWidth()/2, Display.getHeight()/8, Main.COLOR_GREEN1, 0.5f);
+				Main.font.drawWordc("Great job!", Display.getWidth()/2, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
+			}else if(Game.state == EndState.LOSS_TUTORIAL){
+				Main.font.drawWordc("TUTORIAL FAILED", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Color.black, 0.5f);
+				Main.font.drawWordc("TUTORIAL FAILED", Display.getWidth()/2, Display.getHeight()/8, Color.red, 0.5f);
+				Main.font.drawWordc("try to...", Display.getWidth()/8*5, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Keep both ships from crashing.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 48f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Don't stray from the objective.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 96f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Read descriptions carefully.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 144f, Main.COLOR_GREEN1, 0.25f);
+			}else if(Game.state == EndState.LOSS_ENERGY){
+				Main.font.drawWordc("ENERGY DEPLETED", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Color.black, 0.5f);
+				Main.font.drawWordc("ENERGY DEPLETED", Display.getWidth()/2, Display.getHeight()/8, Color.red, 0.5f);
+				Main.font.drawWordc("try to...", Display.getWidth()/8*5, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Keep an eye on your energy bar.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 48f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Always have energy ships ready.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 96f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Don't let raiders steal energy.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 144f, Main.COLOR_GREEN1, 0.25f);
+			}else if(Game.state == EndState.LOSS_COLLISIONS){
+				Main.font.drawWordc("MORALITY DEPLETED", (Display.getWidth()/2) + 4, (Display.getHeight()/8) + 4, Color.black, 0.5f);
+				Main.font.drawWordc("MORALITY DEPLETED", Display.getWidth()/2, Display.getHeight()/8, Color.red, 0.5f);
+				Main.font.drawWordc("try to...", Display.getWidth()/8*5, Display.getHeight()/8*3, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Don't be evil.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 192f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("Don't let raiders crash into", Display.getWidth()/8*5, Display.getHeight()/8*3 + 48f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("merchant ships by stopping in", Display.getWidth()/8*5, Display.getHeight()/8*3 + 96f, Main.COLOR_GREEN1, 0.25f);
+				Main.font.drawWordc("the traffic lanes.", Display.getWidth()/8*5, Display.getHeight()/8*3 + 144f, Main.COLOR_GREEN1, 0.25f);
 			}
 		}
 	}

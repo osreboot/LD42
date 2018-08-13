@@ -5,7 +5,6 @@ import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
-import org.newdawn.slick.Color;
 
 import com.hyprgloo.ld42.ships.Raider;
 import com.hyprgloo.ld42.ships.ShipMerchant;

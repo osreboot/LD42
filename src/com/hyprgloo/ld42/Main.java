@@ -18,21 +18,12 @@ public class Main extends HvlTemplateInteg2D{
 
 	//TODO
 	/*
-	 * TUTORIALS - menus
-	 * 		large ships
-	 * 		flight paths
-	 * 		medium ships
-	 * 		raiders
-	 * music
+	 * raider tutorial
 	 * sound effects
-	 * station 2
-	 * large merchants
-	 * game loss states (just titles left)
-	 * menu titles
-	 * 
+	 * station 4
 	 * fix sam's titles
-	 * 
 	 * disaster fail state?
+	 * window icon
 	 * 
 	 * xwing?
 	 * 
