@@ -79,8 +79,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_TARGET_INDICATOR = 30,
 	INDEX_DOCKING_ICON = 31,
 	INDEX_TUTORIAL = 32,
-	INDEX_HYPRGLOO = 39,
-	INDEX_STRUT = 40;
+	INDEX_HYPRGLOO = 41,
+	INDEX_STRUT = 42;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
@@ -143,8 +143,10 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("Tutorial5"); //36
 		getTextureLoader().loadResource("Tutorial6"); //37
 		getTextureLoader().loadResource("Tutorial7"); //38
-		getTextureLoader().loadResource("HYPRGLOO"); //39
-		getTextureLoader().loadResource("strut");//40
+		getTextureLoader().loadResource("Tutorial8"); //39
+		getTextureLoader().loadResource("Tutorial9"); //40
+		getTextureLoader().loadResource("HYPRGLOO"); //41
+		getTextureLoader().loadResource("strut");//42
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
@@ -202,20 +204,19 @@ public class Main extends HvlTemplateInteg2D{
 	public void update(float delta){
 		//TODO Add mouse menu remembrance
 		if(settings.customCursor) {
-			if(HvlMenu.getCurrent() == MenuManager.pause) {
-				HvlCursor.setTexture(getTexture(INDEX_CLEAR));
-				HvlCursor.setNativeHidden(false);
-
-			} else {
-				if(HvlCursor.getTexture() == getTexture(INDEX_CLEAR)) {
-					HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
-					HvlCursor.setHeight(32);
-					HvlCursor.setWidth(32);
-					HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
-					HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
-				}
-				HvlCursor.setNativeHidden(true);
+			//			if(HvlMenu.getCurrent() == MenuManager.pause) {
+			//				HvlCursor.setTexture(getTexture(INDEX_CLEAR));
+			//				HvlCursor.setNativeHidden(false);
+			//			} else {
+			if(HvlCursor.getTexture() == getTexture(INDEX_CLEAR)) {
+				HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
+				HvlCursor.setHeight(32);
+				HvlCursor.setWidth(32);
+				HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
+				HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
 			}
+			HvlCursor.setNativeHidden(true);
+			//			}
 		}else {
 			HvlCursor.setTexture(getTexture(INDEX_CLEAR));
 			HvlCursor.setNativeHidden(false);

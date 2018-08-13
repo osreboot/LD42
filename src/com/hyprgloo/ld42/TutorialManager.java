@@ -2,12 +2,18 @@ package com.hyprgloo.ld42;
 
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.lwjgl.opengl.Display;
 import org.newdawn.slick.Color;
+
+import com.hyprgloo.ld42.ships.ShipMerchant;
+import com.osreboot.ridhvl.action.HvlAction0;
+import com.osreboot.ridhvl.action.HvlAction0r;
+import com.osreboot.ridhvl.action.HvlAction2;
 
 public class TutorialManager {
 
@@ -29,6 +35,27 @@ public class TutorialManager {
 
 	public static void initialize(){
 		TutorialStageInitializer.initialize();
+		
+		tutorials.put(new Tutorial(2, new HvlAction2<Float, Integer>(){
+			@Override
+			public void run(Float delta, Integer stage){
+				if(stage == 1){
+					TutorialManager.emphasize(Ship.ships.get(1).x, Ship.ships.get(1).y, 64, 64);
+					Main.font.drawWordc("Now tell this ship to exit the radio space.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+				}
+			}
+		}, new HvlAction0r<Boolean>(){
+			@Override
+			public Boolean run(){
+				return Main.settings.tutorialsEnabled && Game.selected_level >= 1;
+			}
+		}, new HvlAction0(){
+			@Override
+			public void run(){
+				Main.settings.tutorial0Completed = true;
+				Main.saveConfig();
+			}
+		}), Main.settings.tutorial0Completed);
 	}
 
 	public static void update(float delta){

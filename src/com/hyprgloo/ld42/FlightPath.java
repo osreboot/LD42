@@ -17,6 +17,27 @@ public class FlightPath {
 
 	public static void restart(){
 		paths.clear();
+		if(Game.selected_level == 1){
+			paths.add(new FlightPath("A1-Medium", new HvlCoord2D(100, 500 - 48), 
+					new PathNode(new HvlCoord2D(100, 500), false), 
+					new PathNode(new HvlCoord2D(175, 500), true), 
+					new PathNode(new HvlCoord2D(250, 500), true), 
+					new PathNode(new HvlCoord2D(325, 500), true), 
+					new PathNode(new HvlCoord2D(400, 500), false),
+					new PathNode(new HvlCoord2D(400, 425), true),
+					new PathNode(new HvlCoord2D(400, 350), true),
+					new PathNode(new HvlCoord2D(400, 275), false),
+					new PathNode(new HvlCoord2D(475, 275), false)));
+			paths.add(new FlightPath("A1-Light", new HvlCoord2D(750, 250 - 48), 
+					new PathNode(new HvlCoord2D(750, 250), false),
+					new PathNode(new HvlCoord2D(800, 250), true),
+					new PathNode(new HvlCoord2D(850, 250), false),
+					new PathNode(new HvlCoord2D(850, 300), true),
+					new PathNode(new HvlCoord2D(850, 350), true),
+					new PathNode(new HvlCoord2D(850, 400), true),
+					new PathNode(new HvlCoord2D(850, 450), true),
+					new PathNode(new HvlCoord2D(850, 500), false)));
+		}
 		if(Game.selected_level == 3){
 			paths.add(new FlightPath("C3-Light", new HvlCoord2D(300, 500 + 48), 
 					new PathNode(new HvlCoord2D(300, 500), false), 

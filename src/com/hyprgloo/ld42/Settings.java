@@ -10,4 +10,6 @@ public class Settings implements Serializable{
 	public boolean tutorialsEnabled = true;
 	public boolean customCursor = true;
 	
+	public boolean tutorial0Completed = false;
+	
 }

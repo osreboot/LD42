@@ -80,10 +80,9 @@ public class LevelShipSequencer {
 					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING - ShipMerchantLight.COLLISION_SIZE) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
 				}while(Ship.shipInProximity(-128, startY, ShipMerchantLight.COLLISION_SIZE));
 				Cargo cargo = Cargo.EMPTY;
-				int cargoSelect = HvlMath.randomInt(3);
+				int cargoSelect = HvlMath.randomInt(2);
 				if(cargoSelect == 0) cargo = Cargo.FUEL;
 				if(cargoSelect == 1) cargo = Cargo.ENERGY;
-				if(cargoSelect == 2) cargo = Cargo.AMMO;
 				new ShipMerchantLight(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
 				smallShipTimer = SMALL_TIME;
 			}
@@ -93,10 +92,9 @@ public class LevelShipSequencer {
 					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING - ShipMerchantMedium.COLLISION_SIZE) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
 				}while(Ship.shipInProximity(-128, startY, ShipMerchantMedium.COLLISION_SIZE));
 				Cargo cargo = Cargo.EMPTY;
-				int cargoSelect = HvlMath.randomInt(3);
+				int cargoSelect = HvlMath.randomInt(2);
 				if(cargoSelect == 0) cargo = Cargo.FUEL;
 				if(cargoSelect == 1) cargo = Cargo.ENERGY;
-				if(cargoSelect == 2) cargo = Cargo.AMMO;
 				new ShipMerchantMedium(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
 				medShipTimer = MED_TIME;
 			}

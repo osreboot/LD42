@@ -180,7 +180,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 5 && Ship.ships.get(0).holding;
+				return Game.selected_level == 0 && Game.tutorialStageIndex == 5 && (Ship.ships.get(0).holding || Ship.ships.get(0).isLeaving);
 			}
 		}, new HvlAction0(){
 			@Override
@@ -208,7 +208,7 @@ public class TutorialStageInitializer {
 			@Override
 			public Boolean run(){
 				return Game.selected_level == 0 && Game.tutorialStageIndex == 6 && 
-						(((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.EMPTY);
+						(((ShipMerchant)Ship.ships.get(Ship.ships.size() - 1)).cargo == Cargo.EMPTY);
 			}
 		}, new HvlAction0(){
 			@Override

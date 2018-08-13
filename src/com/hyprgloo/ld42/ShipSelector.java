@@ -72,8 +72,8 @@ public class ShipSelector {
 		selectShip.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-				if(TutorialManager.current == null){
-					if(HvlMenu.getCurrent() != MenuManager.pause && Main.settings.customCursor) {
+				if(TutorialManager.current == null && HvlMenu.getCurrent() != MenuManager.pause){
+					if(Main.settings.customCursor) {
 						HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
 						HvlCursor.setHeight(32);
 						HvlCursor.setWidth(32);
@@ -102,9 +102,9 @@ public class ShipSelector {
 		chooseLocation.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-				if(TutorialManager.current == null){
+				if(TutorialManager.current == null && HvlMenu.getCurrent() != MenuManager.pause){
 					if(selectedShip != null) {
-						if(HvlMenu.getCurrent() != MenuManager.pause  && Main.settings.customCursor) {
+						if(Main.settings.customCursor) {
 							HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
 							HvlCursor.setHeight(32);
 							HvlCursor.setWidth(32);
