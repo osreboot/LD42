@@ -34,6 +34,7 @@ public class TutorialManager {
 	public static void update(float delta){
 		if(current != null){
 			current.display.run(delta, current.stage);
+			Main.font.drawWordc("<space> to continue...", Display.getWidth()/2, Display.getHeight()/16*15, Color.white, 0.125f);
 		}else{
 			for(Tutorial t : tutorials.keySet()){
 				if(!tutorials.get(t) && t.isTriggered.run()){
