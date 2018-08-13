@@ -277,8 +277,23 @@ public class MenuManager {
 		} else if (HvlMenu.getCurrent() == end) {
 			switch (Game.state) {
 			case WIN:
+				Main.font.drawWordc("You escaped and completed the level!", 700, 300, Color.white, 0.3f);
+
+				break;
+			case LOSS_TUTORIAL:
+				Main.font.drawWordc("You failed the tutorial.", 700, 300, Color.white, 0.3f);
+
+				break;
+			case WIN_TUTORIAL:
+				Main.font.drawWordc("Congratulations for \n        completing the tutorial!", 700, 300, Color.white, 0.3f);
+
+				break;
+			case LOSS_ENERGY:
+				Main.font.drawWordc("Your ship ran out of power \n          and you lost.", 700, 300, Color.white, 0.3f);
+
 				break;
 			default:
+				Main.font.drawWordc("YOU SHOULD NOT HIT THIS STATE", 700, 300, Color.white, 0.3f);
 				break;
 					
 			}
