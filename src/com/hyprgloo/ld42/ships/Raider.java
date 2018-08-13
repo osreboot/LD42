@@ -9,6 +9,7 @@ import com.hyprgloo.ld42.Cargo;
 import com.hyprgloo.ld42.FancyOverlay;
 import com.hyprgloo.ld42.Game;
 import com.hyprgloo.ld42.LevelShipSequencer;
+import com.hyprgloo.ld42.Main;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
 import com.hyprgloo.ld42.SpaceStationPart;
