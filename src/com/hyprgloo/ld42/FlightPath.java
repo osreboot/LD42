@@ -17,8 +17,8 @@ public class FlightPath {
 
 	public static void restart(){
 		paths.clear();
-		if(Game.selected_level == 1){
-			paths.add(new FlightPath("A3-Light", new HvlCoord2D(500, 500 + 48), 
+		if(Game.selected_level == 3){
+			paths.add(new FlightPath("C3-Light", new HvlCoord2D(500, 500 + 48), 
 					new PathNode(new HvlCoord2D(500, 500), false), 
 					new PathNode(new HvlCoord2D(550, 500), true), 
 					new PathNode(new HvlCoord2D(600, 500), true), 
@@ -26,21 +26,17 @@ public class FlightPath {
 					new PathNode(new HvlCoord2D(700, 500), true), 
 					new PathNode(new HvlCoord2D(750, 500), false), 
 					new PathNode(new HvlCoord2D(750, 450), false)));
-			paths.add(new FlightPath("A1-Light", new HvlCoord2D(350, 220 - 48), 
-					new PathNode(new HvlCoord2D(350, 220), false), 
-					new PathNode(new HvlCoord2D(400, 220), true), 
-					new PathNode(new HvlCoord2D(450, 220), true), 
-					new PathNode(new HvlCoord2D(500, 220), true), 
-					new PathNode(new HvlCoord2D(550, 220), true), 
-					new PathNode(new HvlCoord2D(600, 220), true), 
-					new PathNode(new HvlCoord2D(650, 220), true), 
-					new PathNode(new HvlCoord2D(700, 220), true), 
-					new PathNode(new HvlCoord2D(750, 220), false), 
-					new PathNode(new HvlCoord2D(750, 270), false)));
-			paths.add(new FlightPath("A2-Heavy", new HvlCoord2D(150, 360 - 48), 
-					new PathNode(new HvlCoord2D(150, 360), false), 
-					new PathNode(new HvlCoord2D(250, 360), true),
-					new PathNode(new HvlCoord2D(350, 360), true),
+			paths.add(new FlightPath("C1-Heavy", new HvlCoord2D(400, 200 + 48), 
+					new PathNode(new HvlCoord2D(400, 200), false), 
+					new PathNode(new HvlCoord2D(500, 200), true), 
+					new PathNode(new HvlCoord2D(600, 200), true), 
+					new PathNode(new HvlCoord2D(700, 200), true), 
+					new PathNode(new HvlCoord2D(800, 200), false), 
+					new PathNode(new HvlCoord2D(800, 300), false)));
+			paths.add(new FlightPath("C2-Medium", new HvlCoord2D(225, 360 - 48), 
+					new PathNode(new HvlCoord2D(225, 360), false), 
+					new PathNode(new HvlCoord2D(300, 360), true),
+					new PathNode(new HvlCoord2D(375, 360), true),
 					new PathNode(new HvlCoord2D(450, 360), false)));
 		}
 	}
