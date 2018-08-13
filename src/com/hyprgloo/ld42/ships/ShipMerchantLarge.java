@@ -9,12 +9,11 @@ import org.newdawn.slick.Color;
 import com.hyprgloo.ld42.Cargo;
 import com.hyprgloo.ld42.Main;
 
-public class ShipMerchantMedium extends ShipMerchant{
-
-	public static final float TRADE_TIME = 22f, COLLISION_SIZE = 32f - 4f;
+public class ShipMerchantLarge extends ShipMerchant{
+	public static final float TRADE_TIME = 30f, COLLISION_SIZE = 48f - 4f;
 	
-	public ShipMerchantMedium(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 30f, COLLISION_SIZE, cargoArg, TRADE_TIME, 180f, -2, 2f);
+	public ShipMerchantLarge(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 40f, COLLISION_SIZE, cargoArg, TRADE_TIME, 90f, -3, 3f);
 	}
 
 	@Override
@@ -22,13 +21,13 @@ public class ShipMerchantMedium extends ShipMerchant{
 		super.draw(delta);
 		Color deadColor = new Color(isDead ? 0.4f : 1f, isDead ? 0.4f : 1f, isDead ? 0.4f : 1f, 1f);
 		hvlRotate(x, y, rotation - 90f);
-		hvlDrawQuadc(x, y, 64f, 64f, Main.getTexture(Main.INDEX_CARGO_SHIP_MEDIUM), deadColor);
+		hvlDrawQuadc(x, y, 96f, 96f, Main.getTexture(Main.INDEX_CARGO_SHIP_LARGE), deadColor);
 		if(!docked && !isDead){
-			hvlDrawQuadc(x + 10f, y - 8f, 16f, 16f, Main.getTexture(cargo.texture));
-			hvlDrawQuadc(x + 22f, y - 8f, 16f, 16f, Main.getTexture(cargo.texture));
+			hvlDrawQuadc(x, y - 12f, 16f, 16f, Main.getTexture(cargo.texture));
+			hvlDrawQuadc(x, y + 6f, 16f, 16f, Main.getTexture(cargo.texture));
+			hvlDrawQuadc(x, y + 24f, 16f, 16f, Main.getTexture(cargo.texture));
 		}
 		hvlResetRotation();
 		drawTradeProgressBar(x, y);
 	}
-
 }

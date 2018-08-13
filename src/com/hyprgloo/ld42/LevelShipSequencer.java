@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.lwjgl.opengl.Display;
 
+import com.hyprgloo.ld42.ships.ShipMerchantLarge;
 import com.hyprgloo.ld42.ships.ShipMerchantLight;
 import com.hyprgloo.ld42.ships.ShipMerchantMedium;
 import com.hyprgloo.ld42.ships.ShipRaiderLight;
@@ -156,6 +157,19 @@ public class LevelShipSequencer {
 				if(cargoSelect == 2) cargo = Cargo.AMMO;
 				new ShipMerchantMedium(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
 				medShipTimer = MED_TIME;
+			}
+			if(largeShipTimer <= 0) {
+				float startY;
+				do{
+					startY = HvlMath.randomInt(2) == 0 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
+				}while(Ship.shipInProximity(-128, startY, ShipMerchantLarge.COLLISION_SIZE));
+				Cargo cargo = Cargo.EMPTY;
+				int cargoSelect = HvlMath.randomInt(3);
+				if(cargoSelect == 0) cargo = Cargo.FUEL;
+				if(cargoSelect == 1) cargo = Cargo.ENERGY;
+				if(cargoSelect == 2) cargo = Cargo.AMMO;
+				new ShipMerchantLarge(-128, startY , Display.getWidth() + 128, startY, 0, cargo);
+				largeShipTimer = LAR_TIME;
 			}
 			if(raiderShipTimer <= 0) {
 

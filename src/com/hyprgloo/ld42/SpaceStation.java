@@ -69,7 +69,12 @@ public class SpaceStation {
 			stationParts.add(new SpaceStationPart(0f, 0f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 			stationParts.add(new SpaceStationPart(1f, 1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 		}else if(Game.selected_level == 3) {
-			stationParts.add(new SpaceStationPart(1f, 0f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
+			stationParts.add(new SpaceStationPart(0f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_LRG));
+			stationParts.add(new SpaceStationPart(-1f, 0f, 270f, -3));
+
+			stationParts.add(new SpaceStationPart(1f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+
+			stationParts.add(new SpaceStationPart(2f, 0f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 		}
 	}
 

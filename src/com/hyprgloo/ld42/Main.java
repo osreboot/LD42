@@ -29,11 +29,11 @@ public class Main extends HvlTemplateInteg2D{
 	 * options config
 	 * game loss states (just titles left)
 	 * menu titles
-	 * credits screen
-	 * splash screen
+	 * 
+	 * 
 	 * disaster fail state?
 	 * 
-	 * cursor?
+	 * 
 	 * 
 	 * blue/green canister similarities
 	 * 
