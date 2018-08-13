@@ -13,7 +13,7 @@ public class ShipMerchantLarge extends ShipMerchant{
 	public static final float TRADE_TIME = 30f, COLLISION_SIZE = 48f - 4f;
 	
 	public ShipMerchantLarge(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 40f, COLLISION_SIZE, cargoArg, TRADE_TIME, 90f, -3, 4f);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 30f, COLLISION_SIZE, cargoArg, TRADE_TIME, 90f, -3, 4f);
 	}
 
 	@Override

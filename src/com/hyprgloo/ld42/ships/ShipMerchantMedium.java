@@ -14,7 +14,7 @@ public class ShipMerchantMedium extends ShipMerchant{
 	public static final float TRADE_TIME = 22f, COLLISION_SIZE = 32f - 8f;
 	
 	public ShipMerchantMedium(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 30f, COLLISION_SIZE, cargoArg, TRADE_TIME, 180f, -2, 2f);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 40f, COLLISION_SIZE, cargoArg, TRADE_TIME, 180f, -2, 2f);
 	}
 
 	@Override
