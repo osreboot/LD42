@@ -260,6 +260,7 @@ public class MenuManager {
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
 			TutorialManager.update(delta);
 		}
+		TutorialManager.updateSkipFix(delta);
 
 		if(HvlMenu.getCurrent() == main || HvlMenu.getCurrent() == levels){
 			if(FancyOverlay.mainTimer > 2f){

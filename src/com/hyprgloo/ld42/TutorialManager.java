@@ -16,6 +16,7 @@ import com.hyprgloo.ld42.Game.EndState;
 import com.osreboot.ridhvl.action.HvlAction0;
 import com.osreboot.ridhvl.action.HvlAction0r;
 import com.osreboot.ridhvl.action.HvlAction2;
+import com.osreboot.ridhvl.menu.HvlMenu;
 
 public class TutorialManager {
 
@@ -37,7 +38,7 @@ public class TutorialManager {
 
 	public static void initialize(){
 		TutorialStageInitializer.initialize();
-		
+
 		tutorials.put(new Tutorial(5, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
@@ -79,7 +80,7 @@ public class TutorialManager {
 				Main.saveConfig();
 			}
 		}), Main.settings.tutorial0Completed);
-		
+
 		tutorials.put(new Tutorial(6, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
@@ -130,7 +131,7 @@ public class TutorialManager {
 				Main.saveConfig();
 			}
 		}), Main.settings.tutorial1Completed);
-		
+
 		tutorials.put(new Tutorial(5, new HvlAction2<Float, Integer>(){
 			@Override
 			public void run(Float delta, Integer stage){
@@ -214,6 +215,14 @@ public class TutorialManager {
 				current.stage = 0;
 				current = null;
 			}
+		}
+	}
+
+	public static void updateSkipFix(float delta){
+		if(HvlMenu.getCurrent() != MenuManager.game && current != null){
+			if(tutorials.containsKey(current)) tutorials.put(current, false);
+			current.stage = 0;
+			current = null;
 		}
 	}
 
