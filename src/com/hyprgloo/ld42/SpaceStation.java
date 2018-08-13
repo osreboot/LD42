@@ -51,8 +51,10 @@ public class SpaceStation {
 			stationParts.add(new SpaceStationPart(2f, -1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 			stationParts.add(new SpaceStationPart(2f, -2f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 
-			stationParts.add(new SpaceStationPart(3f, 0f, 90f, Main.INDEX_STATION_DOCKING_PORT_LRG));
-			stationParts.add(new SpaceStationPart(4f, 0f, 90f, -3));
+			stationParts.add(new SpaceStationPart(4f, 0f, 90f, Main.INDEX_STATION_DOCKING_PORT_LRG));
+			stationParts.add(new SpaceStationPart(3f, 0f, 90f, Main.INDEX_STRUT));
+
+			stationParts.add(new SpaceStationPart(5f, 0f, 90f, -3));
 
 			stationParts.add(new SpaceStationPart(0f, 1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 			stationParts.add(new SpaceStationPart(0f, 2f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
@@ -69,8 +71,10 @@ public class SpaceStation {
 			stationParts.add(new SpaceStationPart(0f, 0f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 			stationParts.add(new SpaceStationPart(1f, 1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 		}else if(Game.selected_level == 3) {
-			stationParts.add(new SpaceStationPart(0f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_LRG));
-			stationParts.add(new SpaceStationPart(-1f, 0f, 270f, -3));
+			stationParts.add(new SpaceStationPart(-1f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_LRG));
+			stationParts.add(new SpaceStationPart(0f, 0f, 270f, Main.INDEX_STRUT));
+
+			stationParts.add(new SpaceStationPart(-2f, 0f, 270f, -3));
 
 			stationParts.add(new SpaceStationPart(1f, 0f, 0f, Main.INDEX_STATION_TRUSS));
 

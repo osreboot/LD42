@@ -108,7 +108,7 @@ public class Ship {
 		}
 		for(SpaceStationPart sp : SpaceStation.stationParts) {
 			if(sp.textureIndex >= 0 && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT && 
-					sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_LRG && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_MED) {
+					sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_LRG && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_MED && sp.textureIndex != Main.INDEX_STRUT) {
 				if(HvlMath.distance(sp.x,  sp.y, x, y) < collisionSize + SpaceStation.GRID_SIZE/2) return true;
 			}
 		}
