@@ -87,9 +87,9 @@ public class MenuManager {
 		main.add(new HvlArrangerBox.Builder().build());
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("start").setClickedCommand(new HvlButtonMenuLink(levels)).build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
-		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setClickedCommand(new HvlButtonMenuLink(credits)).setText("credits").build());
-		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setClickedCommand(new HvlButtonMenuLink(options)).setText("options").build());
+		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setClickedCommand(new HvlButtonMenuLink(credits)).setText("credits").build());
 		main.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		main.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("exit").setClickedCommand(new HvlAction1<HvlButton>(){
 			@Override

@@ -72,14 +72,14 @@ public class ShipSelector {
 		selectShip.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-				if(TutorialManager.current == null && HvlMenu.getCurrent() != MenuManager.pause){
+				if(TutorialManager.current == null && HvlMenu.getCurrent() == MenuManager.game){
 					if(Main.settings.customCursor) {
 						HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));
 						HvlCursor.setHeight(32);
 						HvlCursor.setWidth(32);
 						HvlCursor.setXOffset(-HvlCursor.getWidth()/2);
 						HvlCursor.setYOffset(-HvlCursor.getHeight()/2);
-					} 
+					}
 					if(selectedShip == null && getClosestShip() != null) {
 
 						float currentMouseToClose = HvlMath.distance(HvlCursor.getCursorX(), HvlCursor.getCursorY(), getClosestShip().x, getClosestShip().y);
@@ -103,7 +103,7 @@ public class ShipSelector {
 		chooseLocation.setPressedAction(new HvlAction1<HvlInput>() {
 			@Override
 			public void run(HvlInput a) {
-				if(TutorialManager.current == null && HvlMenu.getCurrent() != MenuManager.pause){
+				if(TutorialManager.current == null && HvlMenu.getCurrent() == MenuManager.game){
 					if(selectedShip != null) {
 						if(Main.settings.customCursor) {
 							HvlCursor.setTexture(Main.getTexture(Main.INDEX_CURSOR_2));

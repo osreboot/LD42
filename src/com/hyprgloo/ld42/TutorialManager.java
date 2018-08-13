@@ -3,6 +3,8 @@ package com.hyprgloo.ld42;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawLine;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuad;
 import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlDrawQuadc;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlResetRotation;
+import static com.osreboot.ridhvl.painter.painter2d.HvlPainter2D.hvlRotate;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -128,6 +130,57 @@ public class TutorialManager {
 				Main.saveConfig();
 			}
 		}), Main.settings.tutorial1Completed);
+		
+		tutorials.put(new Tutorial(5, new HvlAction2<Float, Integer>(){
+			@Override
+			public void run(Float delta, Integer stage){
+				if(stage == 0){
+					emphasize(300, Display.getHeight() - 80, 64, 64);
+					Main.font.drawWordc("Careful! This sector is home to raiders", Display.getWidth()/2, Display.getHeight()/4, Color.white, 0.25f);
+					Main.font.drawWordc("who really want your resources.", Display.getWidth()/2, Display.getHeight()/4 + 48f, Color.white, 0.25f);
+					hvlRotate(300, Display.getHeight() - 80, 90);
+					hvlDrawQuadc(300, Display.getHeight() - 80, 48, 48, Main.getTexture(Main.INDEX_RAIDER));
+					hvlResetRotation();
+				}
+				if(stage == 1){
+					emphasize(575, Display.getHeight() - 80, 64, 64);
+					Main.font.drawWordc("They'll wait outside your station and", Display.getWidth()/2, Display.getHeight()/4, Color.white, 0.25f);
+					Main.font.drawWordc("try to dock when they see an opening.", Display.getWidth()/2, Display.getHeight()/4 + 48f, Color.white, 0.25f);
+					hvlDrawQuadc(575, Display.getHeight() - 80, 48, 48, Main.getTexture(Main.INDEX_RAIDER));
+				}
+				if(stage == 2){
+					emphasize(575, Display.getHeight() - 80, 64, 64);
+					Main.font.drawWordc("Raiders are aggressive, so keep merchants", Display.getWidth()/2, Display.getHeight()/4, Color.white, 0.25f);
+					Main.font.drawWordc("out of their way.", Display.getWidth()/2, Display.getHeight()/4 + 48f, Color.white, 0.25f);
+					hvlDrawQuadc(575, Display.getHeight() - 80, 48, 48, Main.getTexture(Main.INDEX_RAIDER));
+				}
+				if(stage == 3){
+					emphasize(FancyOverlay.GAME_LEVEL_AMMO_X + 64, 16, 192, 24);
+					Main.font.drawWordc("Lasers are a good raider deterrent.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("Keep a supply of charged ammo handy in", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					Main.font.drawWordc("case they show up.", Display.getWidth()/2, Display.getHeight()/4*3 + 96f, Color.white, 0.25f);
+					hvlDrawQuadc(FancyOverlay.GAME_LEVEL_AMMO_X + 64, 128, 96, 96, Main.getTexture(Main.INDEX_CANISTER_AMMO));
+				}
+				if(stage == 4){
+					emphasize(Display.getWidth()/2, Display.getHeight()/2, 192 + 64, 256);
+					Main.font.drawWordc("Your station's auto-turrets will", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
+					Main.font.drawWordc("automatically down any raiders within", Display.getWidth()/2, Display.getHeight()/4*3 + 48f, Color.white, 0.25f);
+					Main.font.drawWordc("range, so long as they have enough ammo.", Display.getWidth()/2, Display.getHeight()/4*3 + 96f, Color.white, 0.25f);
+					hvlDrawQuadc(Display.getWidth()/4*3, Display.getHeight()/2, 256, 256, Main.getTexture(Main.INDEX_TUTORIAL + 8));
+				}
+			}
+		}, new HvlAction0r<Boolean>(){
+			@Override
+			public Boolean run(){
+				return Main.settings.tutorialsEnabled && Game.selected_level == 3;
+			}
+		}, new HvlAction0(){
+			@Override
+			public void run(){
+				Main.settings.tutorial2Completed = true;
+				Main.saveConfig();
+			}
+		}), Main.settings.tutorial2Completed);
 	}
 
 	public static void update(float delta){

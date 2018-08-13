@@ -110,7 +110,7 @@ public class FancyOverlay {
 			hvlDrawQuadc(GAME_LEVEL_ENERGY_X, 12, energySize+20, energySize+20, Main.getTexture(HvlMath.randomIntBetween(Main.INDEX_LIGHT_1, Main.INDEX_LIGHT_3+1)));
 			hvlResetRotation();
 		}
-		if(Game.selected_level > 1) {
+		if(Game.selected_level >= 3) {
 			hvlDrawQuadc(GAME_LEVEL_AMMO_X, 12, 16, 16, Main.getTexture(Main.INDEX_CANISTER_AMMO));
 			hvlDrawQuad(GAME_LEVEL_AMMO_X + 12 - 1, 8 - 1, 128f + 2, 8f + 2, Color.gray);
 			hvlDrawQuad(GAME_LEVEL_AMMO_X + 12, 8, 128f, 8f, Color.black);
