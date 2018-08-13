@@ -29,11 +29,11 @@ public class Main extends HvlTemplateInteg2D{
 	 * options config
 	 * game loss states (just titles left)
 	 * menu titles
-	 * credits screen
-	 * splash screen
+	 * 
+	 * 
 	 * disaster fail state?
 	 * 
-	 * cursor?
+	 * 
 	 * 
 	 * blue/green canister similarities
 	 * 
@@ -79,7 +79,7 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_TARGET_INDICATOR = 30,
 	INDEX_DOCKING_ICON = 31,
 	INDEX_TUTORIAL = 32,
-	INDEX_HYPRGLOO = 38;
+	INDEX_HYPRGLOO = 39;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
