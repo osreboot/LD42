@@ -250,7 +250,7 @@ public class MenuManager {
 			TutorialManager.update(delta);
 		}
 
-		if(HvlMenu.getCurrent() == main){
+		if(HvlMenu.getCurrent() == main || HvlMenu.getCurrent() == levels){
 			if(FancyOverlay.mainTimer > 2f){
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5 + 6f, Display.getHeight()/2 + 16f + 6f, Main.COLOR_GREEN5);
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5, Display.getHeight()/2 + 16f, Main.COLOR_GREEN1);
@@ -275,6 +275,29 @@ public class MenuManager {
 			if(introProgress >= 1f || (introProgress > 0.25f && Mouse.isButtonDown(0))) HvlMenu.setCurrent(main);
 			float alpha = 1f - (Math.abs(introProgress - 0.5f)*2f);
 			hvlDrawQuadc(Display.getWidth()/2, Display.getHeight()/2, 512, 512, Main.getTexture(Main.INDEX_HYPRGLOO), new Color(1f, 1f, 1f, alpha));
+		} else if (HvlMenu.getCurrent() == end) {
+			switch (Game.state) {
+			case WIN:
+				Main.font.drawWordc("You escaped and completed the level!", 700, 300, Color.white, 0.3f);
+
+				break;
+			case LOSS_TUTORIAL:
+				Main.font.drawWordc("You failed the tutorial.", 700, 300, Color.white, 0.3f);
+
+				break;
+			case WIN_TUTORIAL:
+				Main.font.drawWordc("Congratulations for \n        completing the tutorial!", 700, 300, Color.white, 0.3f);
+
+				break;
+			case LOSS_ENERGY:
+				Main.font.drawWordc("Your ship ran out of power \n          and you lost.", 700, 300, Color.white, 0.3f);
+
+				break;
+			default:
+				Main.font.drawWordc("YOU SHOULD NOT HIT THIS STATE", 700, 300, Color.white, 0.3f);
+				break;
+					
+			}
 		}
 	}
 

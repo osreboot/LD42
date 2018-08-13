@@ -13,7 +13,7 @@ public class ShipMerchantLarge extends ShipMerchant{
 	public static final float TRADE_TIME = 30f, COLLISION_SIZE = 48f - 4f;
 	
 	public ShipMerchantLarge(float xArg, float yArg, float xGoalArg, float yGoalArg, float rotationArg, Cargo cargoArg){
-		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 40f, COLLISION_SIZE, cargoArg, TRADE_TIME, 90f, -3, 3f);
+		super(xArg, yArg, xGoalArg, yGoalArg, rotationArg, 40f, COLLISION_SIZE, cargoArg, TRADE_TIME, 90f, -4, 4f);
 	}
 
 	@Override
@@ -26,6 +26,7 @@ public class ShipMerchantLarge extends ShipMerchant{
 			hvlDrawQuadc(x, y - 12f, 16f, 16f, Main.getTexture(cargo.texture));
 			hvlDrawQuadc(x, y + 6f, 16f, 16f, Main.getTexture(cargo.texture));
 			hvlDrawQuadc(x, y + 24f, 16f, 16f, Main.getTexture(cargo.texture));
+			hvlDrawQuadc(x, y -30f, 16f, 16f, Main.getTexture(cargo.texture));
 		}
 		hvlResetRotation();
 		drawTradeProgressBar(x, y);

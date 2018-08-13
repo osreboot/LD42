@@ -33,7 +33,7 @@ public class Main extends HvlTemplateInteg2D{
 	 * 
 	 * disaster fail state?
 	 * 
-	 * 
+	 * fix tutorial leaving during unloading bug
 	 * 
 	 * blue/green canister similarities
 	 * 
