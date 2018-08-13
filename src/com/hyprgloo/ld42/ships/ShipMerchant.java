@@ -45,7 +45,7 @@ public class ShipMerchant extends Ship{
 		if(checkCollision() || isDead){
 			if(!isDead && x < Display.getWidth() && x > 0) { 
 				Game.collisions++;
-				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.3f, false);
+				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.25f, false);
 			}
 			isDead = true;
 			docking = false;

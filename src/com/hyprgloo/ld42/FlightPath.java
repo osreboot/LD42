@@ -47,13 +47,14 @@ public class FlightPath {
 					new PathNode(new HvlCoord2D(500, 500), true), 
 					new PathNode(new HvlCoord2D(550, 500), false), 
 					new PathNode(new HvlCoord2D(550, 450), false)));
-			paths.add(new FlightPath("C1-Heavy", new HvlCoord2D(450, 200 + 48), 
+			paths.add(new FlightPath("C1-Medium", new HvlCoord2D(450, 200 + 48), 
 					new PathNode(new HvlCoord2D(450, 200), false), 
-					new PathNode(new HvlCoord2D(550, 200), true), 
-					new PathNode(new HvlCoord2D(650, 200), true), 
+					new PathNode(new HvlCoord2D(525, 200), true), 
+					new PathNode(new HvlCoord2D(600, 200), true), 
+					new PathNode(new HvlCoord2D(675, 200), true), 
 					new PathNode(new HvlCoord2D(750, 200), true), 
-					new PathNode(new HvlCoord2D(850, 200), false), 
-					new PathNode(new HvlCoord2D(850, 300), false)));
+					new PathNode(new HvlCoord2D(825, 200), false), 
+					new PathNode(new HvlCoord2D(825, 275), false)));
 			paths.add(new FlightPath("C2-Medium", new HvlCoord2D(225, 360 + 48), 
 					new PathNode(new HvlCoord2D(225, 360), false), 
 					new PathNode(new HvlCoord2D(300, 360), true),

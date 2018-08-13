@@ -53,7 +53,7 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 				if(killTimer <= 0) {
 					Game.level_ammo -= Game.SHOOT_AMMO_COST;
 					target.isDead = true;
-					if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.3f, false);
+					if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.25f, false);
 					killTimer = KILL_TIME;
 				} 
 				if(!target.isDead) {

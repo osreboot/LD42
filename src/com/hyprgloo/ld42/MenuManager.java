@@ -133,6 +133,15 @@ public class MenuManager {
 			}
 		}).build());
 		levels.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("station 4").setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg){
+				Game.selected_level = 4;
+				HvlMenu.setCurrent(game);
+				Game.restart();
+			}
+		}).build());
+		levels.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		levels.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlButtonMenuLink(main)).build());
 
 		pause.add(new HvlArrangerBox.Builder().build());
@@ -306,11 +315,17 @@ public class MenuManager {
 	private static class ButtonWrapper{
 
 		public float fade = 0f;
+		public boolean rollover = false;
 
 		private ButtonWrapper(){}
 
 		private void update(float delta, boolean hovering, boolean menu){
 			fade = menu ? HvlMath.stepTowards(fade, delta * 8f, hovering ? 1f : 0f) : 0f;
+			if(hovering && !rollover){
+				rollover = true;
+				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_MENU_BLIP).playAsSoundEffect(1, 0.2f, false);
+			}
+			if(!hovering) rollover = false;
 		}
 
 	}
