@@ -41,6 +41,18 @@ public class SpaceStation {
 			stationParts.add(new SpaceStationPart(-2f, 0f, 0f, Main.INDEX_STATION_TRUSS));
 			stationParts.add(new SpaceStationPart(-3f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_MED));
 			stationParts.add(new SpaceStationPart(-4f, 0f, 270f, -2));
+
+
+		}else if(Game.selected_level == 2) {
+			stationParts.add(new SpaceStationPart(0f, 0f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
+			stationParts.add(new SpaceStationPart(1f, 1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
+		}else if(Game.selected_level == 3) {
+			stationParts.add(new SpaceStationPart(1f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(2f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(-1f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(-2f, 0f, 0f, Main.INDEX_STATION_TRUSS));
+			stationParts.add(new SpaceStationPart(-3f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_MED));
+			stationParts.add(new SpaceStationPart(-4f, 0f, 270f, -2));
 			stationParts.add(new SpaceStationPart(-2f, -1f, 0f, Main.INDEX_STATION_DOCKING_PORT));
 			stationParts.add(new SpaceStationPart(-2f, -2f, 0f, -1, true));
 			//stationParts.add(new SpaceStationPart(-2f, -1f, 0f, Main.INDEX_STATION_DOCKING_PORT));
@@ -66,19 +78,6 @@ public class SpaceStation {
 			stationParts.add(new SpaceStationPart(0f, -3f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 			stationParts.add(new SpaceStationPart(0f, -4f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 			stationParts.add(new SpaceStationPartTurret(0f, 0f, 0f));
-
-		}else if(Game.selected_level == 2) {
-			stationParts.add(new SpaceStationPart(0f, 0f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
-			stationParts.add(new SpaceStationPart(1f, 1f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
-		}else if(Game.selected_level == 3) {
-			stationParts.add(new SpaceStationPart(-1f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_LRG));
-			stationParts.add(new SpaceStationPart(0f, 0f, 270f, Main.INDEX_STRUT));
-
-			stationParts.add(new SpaceStationPart(-2f, 0f, 270f, -3));
-
-			stationParts.add(new SpaceStationPart(1f, 0f, 0f, Main.INDEX_STATION_TRUSS));
-
-			stationParts.add(new SpaceStationPart(2f, 0f, 0f, Main.INDEX_STATION_SOLAR_PANEL));
 		}
 	}
 
