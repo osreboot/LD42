@@ -104,15 +104,18 @@ public class Ship {
 
 	public boolean checkCollision(){
 		for(Ship s : ships){
-			if(HvlMath.distance(s.x, s.y, x, y) < s.collisionSize + collisionSize && s != this) return true;
+			if(HvlMath.distance(s.x, s.y, x, y) < s.collisionSize + collisionSize && s != this) {
+				return true;
+			}
 		}
 		for(SpaceStationPart sp : SpaceStation.stationParts) {
 			if(sp.textureIndex >= 0 && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT && 
 					sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_LRG && sp.textureIndex != Main.INDEX_STATION_DOCKING_PORT_MED && sp.textureIndex != Main.INDEX_STRUT) {
-				if(HvlMath.distance(sp.x,  sp.y, x, y) < collisionSize + SpaceStation.GRID_SIZE/2) return true;
+				if(HvlMath.distance(sp.x,  sp.y, x, y) < collisionSize + SpaceStation.GRID_SIZE/2) {
+				}
 			}
 		}
-		
+
 		return false;
 	}
 

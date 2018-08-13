@@ -10,6 +10,7 @@ import com.hyprgloo.ld42.Cargo;
 import com.hyprgloo.ld42.FancyOverlay;
 import com.hyprgloo.ld42.FlightPath;
 import com.hyprgloo.ld42.Game;
+import com.hyprgloo.ld42.Main;
 import com.hyprgloo.ld42.Ship;
 import com.hyprgloo.ld42.SpaceStation;
 import com.hyprgloo.ld42.SpaceStationPart;
@@ -42,7 +43,9 @@ public class ShipMerchant extends Ship{
 	public void update(float delta){
 		super.update(delta);
 		if(checkCollision() || isDead){
-			if(!isDead && x < Display.getWidth() && x > 0) Game.collisions++;
+			if(!isDead && x < Display.getWidth() && x > 0) { Game.collisions++;
+			if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_CRASH).playAsSoundEffect(1, 0.3f, false);
+			}
 			isDead = true;
 			docking = false;
 			docked = false;
