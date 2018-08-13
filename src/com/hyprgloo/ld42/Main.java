@@ -22,6 +22,7 @@ public class Main extends HvlTemplateInteg2D{
 	 * sound effects
 	 * station 4
 	 * window icon
+	 * ship chart viewer?
 	 * 
 	 * xwing?
 	 * 

@@ -12,5 +12,6 @@ public class Settings implements Serializable{
 	
 	public boolean tutorial0Completed = false;
 	public boolean tutorial1Completed = false;
+	public boolean tutorial2Completed = false;
 	
 }
