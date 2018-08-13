@@ -53,8 +53,8 @@ public class SpaceStation {
 			stationParts.add(new SpaceStationPart(-2f, 0f, 0f, Main.INDEX_STATION_TRUSS));
 			stationParts.add(new SpaceStationPart(-3f, 0f, 270f, Main.INDEX_STATION_DOCKING_PORT_MED));
 			stationParts.add(new SpaceStationPart(-4f, 0f, 270f, -2));
-			stationParts.add(new SpaceStationPart(-2f, -1f, 0f, Main.INDEX_STATION_DOCKING_PORT));
-			stationParts.add(new SpaceStationPart(-2f, -2f, 0f, -1, true));
+			stationParts.add(new SpaceStationPart(-2f, 1f, 180f, Main.INDEX_STATION_DOCKING_PORT));
+			stationParts.add(new SpaceStationPart(-2f, 2f, 180f, -1, true));
 			//stationParts.add(new SpaceStationPart(-2f, -1f, 0f, Main.INDEX_STATION_DOCKING_PORT));
 			//stationParts.add(new SpaceStationPart(-2f, -2f, 0f, -1, true));
 
