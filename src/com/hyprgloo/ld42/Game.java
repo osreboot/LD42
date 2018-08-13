@@ -14,7 +14,7 @@ import com.osreboot.ridhvl.menu.HvlMenu;
 public class Game {
 
 	public static enum EndState{
-		IN_PROGRESS, WIN, LOSS_ENERGY, LOSS_COLLISIONS
+		IN_PROGRESS, WIN, LOSS_ENERGY, LOSS_COLLISIONS, LOSS_TUTORIAL
 	}
 
 	public static final float 
@@ -35,8 +35,10 @@ public class Game {
 	public static EndState state;
 
 	public static Color endStateColor;
-	
+
 	public static int backgroundTexture;
+
+	public static int tutorialStageIndex = 0;
 
 	public static void restart(){
 		Ship.ships.clear();
@@ -58,11 +60,18 @@ public class Game {
 		LevelShipSequencer.spawnedTutorial = false;
 		SpaceStation.restart();
 		LevelShipSequencer.reset();
-	
+
 		backgroundTexture = HvlMath.randomInt(2) == 0 ? Main.INDEX_NEBULA1 : Main.INDEX_NEBULA2;
 	}
 
 	public static void update(float delta){
+		if(selected_level == 0 && tutorialStageIndex < 2){
+			if(Ship.ships.size() > 1){
+				Ship.ships.get(1).x = -128;
+				if(Ship.ships.get(0).isDead || Ship.ships.get(1).isDead) state = EndState.LOSS_TUTORIAL;
+			}
+		}
+
 		float backgroundOffset = Main.getNewestInstance().getTimer().getTotalTime()*-10f;
 		backgroundOffset = backgroundOffset%Display.getWidth();
 		hvlDrawQuad(backgroundOffset, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(backgroundTexture));
@@ -71,7 +80,7 @@ public class Game {
 		backgroundOffset2 = backgroundOffset2%Display.getWidth();
 		hvlDrawQuad(backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
 		hvlDrawQuad(Display.getWidth() + backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
-		
+
 		if(state == EndState.IN_PROGRESS){
 			energyPulseTimer = HvlMath.stepTowards(energyPulseTimer, delta, 0f);
 			if(energyPulseTimer == 0){
@@ -110,8 +119,6 @@ public class Game {
 		Ship.updateShips(delta);
 		ShipSelector.update(delta);
 		SpaceStation.update(delta);
-		
-
 
 		for(Explosion e : Ship.exps) e.draw(delta);
 
@@ -122,8 +129,8 @@ public class Game {
 		level_ammo = HvlMath.limit(level_ammo, 0f, 1f);
 
 		FancyOverlay.drawGameLevels(delta);
-		
-		
+
+
 		if(state == EndState.WIN){
 			float value = HvlMath.limit(HvlMath.map(endStateTimer, 0.8f, 0.9f, 0f, 1f), 0f, 1f) - HvlMath.limit(HvlMath.map(endStateTimer, 0.9f, 1f, 0f, 1f), 0f, 1f);
 			hvlRotate(Display.getWidth()/2, Display.getHeight()/2, Main.getNewestInstance().getTimer().getTotalTime() * 720f);

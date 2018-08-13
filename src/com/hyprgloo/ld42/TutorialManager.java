@@ -26,12 +26,12 @@ public class TutorialManager {
 	public static Tutorial current;
 	
 	public static void initialize(){
-		
+		TutorialStageInitializer.initialize();
 	}
 	
 	public static void update(float delta){
 		if(current != null){
-			current.display.run(delta);
+			current.display.run(delta, current.stage);
 		}else{
 			for(Tutorial t : tutorials.keySet()){
 				if(!tutorials.get(t) && t.isTriggered.run()){

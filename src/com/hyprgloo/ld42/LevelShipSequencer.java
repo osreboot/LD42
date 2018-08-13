@@ -64,10 +64,9 @@ public class LevelShipSequencer {
 		largeShipTimer -= delta;
 		raiderShipTimer -= delta;
 		if(Game.selected_level == 0) {
-			//TODO tutorial????
 			if(!spawnedTutorial) {
-				new ShipMerchantLight(-128, 250, 64, 250, 0, Cargo.FUEL);
-				new ShipMerchantLight(-500, 500, 64, 500 , 0, Cargo.ENERGY);
+				new ShipMerchantLight(-64, 250, 64, 250, 0, Cargo.FUEL);
+				new ShipMerchantLight(-64, 500, 64, 500 , 0, Cargo.ENERGY);
 				spawnedTutorial = true;
 			}
 

@@ -28,13 +28,16 @@ public class Main extends HvlTemplateInteg2D{
 	 * large merchants
 	 * options config
 	 * game loss states (just titles left)
-	 * interaction textures (select, target, targetoptions)
 	 * menu titles
 	 * credits screen
 	 * splash screen
 	 * disaster fail state?
 	 * 
 	 * cursor?
+	 * 
+	 * blue/green canister similarities
+	 * 
+	 * xwing?
 	 * 
 	 */
 
@@ -74,7 +77,8 @@ public class Main extends HvlTemplateInteg2D{
 	INDEX_CURSOR_2 = 28,
 	INDEX_CLEAR = 29,
 	INDEX_TARGET_INDICATOR = 30,
-	INDEX_DOCKING_ICON = 31;
+	INDEX_DOCKING_ICON = 31,
+	INDEX_TUTORIAL = 32;
 
 	public static final Color 
 	COLOR_GREEN0 = new Color(0f, 1.0f, 0f),
@@ -130,6 +134,8 @@ public class Main extends HvlTemplateInteg2D{
 		getTextureLoader().loadResource("clear"); //29
 		getTextureLoader().loadResource("TargetIndicator"); //30
 		getTextureLoader().loadResource("Docking_Icon"); //31
+		getTextureLoader().loadResource("Tutorial1"); //32
+		getTextureLoader().loadResource("Tutorial2"); //33
 
 
 		font = new HvlFontPainter2D(getTexture(INDEX_FONT), HvlFontPainter2D.Preset.FP_AGOFFICIAL);
@@ -155,7 +161,7 @@ public class Main extends HvlTemplateInteg2D{
 		inputTutorialSkip = new HvlInput(new HvlInput.InputFilter(){
 			@Override
 			public float getCurrentOutput(){
-				return Keyboard.isKeyDown(Keyboard.KEY_SPACE) || Mouse.isButtonDown(0) ? 1 : 0;
+				return Keyboard.isKeyDown(Keyboard.KEY_SPACE) ? 1 : 0;
 			}
 		});
 		inputTutorialSkip.setPressedAction(new HvlAction1<HvlInput>(){

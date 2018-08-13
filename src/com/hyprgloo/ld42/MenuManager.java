@@ -145,6 +145,41 @@ public class MenuManager {
 		}).build());
 
 		options.add(new HvlArrangerBox.Builder().build());
+		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("Sound: " + (Main.settings.soundEnabled ? "on" : "off")).setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg) {
+				HvlLabeledButton b = (HvlLabeledButton)aArg;
+				Main.settings.soundEnabled = !Main.settings.soundEnabled;
+				b.setText("Sound: " + (Main.settings.soundEnabled ? "on" : "off"));
+			}
+		}).build());
+		options.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("Music: " + (Main.settings.musicEnabled ? "on" : "off")).setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg) {
+				HvlLabeledButton b = (HvlLabeledButton)aArg;
+				Main.settings.musicEnabled = !Main.settings.musicEnabled;
+				b.setText("Music: " + (Main.settings.musicEnabled ? "on" : "off"));
+			}
+		}).build());
+		options.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("Tutorial: " + (Main.settings.tutorialsEnabled ? "on" : "off")).setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg) {
+				HvlLabeledButton b = (HvlLabeledButton)aArg;
+				Main.settings.tutorialsEnabled = !Main.settings.tutorialsEnabled;
+				b.setText("Tutorial: " + (Main.settings.tutorialsEnabled ? "on" : "off"));
+			}
+		}).build());
+		options.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
+		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("Cursor: " + (Main.settings.customCursor ? "on" : "off")).setClickedCommand(new HvlAction1<HvlButton>(){
+			@Override
+			public void run(HvlButton aArg) {
+				HvlLabeledButton b = (HvlLabeledButton)aArg;
+				Main.settings.customCursor = !Main.settings.customCursor;
+				b.setText("Cursor: " + (Main.settings.customCursor ? "on" : "off"));
+			}
+		}).build());
 		options.getFirstArrangerBox().add(new HvlSpacer(0, BUTTON_SPACING));
 		options.getFirstArrangerBox().add(new HvlLabeledButton.Builder().setText("back").setClickedCommand(new HvlAction1<HvlButton>(){
 			@Override
@@ -180,8 +215,6 @@ public class MenuManager {
 	}
 
 	public static void update(float delta){
-		TutorialManager.update(delta);
-		
 		if(HvlMenu.getCurrent() == pause || HvlMenu.getCurrent() == end){
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), new Color(0f, 0f, 0f, 0.4f));
@@ -210,7 +243,7 @@ public class MenuManager {
 				});
 			}
 			hvlDrawQuad(0, 0, Display.getWidth(), Display.getHeight(), pauseFrame);
-			if(TutorialManager.current != null) TutorialManager.current.display.run(delta);
+			TutorialManager.update(delta);
 		}
 		
 		if(HvlMenu.getCurrent() == main){
