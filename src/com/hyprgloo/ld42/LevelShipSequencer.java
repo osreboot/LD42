@@ -42,20 +42,21 @@ public class LevelShipSequencer {
 				raiderCompParts.add(allParts);
 			}
 		}
-		int targetIndex = HvlMath.randomInt(raiderCompParts.size());
-		
-		float y;
-		do{
-			y = raiderCompParts.get(targetIndex).y <= 360 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
-		}while(Ship.shipInProximity(-128, y, ShipRaiderLight.COLLISION_SIZE));
 		if(raiderCompParts.size() > 0) {
-			if(raiderCompParts.get(targetIndex).y <= 360) {
-				ShipRaiderLight SRL = new ShipRaiderLight(-128, y, raiderCompParts.get(targetIndex).x, SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
-				SRL.setGoal(raiderCompParts.get(targetIndex).x, y);
-			} else if (raiderCompParts.get(targetIndex).y > 360) {
-				ShipRaiderLight SRL = new ShipRaiderLight(-128, y, raiderCompParts.get(targetIndex).x, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
-				SRL.setGoal(raiderCompParts.get(targetIndex).x, y);
-			}
+			int targetIndex = HvlMath.randomInt(raiderCompParts.size());
+			
+			float y;
+			do{
+				y = raiderCompParts.get(targetIndex).y <= 360 ? HvlMath.randomFloatBetween(SHIP_SPAWN_EDGE_SPACING_MIN, SHIP_SPAWN_EDGE_SPACING) : HvlMath.randomFloatBetween(Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING_MIN);
+			}while(Ship.shipInProximity(-128, y, ShipRaiderLight.COLLISION_SIZE));
+			
+				if(raiderCompParts.get(targetIndex).y <= 360) {
+					ShipRaiderLight SRL = new ShipRaiderLight(-128, y, raiderCompParts.get(targetIndex).x, SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
+					SRL.setGoal(raiderCompParts.get(targetIndex).x, y);
+				} else if (raiderCompParts.get(targetIndex).y > 360) {
+					ShipRaiderLight SRL = new ShipRaiderLight(-128, y, raiderCompParts.get(targetIndex).x, Display.getHeight() - SHIP_SPAWN_EDGE_SPACING, 0, raiderCompParts.get(targetIndex));
+					SRL.setGoal(raiderCompParts.get(targetIndex).x, y);
+				}
 		}
 
 	}
