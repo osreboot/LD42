@@ -219,7 +219,7 @@ public class TutorialManager {
 	}
 
 	public static void updateSkipFix(float delta){
-		if(HvlMenu.getCurrent() != MenuManager.game && current != null){
+		if(HvlMenu.getCurrent() != MenuManager.game && HvlMenu.getCurrent() != MenuManager.pause && current != null){
 			if(tutorials.containsKey(current)) tutorials.put(current, false);
 			current.stage = 0;
 			current = null;
