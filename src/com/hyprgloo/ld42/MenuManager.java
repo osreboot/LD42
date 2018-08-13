@@ -249,7 +249,7 @@ public class MenuManager {
 			TutorialManager.update(delta);
 		}
 
-		if(HvlMenu.getCurrent() == main){
+		if(HvlMenu.getCurrent() == main || HvlMenu.getCurrent() == levels){
 			if(FancyOverlay.mainTimer > 2f){
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5 + 6f, Display.getHeight()/2 + 16f + 6f, Main.COLOR_GREEN5);
 				Main.font.drawWordc("Airlock \n Gridlock", Display.getWidth()/8*5, Display.getHeight()/2 + 16f, Main.COLOR_GREEN1);
