@@ -91,7 +91,7 @@ public class ShipMerchant extends Ship{
 				}
 				tradeTime = HvlMath.stepTowards(tradeTime, delta, 0);
 				if(tradeTime == 0){
-					Main.getSound(Main.INDEX_ITEM_COMPLETE).playAsSoundEffect(1f, 0.25f, false);
+					if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_ITEM_COMPLETE).playAsSoundEffect(1f, 0.25f, false);
 					docked = false;
 					if(cargo == Cargo.FUEL){
 						Game.level_fuel += Game.RESUPPLY_FUEL_AMOUNT * cargoMultiplier;

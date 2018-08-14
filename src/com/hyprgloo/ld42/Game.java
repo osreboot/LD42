@@ -43,7 +43,7 @@ public class Game {
 
 	public static boolean hasPlayedEnergySound = false;
 	public static boolean hasPlayedJumpSound = false;
-	
+
 	public static void restart(){
 		Ship.ships.clear();
 		FancyOverlay.gameRestart();
@@ -122,8 +122,8 @@ public class Game {
 		hvlDrawQuad(Display.getWidth() + backgroundOffset2, 0, Display.getWidth(), Display.getHeight(), Main.getTexture(Main.INDEX_STARS));
 		if(state == EndState.IN_PROGRESS){
 			if(energyPulseTimer < 1.5 && hasPlayedEnergySound == false && !(Game.selected_level == 0)) {
-			Main.getSound(Main.INDEX_ELECTRIC3).playAsSoundEffect(1.5f, 0.075f, false);
-			hasPlayedEnergySound = true;
+				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_ELECTRIC3).playAsSoundEffect(1.5f, 0.075f, false);
+				hasPlayedEnergySound = true;
 			}
 			energyPulseTimer = HvlMath.stepTowards(energyPulseTimer, delta, 0f);
 			if(energyPulseTimer == 0){
@@ -135,11 +135,11 @@ public class Game {
 
 		if(state == EndState.IN_PROGRESS){
 			if(hasPlayedJumpSound) {
-			hasPlayedJumpSound = false;
+				hasPlayedJumpSound = false;
 			}
 			if(level_energy == 0){
 				state = EndState.LOSS_ENERGY;
-				Main.getSound(Main.INDEX_BATTERY_DEATH).playAsSoundEffect(1f, 0.7f, false);
+				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_BATTERY_DEATH).playAsSoundEffect(1f, 0.7f, false);
 			}else if(level_fuel == 1){
 				state = EndState.WIN;
 				endStateTimerMeta = 7f;
@@ -153,7 +153,7 @@ public class Game {
 				endStateColor = new Color(value, value, value);
 			}
 			if(state == EndState.WIN){
-				
+
 				float value = HvlMath.limit(HvlMath.map(endStateTimer, 1f, 0.75f, 0f, 1f), 0f, 1f);
 				endStateColor = new Color(1f, 1f, 1f, value);
 			}
@@ -177,7 +177,7 @@ public class Game {
 
 		if(collisions > 0) Main.font.drawWord("disasters: " + collisions, 8f, Display.getHeight() - 24f, collisions >= 8 ? Color.red : Color.white, 0.125f);
 		if(collisions > 9 && state == EndState.IN_PROGRESS) state = EndState.LOSS_COLLISIONS;
-		
+
 		level_fuel = state == EndState.WIN ? 1f : HvlMath.limit(level_fuel, 0f, 1f);
 		level_energy = state == EndState.LOSS_ENERGY ? 0f : HvlMath.limit(level_energy, 0f, 1f);
 		level_ammo = HvlMath.limit(level_ammo, 0f, 1f);
@@ -187,9 +187,9 @@ public class Game {
 
 		if(state == EndState.WIN){
 			if(hasPlayedJumpSound == false && endStateTimerMeta < 3.75) {
-				Main.getSound(Main.INDEX_JUMP).playAsSoundEffect(1.0f, 0.5f, false);
+				if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_JUMP).playAsSoundEffect(1.0f, 0.5f, false);
 				hasPlayedJumpSound = true;
-				}
+			}
 			float value = HvlMath.limit(HvlMath.map(endStateTimer, 0.8f, 0.9f, 0f, 1f), 0f, 1f) - HvlMath.limit(HvlMath.map(endStateTimer, 0.9f, 1f, 0f, 1f), 0f, 1f);
 			hvlRotate(Display.getWidth()/2, Display.getHeight()/2, Main.getNewestInstance().getTimer().getTotalTime() * 720f);
 			hvlDrawQuadc(Display.getWidth()/2, Display.getHeight()/2, value * 256, value * 256, Main.getTexture(Main.INDEX_BLINK));

@@ -51,7 +51,7 @@ public class SpaceStationPartTurret extends SpaceStationPart{
 			turretRotation = HvlMath.stepTowards(turretRotation, delta * 100f, newRotation);
 			if(HvlMath.distance(x, y, target.x, target.y) < KILL_RANGE && !target.isDead && Game.level_ammo >= Game.SHOOT_AMMO_COST) {
 				if(!laserSoundPlayed) {
-					Main.getSound(Main.INDEX_LASER2).playAsSoundEffect(1f, 0.55f, false);
+					if(Main.settings.soundEnabled) Main.getSound(Main.INDEX_LASER2).playAsSoundEffect(1f, 0.55f, false);
 					laserSoundPlayed = true;
 				}
 				killTimer = HvlMath.stepTowards(killTimer, delta, 0);
