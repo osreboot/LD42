@@ -28,7 +28,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 0 && Ship.ships.get(0).x > 32f;
+				return Game.selected_level == 0 && Game.state == Game.EndState.IN_PROGRESS && Game.tutorialStageIndex == 0 && Ship.ships.get(0).x > 32f;
 			}
 		}, new HvlAction0(){
 			@Override
@@ -60,7 +60,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 1 && ShipSelector.selectedShip != null;
+				return Game.selected_level == 0 && Game.state == Game.EndState.IN_PROGRESS && Game.tutorialStageIndex == 1 && ShipSelector.selectedShip != null;
 			}
 		}, new HvlAction0(){
 			@Override
@@ -101,7 +101,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 2 && Ship.ships.get(1).x > 32f;
+				return Game.selected_level == 0 && Game.state == Game.EndState.IN_PROGRESS && Game.tutorialStageIndex == 2 && Ship.ships.get(1).x > 32f;
 			}
 		}, new HvlAction0(){
 			@Override
@@ -123,7 +123,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 3 && 
+				return Game.selected_level == 0 && Game.state == Game.EndState.IN_PROGRESS && Game.tutorialStageIndex == 3 && 
 						(((ShipMerchant)Ship.ships.get(0)).cargo == Cargo.EMPTY || ((ShipMerchant)Ship.ships.get(0)).tradeTime <= 5f);
 			}
 		}, new HvlAction0(){
@@ -158,7 +158,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 4 && 
+				return Game.selected_level == 0 && Game.state == Game.EndState.IN_PROGRESS && Game.tutorialStageIndex == 4 && 
 						(((ShipMerchant)Ship.ships.get(0)).cargo == Cargo.EMPTY);
 			}
 		}, new HvlAction0(){
@@ -180,7 +180,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 5 && (Ship.ships.get(0).holding || Ship.ships.get(0).isLeaving);
+				return Game.selected_level == 0 && Game.state == Game.EndState.IN_PROGRESS && Game.tutorialStageIndex == 5 && (Ship.ships.get(0).holding || Ship.ships.get(0).isLeaving);
 			}
 		}, new HvlAction0(){
 			@Override
@@ -193,7 +193,7 @@ public class TutorialStageInitializer {
 			@Override
 			public void run(Float delta, Integer stage){
 				if(stage == 0){
-					TutorialManager.emphasize(Ship.ships.get(1).x, Ship.ships.get(1).y, 64, 64);
+					TutorialManager.emphasize(Ship.ships.get(Ship.ships.size() - 1).x, Ship.ships.get(Ship.ships.size() - 1).y, 64, 64);
 					Main.font.drawWordc("Now tell this ship to exit the radio space.", Display.getWidth()/2, Display.getHeight()/4*3, Color.white, 0.25f);
 				}
 				if(stage == 1){
@@ -207,7 +207,7 @@ public class TutorialStageInitializer {
 		}, new HvlAction0r<Boolean>(){
 			@Override
 			public Boolean run(){
-				return Game.selected_level == 0 && Game.tutorialStageIndex == 6 && 
+				return Game.selected_level == 0 && Game.state == Game.EndState.IN_PROGRESS && Game.tutorialStageIndex == 6 && 
 						(((ShipMerchant)Ship.ships.get(Ship.ships.size() - 1)).cargo == Cargo.EMPTY);
 			}
 		}, new HvlAction0(){

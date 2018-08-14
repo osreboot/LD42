@@ -71,8 +71,9 @@ public class Game {
 	}
 
 	public static void update(float delta){
-		if(selected_level == 0 && collisions > 0) state = EndState.LOSS_TUTORIAL;
-		if(Ship.ships.size() > 0 && selected_level == 0){
+		if(selected_level == 0 && collisions > 0){
+			state = EndState.LOSS_TUTORIAL;
+		}else if(state == EndState.IN_PROGRESS && Ship.ships.size() > 0 && selected_level == 0){
 			if(tutorialStageIndex < 2 || Ship.ships.get(0).xGoal < 128f){
 				Ship.ships.get(1).x = -128;
 			}
@@ -80,17 +81,29 @@ public class Game {
 			if(Ship.ships.size() > 1 && ((ShipMerchant)Ship.ships.get(1)).cargo == Cargo.ENERGY) level_energy = 1f - ENERGY_PULSE_AMOUNT;
 			else level_energy = 1f;
 
-			if(tutorialStageIndex == 2 && Ship.ships.get(1).x > 0){
+			if((tutorialStageIndex == 2 || tutorialStageIndex == 3) && Ship.ships.get(1).x > 0){
 				boolean dockFound = false;
 				for(SpaceStationPart p : SpaceStation.stationParts){
 					if(Ship.ships.get(0).xGoal == p.x && Ship.ships.get(0).yGoal == p.y) dockFound = true;
 				}
 				if(!dockFound && Ship.ships.get(0).xGoal > 128f){
 					state = EndState.LOSS_TUTORIAL;
+					endStateTimer = 1f;
+				}
+			}
+			if(tutorialStageIndex < 6){
+				if(Ship.ships.size() > 1){
+					if(((ShipMerchant)Ship.ships.get(1)).isLeaving){
+						state = EndState.LOSS_TUTORIAL;
+						endStateTimer = 1f;
+					}
+				}else{
+					state = EndState.LOSS_TUTORIAL;
+					endStateTimer = 1f;
 				}
 			}
 		}
-		if(selected_level == 0 && level_energy == 1f && level_fuel > 0f){
+		if(state == EndState.IN_PROGRESS && selected_level == 0 && level_energy == 1f && level_fuel > 0f){
 			boolean win = true;
 			for(Ship s : Ship.ships) if(s.x < Display.getWidth()) win = false;
 			if(win){
